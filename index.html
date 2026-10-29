@@ -97,10 +97,7 @@
     content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background-image: var(--wm); background-size: 120px 64px;
   }
-  .media .count, .stage .hint, .tile3d .label, .tile3d .spin, .tile .label, .play { z-index: 2; }
-  /* posters already carry a watermark */
-  .media.poster::after, .lb-frame.baked::after { display: none; }
-  .media img, .thumb img, .pick-art img, #lb-img { -webkit-user-drag: none; user-select: none; }
+  .media .count, .stage .hint, .tile3d .label, .tile3d .spin, .tile .label, .play { z-index: 2; }  .media img, .thumb img, .pick-art img, #lb-img { -webkit-user-drag: none; user-select: none; }
 
   /* Tool Set material buttons */
   :root { --mat-stone: #8f8f8f; --mat-iron: #d9d9d9; --mat-gold: #f4c542; --mat-diamond: #4fd8d2; --mat-netherite: #4b3f46; }
@@ -346,7 +343,7 @@
     </div>
     <div class="grid">
       <article class="card">
-        <button type="button" class="media poster" data-baked data-images="assets/img/rankpack-v1.png|Rank Pack v1, all 39 ranks" aria-label="Open Rank Pack v1 image">
+        <button type="button" class="media poster" data-images="assets/img/rankpack-v1.png|Rank Pack v1, all 39 ranks" aria-label="Open Rank Pack v1 image">
           <img src="assets/img/rankpack-v1.png" alt="Rank Pack v1: 39 chat rank badges with icons" loading="lazy">
           <span class="soon">Coming soon</span>
         </button>
@@ -357,7 +354,7 @@
         </div>
       </article>
       <article class="card">
-        <button type="button" class="media poster" data-baked data-images="assets/img/foodpack-v1-poster.png|Food Pack v1, all 26 items" aria-label="Open Food Pack v1 image">
+        <button type="button" class="media poster" data-images="assets/img/foodpack-v1-poster.png|Food Pack v1, all 26 items" aria-label="Open Food Pack v1 image">
           <img src="assets/img/foodpack-v1-poster.png" alt="Food Pack v1: 26 food items in an inventory" loading="lazy">
           <span class="soon">Coming soon</span>
         </button>
@@ -368,7 +365,7 @@
         </div>
       </article>
       <article class="card">
-        <button type="button" class="media poster" data-baked data-images="assets/img/foodpack-v2-poster.png|Food Pack v2, all 22 items" aria-label="Open Food Pack v2 image">
+        <button type="button" class="media poster" data-images="assets/img/foodpack-v2-poster.png|Food Pack v2, all 22 items" aria-label="Open Food Pack v2 image">
           <img src="assets/img/foodpack-v2-poster.png" alt="Food Pack v2: 22 dessert items in an inventory" loading="lazy">
           <span class="soon">Coming soon</span>
         </button>
@@ -379,7 +376,7 @@
         </div>
       </article>
       <article class="card">
-        <button type="button" class="media poster" data-baked data-images="assets/img/foodpack-v3-poster.png|Food Pack v3, all 12 items;assets/img/foodpack-v3-preview.png|Food Pack v3 at 8× scale" aria-label="Open Food Pack v3 images">
+        <button type="button" class="media poster" data-images="assets/img/foodpack-v3-poster.png|Food Pack v3, all 12 items;assets/img/foodpack-v3-preview.png|Food Pack v3 at 8× scale" aria-label="Open Food Pack v3 images">
           <img src="assets/img/foodpack-v3-poster.png" alt="Food Pack v3: 12 cooking ingredients in an inventory" loading="lazy">
           <span class="soon">Coming soon</span>
           <span class="count">2 images</span>
@@ -738,7 +735,6 @@
   $$('[data-images]').forEach(b => b.addEventListener('click', () => {
     list = b.dataset.images.split(';').map(s => s.split('|').map(x => x.trim()));
     idx = Number(b.dataset.start || 0);
-    lbImg.parentElement.classList.toggle('baked', b.hasAttribute('data-baked'));
     render();
     if (lb.showModal) lb.showModal(); else lb.setAttribute('open', '');
   }));
