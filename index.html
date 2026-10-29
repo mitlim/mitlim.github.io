@@ -100,6 +100,17 @@
   .media .count, .stage .hint, .tile3d .label, .tile3d .spin, .tile .label, .play { z-index: 2; }
   .media img, .thumb img, .pick-art img, #lb-img { -webkit-user-drag: none; user-select: none; }
 
+  /* Tool Set material buttons */
+  :root { --mat-stone: #8f8f8f; --mat-iron: #d9d9d9; --mat-gold: #f4c542; --mat-diamond: #4fd8d2; --mat-netherite: #4b3f46; }
+  .mat { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .mat button {
+    display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; cursor: pointer;
+    background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); font-weight: 500; font-size: 0.9rem;
+  }
+  .mat button:hover { border-color: var(--accent); }
+  .mat button[aria-pressed="true"] { border-color: var(--accent); outline: 2px solid var(--accent); outline-offset: -1px; }
+  .mat i { width: 12px; height: 12px; background: var(--c); border: 1px solid var(--slot-dark); }
+
   /* Language switch */
   .top nav { align-items: center; }
   .lang { display: flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
@@ -299,7 +310,7 @@
       <span class="pick-art model" aria-hidden="true"><img src="assets/img/tool-axe.png" alt=""></span>
       <span class="pick-text">
         <span class="pick-title">Modeling</span>
-        <span class="meta">9 models · 6 in live 3D</span>
+        <span class="meta">25 models · 22 in live 3D</span>
         <span class="pick-go">View models →</span>
       </span>
     </button>
@@ -395,7 +406,7 @@
   <section class="cat" id="modeling" aria-labelledby="h-modeling">
     <div class="cat-head">
       <h2 id="h-modeling">Modeling</h2>
-      <p>Java item models built in Blockbench. Six of them are live 3D models you can spin.</p>
+      <p>Java item models built in Blockbench. Most of them are live 3D models you can spin.</p>
     </div>
     <div class="rotate-tip">
       <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -434,14 +445,21 @@
     <section class="set" aria-labelledby="h-tools">
       <div class="set-head">
         <h3 id="h-tools">Tool Set</h3>
-        <p class="meta">4 models · Java item models · ItemsAdder pack</p>
-        <p>Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, so the four read as a family. All four are live 3D.</p>
+        <p class="meta">4 tools × 5 materials · Java item models · ItemsAdder pack</p>
+        <p>Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, so the four read as a family. Each comes in stone, iron, gold, diamond and netherite.</p>
+        <div class="mat" role="group" aria-label="Material">
+          <button type="button" data-mat="stone" aria-pressed="false"><i style="--c: var(--mat-stone)"></i><span>Stone</span></button>
+          <button type="button" data-mat="iron" aria-pressed="false"><i style="--c: var(--mat-iron)"></i><span>Iron</span></button>
+          <button type="button" data-mat="gold" aria-pressed="false"><i style="--c: var(--mat-gold)"></i><span>Gold</span></button>
+          <button type="button" data-mat="diamond" aria-pressed="true"><i style="--c: var(--mat-diamond)"></i><span>Diamond</span></button>
+          <button type="button" data-mat="netherite" aria-pressed="false"><i style="--c: var(--mat-netherite)"></i><span>Netherite</span></button>
+        </div>
       </div>
       <div class="set-row row-4">
-        <div class="tile3d"><canvas data-model="pickaxe" data-roll="0" role="img" aria-label="Pickaxe in 3D. Drag to rotate."></canvas><span class="label">Pickaxe</span><span class="spin">↔ Drag</span></div>
-        <div class="tile3d"><canvas data-model="axe" data-roll="0" role="img" aria-label="Axe in 3D. Drag to rotate."></canvas><span class="label">Axe</span><span class="spin">↔ Drag</span></div>
-        <div class="tile3d"><canvas data-model="hoe" data-roll="0" role="img" aria-label="Hoe in 3D. Drag to rotate."></canvas><span class="label">Hoe</span><span class="spin">↔ Drag</span></div>
-        <div class="tile3d"><canvas data-model="shovel" data-roll="0" role="img" aria-label="Shovel in 3D. Drag to rotate."></canvas><span class="label">Shovel</span><span class="spin">↔ Drag</span></div>
+        <div class="tile3d"><canvas data-model="pickaxe_diamond" data-tool="pickaxe" data-roll="0" role="img" aria-label="Pickaxe in 3D. Drag to rotate."></canvas><span class="label">Pickaxe</span><span class="spin">↔ Drag</span></div>
+        <div class="tile3d"><canvas data-model="axe_diamond" data-tool="axe" data-roll="0" role="img" aria-label="Axe in 3D. Drag to rotate."></canvas><span class="label">Axe</span><span class="spin">↔ Drag</span></div>
+        <div class="tile3d"><canvas data-model="hoe_diamond" data-tool="hoe" data-roll="0" role="img" aria-label="Hoe in 3D. Drag to rotate."></canvas><span class="label">Hoe</span><span class="spin">↔ Drag</span></div>
+        <div class="tile3d"><canvas data-model="shovel_diamond" data-tool="shovel" data-roll="0" role="img" aria-label="Shovel in 3D. Drag to rotate."></canvas><span class="label">Shovel</span><span class="spin">↔ Drag</span></div>
       </div>
     </section>
 
@@ -601,7 +619,7 @@
     '6 works · items, badges, GUIs': '작품 6개 · 아이템, 칭호, GUI',
     'View pixel art →': '도트 보기 →',
     'Modeling': '모델링',
-    '9 models · 6 in live 3D': '모델 9개 · 그중 6개는 3D',
+    '25 models · 22 in live 3D': '모델 25개 · 그중 22개는 3D',
     'View models →': '모델링 보기 →',
     'Scripts': '스크립트',
     '7 projects · Skript': '프로젝트 7개 · Skript',
@@ -627,7 +645,7 @@
     'Client requests · icons and sprites': '의뢰 작업 · 아이콘과 스프라이트',
     'Smaller pieces made for other servers: item icons, UI icons, character sprites and decorations.': '다른 서버의 의뢰로 만든 아이템 아이콘, UI 아이콘, 캐릭터 스프라이트, 장식 등입니다.',
 
-    'Java item models built in Blockbench. Six of them are live 3D models you can spin.': 'Blockbench로 만든 Java 아이템 모델입니다. 그중 6개는 직접 돌려 볼 수 있는 3D 모델입니다.',
+    'Java item models built in Blockbench. Most of them are live 3D models you can spin.': 'Blockbench로 만든 Java 아이템 모델입니다. 대부분 직접 돌려 볼 수 있는 3D 모델입니다.',
     'Try it: drag to rotate': '직접 돌려 보세요',
     'Drag a dark 3D panel with your mouse, or swipe it on your phone, to spin the model. Left alone, each model turns slowly by itself.': '어두운 3D 칸을 마우스로 끌거나 휴대폰에서 손가락으로 밀면 모델이 돌아갑니다. 가만히 두면 천천히 혼자 돌아갑니다.',
     '↔ Drag to rotate': '↔ 끌어서 돌리기',
@@ -637,8 +655,9 @@
     '562 cubes · Java item model': '큐브 562개 · Java 아이템 모델',
     'A winged sword with a gold guard and a sapphire set into the hilt.': '금빛 가드와 손잡이에 박힌 사파이어가 특징인 날개 달린 검입니다.',
     'Tool Set': '도구 세트',
-    '4 models · Java item models · ItemsAdder pack': '모델 4개 · Java 아이템 모델 · ItemsAdder 팩',
-    'Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, so the four read as a family. All four are live 3D.': '곡괭이, 도끼, 괭이, 삽이 같은 손잡이와 보석 장식, 폼멜을 공유해 한 세트로 보입니다. 네 개 모두 3D로 돌려 볼 수 있습니다.',
+    '4 tools × 5 materials · Java item models · ItemsAdder pack': '도구 4종 × 재질 5종 · Java 아이템 모델 · ItemsAdder 팩',
+    'Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, so the four read as a family. Each comes in stone, iron, gold, diamond and netherite.': '곡괭이, 도끼, 괭이, 삽이 같은 손잡이와 보석 장식, 폼멜을 공유해 한 세트로 보입니다. 각각 돌, 철, 금, 다이아, 네더라이트 버전이 있습니다.',
+    'Stone': '돌', 'Iron': '철', 'Gold': '금', 'Diamond': '다이아', 'Netherite': '네더라이트',
     'Pickaxe': '곡괭이', 'Axe': '도끼', 'Hoe': '괭이', 'Shovel': '삽',
     'Medieval Set': '중세 세트',
     '3 models · Blockbench': '모델 3개 · Blockbench',
@@ -831,8 +850,9 @@
   };
   const AXES = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
 
+  // one geometry with a draw group per texture, so models can use several textures
   function buildGeometry(model) {
-    const pos = [], nor = [], uv = [];
+    const perTex = model.tex.map(() => ({ pos: [], nor: [], uv: [] }));
     for (const el of model.el) {
       const a = el.a.map((v, i) => Math.min(v, el.b[i]));
       const b = el.a.map((v, i) => Math.max(v, el.b[i]));
@@ -844,7 +864,10 @@
           .multiply(new THREE.Matrix4().makeTranslation(-ox, -oy, -oz));
       }
       const nm = new THREE.Matrix3().getNormalMatrix(m);
-      for (const [dir, [u1, v1, u2, v2, rot]] of Object.entries(el.f)) {
+      for (const [dir, [u1, v1, u2, v2, rot, ti]] of Object.entries(el.f)) {
+        const out = perTex[ti];
+        if (!out) continue;
+        const [uw, uh] = model.uv[ti];
         const def = FACES[dir];
         const corners = def.c(a, b).map(p => new THREE.Vector3(...p).applyMatrix4(m));
         const n = new THREE.Vector3(...def.n).applyMatrix3(nm).normalize();
@@ -852,15 +875,20 @@
         const cw = [[u1, v1], [u2, v1], [u2, v2], [u1, v2]];
         const k = (rot / 90) | 0;
         const pick = i => cw[(i - k + 4) % 4];
-        const uvs = [pick(0), pick(1), pick(3), pick(2)].map(([u, v]) => [u / model.uw, 1 - v / model.uh]);
+        const uvs = [pick(0), pick(1), pick(3), pick(2)].map(([u, v]) => [u / uw, 1 - v / uh]);
         for (const i of [0, 2, 1, 1, 2, 3]) {
-          pos.push(corners[i].x, corners[i].y, corners[i].z);
-          nor.push(n.x, n.y, n.z);
-          uv.push(...uvs[i]);
+          out.pos.push(corners[i].x, corners[i].y, corners[i].z);
+          out.nor.push(n.x, n.y, n.z);
+          out.uv.push(...uvs[i]);
         }
       }
     }
+    const pos = [], nor = [], uv = [];
     const g = new THREE.BufferGeometry();
+    perTex.forEach((p, ti) => {
+      g.addGroup(pos.length / 3, p.pos.length / 3, ti);
+      pos.push(...p.pos); nor.push(...p.nor); uv.push(...p.uv);
+    });
     g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
     g.setAttribute('normal', new THREE.Float32BufferAttribute(nor, 3));
     g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
@@ -868,8 +896,16 @@
     return g;
   }
 
+  function loadTexture(src, onLoad) {
+    const tex = new THREE.TextureLoader().load(src, onLoad);
+    tex.magFilter = THREE.NearestFilter;
+    tex.minFilter = THREE.NearestFilter;
+    tex.generateMipmaps = false;
+    tex.encoding = THREE.sRGBEncoding;
+    return tex;
+  }
+
   function initViewer(canvas) {
-    const model = MODELS[canvas.dataset.model];
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.outputEncoding = THREE.sRGBEncoding;
@@ -883,21 +919,28 @@
     rim.position.set(2, 1, -2.5);
     scene.add(rim);
 
-    const tex = new THREE.TextureLoader().load(model.tex, () => draw());
-    tex.magFilter = THREE.NearestFilter;
-    tex.minFilter = THREE.NearestFilter;
-    tex.generateMipmaps = false;
-    tex.encoding = THREE.sRGBEncoding;
-
-    const geo = buildGeometry(model);
-    const mesh = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ map: tex, alphaTest: 0.1 }));
-    const center = geo.boundingBox.getCenter(new THREE.Vector3());
-    const radius = geo.boundingBox.getSize(new THREE.Vector3()).length() / 2;
-    mesh.position.copy(center).negate();
     const pivot = new THREE.Group();
     pivot.rotation.order = 'XZY'; // spin on its own axis, then lean diagonally like an inventory icon
-    pivot.add(mesh);
     scene.add(pivot);
+    let mesh = null, radius = 1;
+
+    // swap in another model (used by the Tool Set material buttons)
+    function setModel(id) {
+      const model = MODELS[id];
+      if (!model) return;
+      if (mesh) {
+        pivot.remove(mesh);
+        mesh.geometry.dispose();
+        mesh.material.forEach(mat => { mat.map.dispose(); mat.dispose(); });
+      }
+      const geo = buildGeometry(model);
+      const mats = model.tex.map(src => new THREE.MeshLambertMaterial({ map: loadTexture(src, () => draw()), alphaTest: 0.1 }));
+      mesh = new THREE.Mesh(geo, mats);
+      mesh.position.copy(geo.boundingBox.getCenter(new THREE.Vector3())).negate();
+      radius = geo.boundingBox.getSize(new THREE.Vector3()).length() / 2;
+      pivot.add(mesh);
+      resize();
+    }
 
     // data-roll flips models whose blade points down in model space
     const pose = { spin: 25, roll: Number(canvas.dataset.roll || -45), tilt: 8 };
@@ -936,16 +979,27 @@
     canvas.addEventListener('pointercancel', end);
     new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(canvas);
 
-    return () => {
-      if (visible && dragX === null) { pose.spin += 0.3; draw(); }
+    setModel(canvas.dataset.model);
+    return {
+      canvas,
+      setModel,
+      tick() { if (visible && dragX === null) { pose.spin += 0.3; draw(); } },
     };
   }
 
   unpackModels(window.MODELS_PACK).then(unpacked => {
     MODELS = unpacked;
-    const ticks = $$('canvas[data-model]').map(initViewer);
+    const viewers = $$('canvas[data-model]').map(initViewer);
+
+    // Tool Set: material buttons swap all four tools at once
+    const matButtons = $$('.mat button');
+    matButtons.forEach(btn => btn.addEventListener('click', () => {
+      matButtons.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+      viewers.filter(v => v.canvas.dataset.tool).forEach(v => v.setModel(`${v.canvas.dataset.tool}_${btn.dataset.mat}`));
+    }));
+
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const loop = () => { ticks.forEach(t => t()); requestAnimationFrame(loop); };
+    const loop = () => { viewers.forEach(v => v.tick()); requestAnimationFrame(loop); };
     requestAnimationFrame(loop);
   }).catch(no3d);
 })();
