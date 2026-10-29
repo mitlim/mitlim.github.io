@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mitlim Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Minecraft pixel art, Blockbench models and Skript systems by Mitlim.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Pixelify+Sans:wght@500;600&family=Do+Hyeon&family=Noto+Sans+KR:wght@400;500;600&display=swap">
+<style>
+  /* Layout: a creator's inventory. A hotbar of real items up top, then work grouped by category like creative-mode tabs. */
+  :root {
+    --bg: #eceef3;
+    --surface: #f8f9fb;
+    --ink: #13151b;
+    --muted: #596071;
+    --line: #d5d9e2;
+    --accent: #46568a;
+    --accent-ink: #ffffff;
+    --stage: #16181f;
+    --stage-glow: #2a2f40;
+    --stage-ink: #e9e4f0;
+    --sheet: #ffffff;
+    --panel: #c6c6c6;
+    --slot: #8b8b8b;
+    --slot-dark: #373737;
+    --slot-light: #ffffff;
+    --slot-hover: rgba(255, 255, 255, 0.45);
+    --tip-bg: #100010;
+    --tip-edge: #5000ff;
+    --tip-ink: #ffffff;
+    --scrim: rgba(16, 0, 16, 0.78);
+    --backdrop: rgba(12, 8, 6, 0.82);
+    --font-display: "Pixelify Sans", "Do Hyeon", "Malgun Gothic", "Courier New", monospace;
+    --font-body: "Figtree", "Noto Sans KR", system-ui, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+    --font-mono: "JetBrains Mono", "Noto Sans KR", ui-monospace, Consolas, monospace;
+    --radius: 6px;
+    color-scheme: light;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0a0b0f; --surface: #14161d; --ink: #eceef4; --muted: #9aa2b5;
+      --line: #252a36; --accent: #a9b8e0; --accent-ink: #0a0b0f;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0a0b0f; --surface: #14161d; --ink: #eceef4; --muted: #9aa2b5;
+    --line: #252a36; --accent: #a9b8e0; --accent-ink: #0a0b0f;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { font-variant-ligatures: none; }
+  html[lang="ko"] { word-break: keep-all; overflow-wrap: anywhere; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.6 var(--font-body); }
+  img { max-width: 100%; }
+  button { font: inherit; color: inherit; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  .wrap {
+    max-width: 1120px; margin-inline: auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .meta { margin: 0; font: 400 0.78rem/1.45 var(--font-mono); color: var(--muted); }
+  .eyebrow { margin: 0; font: 500 0.76rem/1.4 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+
+  /* Header */
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 600 1.25rem/1 var(--font-display); }
+  .brand-logo { display: block; width: 40px; height: 40px; border-radius: 6px; }
+  .top nav { display: flex; gap: 18px; font-weight: 500; }
+  .top nav a { text-decoration: none; }
+  .top nav a:hover { color: var(--accent); }
+
+  /* Hero */
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 24px 48px; padding-block: 32px 8px; overflow-x: clip; }
+  .hero-logo { width: clamp(180px, 22vw, 260px); height: auto; border-radius: 10px; }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .hero-logo { display: none; } }
+  .hero h1 { margin: 10px 0 14px; max-width: 17ch; font: 600 clamp(2rem, 4.6vw, 3.3rem)/1.08 var(--font-display); text-wrap: balance; }
+  .lede { margin: 0; max-width: 60ch; font-size: 1.1rem; color: var(--muted); }
+
+  /* Watermark: repeated semi-transparent white "mitlim" over every piece of work */
+  :root {
+    --wm: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='64'%3E%3Cg font-family='Arial, sans-serif' font-size='15' font-weight='700' fill='white' fill-opacity='0.36' stroke='black' stroke-opacity='0.13' stroke-width='0.6' text-anchor='middle'%3E%3Ctext x='30' y='22' transform='rotate(-24 30 18)'%3Emitlim%3C/text%3E%3Ctext x='90' y='54' transform='rotate(-24 90 50)'%3Emitlim%3C/text%3E%3C/g%3E%3C/svg%3E");
+  }
+  .pick-art, .lb-frame { position: relative; }
+  .media::after, .stage::after, .tile3d::after, .thumb::after, .pick-art::after, .lb-frame::after {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background-image: var(--wm); background-size: 120px 64px;
+  }
+  .media .count, .stage .hint, .tile3d .label, .tile3d .spin, .tile .label, .play { z-index: 2; }
+  .media img, .thumb img, .pick-art img, #lb-img { -webkit-user-drag: none; user-select: none; }
+
+  /* Language switch */
+  .top nav { align-items: center; }
+  .lang { display: flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .lang button { padding: 5px 10px; cursor: pointer; background: none; border: 0; color: var(--muted); font: 600 0.85rem/1.2 var(--font-body); }
+  .lang button:hover { color: var(--ink); }
+  .lang button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+
+  /* Rotate tip in the Modeling section */
+  .rotate-tip {
+    display: flex; align-items: center; gap: 14px; margin: 0 0 22px; padding: 14px 18px;
+    background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius);
+  }
+  .rotate-tip svg { flex: none; width: 34px; height: 34px; color: var(--accent); }
+  .rotate-tip strong { display: block; font: 600 1.05rem/1.3 var(--font-display); }
+  .rotate-tip p { margin: 2px 0 0; color: var(--muted); }
+
+  /* Category picker: big buttons that show one category at a time */
+  .picker { padding-block: 44px 4px; }
+  .picker-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .picker-head h2 { margin: 0; font: 600 1.25rem/1.2 var(--font-display); color: var(--muted); }
+  .show-all { padding: 6px 12px; cursor: pointer; background: none; color: var(--muted); border: 1px solid var(--line); border-radius: var(--radius); font-weight: 500; }
+  .show-all:hover, .show-all[aria-pressed="true"] { color: var(--ink); border-color: var(--accent); }
+  .picker-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .pick {
+    display: flex; flex-direction: column; min-width: 0; padding: 0; overflow: hidden; cursor: pointer; text-align: left;
+    background: var(--surface); border: 2px solid var(--line); border-radius: 12px;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .pick:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .pick[aria-pressed="true"] { border-color: var(--accent); outline: 2px solid var(--accent); outline-offset: -4px; }
+  .pick-art { display: flex; align-items: center; justify-content: center; gap: 6%; aspect-ratio: 16 / 9; background: var(--stage); overflow: hidden; }
+  .pick-art img { width: 100%; height: 100%; object-fit: cover; }
+  .pick-art.pixel { background: var(--panel); }
+  .pick-art.pixel img { width: 22%; height: auto; image-rendering: pixelated; }
+  .pick-art.model img { object-fit: contain; }
+  .pick-text { display: grid; gap: 2px; padding: 14px 16px 16px; }
+  .pick-title { font: 600 1.7rem/1.1 var(--font-display); }
+  .pick-go { margin-top: 6px; font-weight: 600; color: var(--accent); }
+
+  /* Category sections */
+  .cat { padding-block: 40px 12px; }
+  .cat-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 32px; margin-bottom: 22px; }
+  .cat-head h2 { margin: 0; font: 600 1.9rem/1.1 var(--font-display); }
+  .cat-head p { margin: 0; max-width: 58ch; color: var(--muted); }
+  .cat-head .back { padding: 6px 12px; cursor: pointer; background: none; color: var(--accent); border: 1px solid var(--line); border-radius: var(--radius); font-weight: 600; }
+  .cat-head .back:hover { border-color: var(--accent); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+  .card { display: flex; flex-direction: column; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .card .body { display: grid; gap: 4px; padding: 14px 16px 18px; }
+  .card h3 { margin: 0; font: 600 1.15rem/1.25 var(--font-display); }
+  .card .body > p:not(.meta) { margin: 4px 0 0; font-size: 0.95rem; }
+
+  .media { position: relative; display: block; width: 100%; aspect-ratio: 1 / 1; padding: 0; border: 0; background: var(--sheet); cursor: zoom-in; overflow: hidden; }
+  .media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .media.fit img { object-fit: contain; padding: 7%; image-rendering: pixelated; }
+  .media.fit.smooth img { image-rendering: auto; }
+  .media .count { position: absolute; right: 8px; bottom: 8px; padding: 2px 7px; background: var(--scrim); color: var(--tip-ink); font: 500 0.72rem/1.5 var(--font-mono); border-radius: 3px; }
+
+  /* Modeling */
+  .viewers { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .stage { position: relative; aspect-ratio: 1 / 1; background: radial-gradient(circle at 50% 45%, var(--stage-glow), var(--stage) 70%); }
+  .stage canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
+  .stage canvas.dragging { cursor: grabbing; }
+  .stage .hint { position: absolute; left: 12px; bottom: 12px; padding: 4px 10px; background: var(--scrim); color: var(--tip-ink); font: 500 0.8rem/1.4 var(--font-mono); border-radius: 999px; pointer-events: none; }
+  .tile3d .spin { position: absolute; right: 8px; top: 8px; padding: 2px 8px; background: var(--scrim); color: var(--tip-ink); font: 500 0.72rem/1.5 var(--font-mono); border-radius: 999px; pointer-events: none; }
+  .tile3d.no3d::before, .stage.no3d::before { content: "3D preview needs an internet connection"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--stage-ink); font: 400 0.85rem var(--font-mono); }
+
+  .set { display: grid; grid-template-columns: minmax(200px, 270px) minmax(0, 1fr); gap: 16px 28px; margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .set h3 { margin: 0 0 4px; font: 600 1.35rem/1.2 var(--font-display); }
+  .set-head > p:not(.meta) { margin: 10px 0 0; color: var(--muted); }
+  .set-row { display: grid; gap: 12px; }
+  .row-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .row-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .tile { aspect-ratio: 3 / 4; background: var(--stage); border-radius: var(--radius); }
+  .tile img { object-fit: contain; }
+  .tile3d { position: relative; aspect-ratio: 3 / 4; border-radius: var(--radius); overflow: hidden; background: radial-gradient(circle at 50% 45%, var(--stage-glow), var(--stage) 75%); }
+  .tile3d canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
+  .tile3d canvas.dragging { cursor: grabbing; }
+  .tile3d .label { position: absolute; left: 8px; bottom: 8px; padding: 2px 7px; background: var(--scrim); color: var(--tip-ink); font: 500 0.8rem/1.4 var(--font-display); border-radius: 3px; pointer-events: none; }
+  .tile .label { position: absolute; left: 8px; bottom: 8px; padding: 2px 7px; background: var(--scrim); color: var(--tip-ink); font: 500 0.8rem/1.4 var(--font-display); border-radius: 3px; }
+
+  /* Scripts */
+  .feature { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); margin-bottom: 20px; }
+  .feature .media { aspect-ratio: 16 / 9; height: 100%; background: var(--stage); }
+  .feature .body { align-content: center; gap: 8px; padding: 24px; }
+  .feature h3 { font-size: 1.5rem; }
+  .btn { display: inline-block; width: fit-content; margin-top: 8px; padding: 10px 16px; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 600; border-radius: var(--radius); }
+  .btn:hover { filter: brightness(1.08); }
+
+  .videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
+  .video { text-decoration: none; }
+  .video:hover h3 { color: var(--accent); }
+  .thumb { position: relative; display: block; aspect-ratio: 16 / 9; background: var(--stage); overflow: hidden; }
+  .thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .play { position: absolute; left: 50%; top: 50%; width: 46px; height: 34px; transform: translate(-50%, -50%); background: var(--scrim); border-radius: 6px; }
+  .play::after { content: ""; position: absolute; left: 18px; top: 9px; width: 13px; height: 16px; background: var(--tip-ink); clip-path: polygon(0 0, 100% 50%, 0 100%); }
+
+  /* Contact */
+  .contact { margin-top: 56px; background: var(--accent); color: var(--accent-ink); }
+  .contact .wrap { display: grid; gap: 12px; padding-block: 44px; }
+  .contact-logo { width: 72px; height: 72px; border-radius: 8px; }
+  .contact h2 { margin: 0; font: 600 2rem/1.1 var(--font-display); }
+  .contact p { margin: 0; max-width: 56ch; }
+  .contact .meta { color: inherit; opacity: 0.8; }
+  .handles { display: flex; flex-wrap: wrap; gap: 12px 40px; margin-top: 8px; }
+  .handle { display: grid; gap: 2px; }
+  .handle-row { display: flex; align-items: center; gap: 10px; }
+  .handle code, .handle a { font: 600 1.3rem/1.3 var(--font-display); text-decoration: none; }
+  .handle a:hover { text-decoration: underline; }
+  #copy { padding: 4px 12px; cursor: pointer; background: transparent; border: 1px solid currentColor; border-radius: var(--radius); font-size: 0.85rem; }
+
+  /* Lightbox */
+  dialog { width: min(1100px, 94vw); max-height: 94vh; padding: 0; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); }
+  dialog::backdrop { background: var(--backdrop); }
+  .lb-frame { display: grid; place-items: center; padding: 16px; max-height: calc(94vh - 72px); overflow: auto; background: var(--sheet); }
+  #lb-img { display: block; max-width: 100%; max-height: calc(94vh - 104px); object-fit: contain; }
+  #lb-img.pixel { image-rendering: pixelated; }
+  .lb-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 12px 16px; border-top: 1px solid var(--line); }
+  .lb-bar p { margin: 0; font-weight: 500; }
+  .lb-ctrl { display: flex; align-items: center; gap: 8px; }
+  .lb-ctrl button { padding: 6px 12px; cursor: pointer; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); }
+  .lb-ctrl button:hover { border-color: var(--accent); }
+
+  @media (max-width: 760px) {
+    .picker-grid { grid-template-columns: 1fr; gap: 12px; }
+    .pick { flex-direction: row; align-items: stretch; }
+    .pick-art { flex: none; width: 38%; height: 112px; aspect-ratio: auto; }
+    .pick-art img { height: 100%; }
+    .pick-art.pixel img { height: auto; }
+    .pick-text { align-content: center; padding: 12px 14px; }
+    .pick-title { font-size: 1.35rem; }
+    .pick-go { display: none; }
+    .set { grid-template-columns: 1fr; }
+    .feature { grid-template-columns: 1fr; }
+    .feature .media { height: auto; }
+  }
+  @media (max-width: 520px) {
+    .row-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .top nav { gap: 12px; font-size: 0.95rem; }
+    .nav-yt { display: none; }
+    .rotate-tip { align-items: flex-start; }
+    dialog { width: calc(100vw - 16px); max-width: none; }
+    .lb-frame { padding: 8px; }
+    .lb-bar { padding: 10px 12px; }
+    .lb-ctrl { width: 100%; justify-content: space-between; }
+    .lb-ctrl button { padding: 10px 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <a class="brand" href="#" aria-label="Mitlim, back to top"><img class="brand-logo" src="assets/logo.png" alt="">mitlim</a>
+  <nav aria-label="Site">
+    <a href="#contact">Contact</a>
+    <a class="nav-yt" href="https://www.youtube.com/@MITLIM98" target="_blank" rel="noopener">YouTube ↗</a>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="ko" aria-pressed="false" lang="ko">한국어</button>
+    </div>
+  </nav>
+</header>
+
+<section class="wrap hero" aria-labelledby="hero-title">
+  <div>
+  <p class="eyebrow">Minecraft resource creator</p>
+  <h1 id="hero-title">Pixel art, models and scripts for Minecraft servers.</h1>
+  <p class="lede">I'm Mitlim. I draw pixel-art items and GUIs, build Java item models in Blockbench, and write Skript systems for servers.</p>
+  </div>
+  <img class="hero-logo" src="assets/logo.png" alt="Mitlim logo: a serif M with dark blue leaves">
+</section>
+
+<section class="wrap picker" aria-labelledby="h-browse">
+  <div class="picker-head">
+    <h2 id="h-browse">Choose a category</h2>
+    <button type="button" class="show-all" data-cat="all" aria-pressed="true">Show all</button>
+  </div>
+  <div class="picker-grid">
+    <button type="button" class="pick" data-cat="pixel-art" aria-pressed="false">
+      <span class="pick-art pixel" aria-hidden="true"><img src="assets/icons/pizza.png" alt=""><img src="assets/icons/donut.png" alt=""><img src="assets/icons/cheesecake.png" alt=""></span>
+      <span class="pick-text">
+        <span class="pick-title">Pixel Art</span>
+        <span class="meta">6 works · items, badges, GUIs</span>
+        <span class="pick-go">View pixel art →</span>
+      </span>
+    </button>
+    <button type="button" class="pick" data-cat="modeling" aria-pressed="false">
+      <span class="pick-art model" aria-hidden="true"><img src="assets/img/tool-axe.png" alt=""></span>
+      <span class="pick-text">
+        <span class="pick-title">Modeling</span>
+        <span class="meta">9 models · 6 in live 3D</span>
+        <span class="pick-go">View models →</span>
+      </span>
+    </button>
+    <button type="button" class="pick" data-cat="scripts" aria-pressed="false">
+      <span class="pick-art" aria-hidden="true"><img src="assets/img/server-menu.png" alt=""></span>
+      <span class="pick-text">
+        <span class="pick-title">Scripts</span>
+        <span class="meta">7 projects · Skript</span>
+        <span class="pick-go">View scripts →</span>
+      </span>
+    </button>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- Pixel Art -->
+  <section class="cat" id="pixel-art" aria-labelledby="h-pixel">
+    <div class="cat-head">
+      <h2 id="h-pixel">Pixel Art</h2>
+      <p>Item sprites, chat badges and GUI textures for servers. Click any card to see the full images.</p>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <button type="button" class="media" data-images="assets/img/foodpack-v1.png|Food Pack v1, all 26 items" aria-label="Open Food Pack v1 images">
+          <img src="assets/img/foodpack-v1.png" alt="Food Pack v1 sheet with 26 food items" loading="lazy">
+        </button>
+        <div class="body">
+          <h3>Food Pack v1</h3>
+          <p class="meta">26 items · 32×32 · ItemsAdder config</p>
+          <p>Cooking ingredients and finished dishes, from flour sacks and fresh fish to pizza, burgers and salad.</p>
+        </div>
+      </article>
+      <article class="card">
+        <button type="button" class="media" data-images="assets/img/foodpack-v2.png|Food Pack v2, all 22 items;assets/img/foodpack-v2-ingame.png|Food Pack v2 in game" aria-label="Open Food Pack v2 images">
+          <img src="assets/img/foodpack-v2.png" alt="Food Pack v2 sheet with 22 dessert items" loading="lazy">
+          <span class="count">2 images</span>
+        </button>
+        <div class="body">
+          <h3>Food Pack v2</h3>
+          <p class="meta">22 items · 32×32 · ItemsAdder config</p>
+          <p>Bakery and desserts: pies, baguettes, cheesecakes, donuts, gingerbread and pudding, most with a plated version.</p>
+        </div>
+      </article>
+      <article class="card">
+        <button type="button" class="media" data-images="assets/img/foodpack-v3.png|Food Pack v3, all 26 items;assets/img/foodpack-v3-ingame.png|Food Pack v3 in game" aria-label="Open Food Pack v3 images">
+          <img src="assets/img/foodpack-v3.png" alt="Food Pack v3 sheet with 26 dessert items" loading="lazy">
+          <span class="count">2 images</span>
+        </button>
+        <div class="body">
+          <h3>Food Pack v3</h3>
+          <p class="meta">26 items · 13 desserts × plated</p>
+          <p>A second dessert set with more detail, where every treat comes alone and served on a plate.</p>
+        </div>
+      </article>
+      <article class="card">
+        <button type="button" class="media fit" data-images="assets/img/rank-tags-cover.png|All 20 rank tags at 4× scale;assets/img/rank-tags.png|Rank tag texture files" aria-label="Open rank tag images">
+          <img src="assets/img/rank-tags-cover.png" alt="Twenty colored rank badges such as Admin, Owner, Builder and VIP" loading="lazy">
+          <span class="count">2 images</span>
+        </button>
+        <div class="body">
+          <h3>Server Rank Tags</h3>
+          <p class="meta">20 badges · chat and tab list</p>
+          <p>Rank badges for a server: Admin, Owner, Builder, Helper, VIP, MVP, YouTuber and more, each with its own icon.</p>
+        </div>
+      </article>
+      <article class="card">
+        <button type="button" class="media fit smooth" data-images="assets/img/server-menu.png|Main menu GUI in game;assets/img/gui-textures.png|GUI texture files" aria-label="Open server GUI images">
+          <img src="assets/img/gui-cover.png" alt="Shop, sell, menu and storage GUI textures" loading="lazy">
+          <span class="count">2 images</span>
+        </button>
+        <div class="body">
+          <h3>Server GUI Set</h3>
+          <p class="meta">Shop · sell · menu · rarity labels</p>
+          <p>Custom inventory screens for a server, including shop and sell windows, rarity labels and the main menu.</p>
+        </div>
+      </article>
+      <article class="card">
+        <button type="button" class="media fit" data-images="assets/img/commission-cover.png|A selection of commission sprites at 3× scale;assets/img/commission-4.png|Tree, hoodie, house and ankh;assets/img/commission-3.png|Shield icons and winged hammer;assets/img/commission-1.png|Box, building, shop and tablet icons;assets/img/commission-2.png|Grain and bean items;assets/img/commission-6.png|Character sprites;assets/img/commission-5.png|Heart icon and banner" aria-label="Open commission images">
+          <img src="assets/img/commission-cover.png" alt="Commission sprites: a tree, hoodie, house, ankh, shield icons, a winged hammer, shop icons and two characters" loading="lazy">
+          <span class="count">7 images</span>
+        </button>
+        <div class="body">
+          <h3>Commission Work</h3>
+          <p class="meta">Client requests · icons and sprites</p>
+          <p>Smaller pieces made for other servers: item icons, UI icons, character sprites and decorations.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Modeling -->
+  <section class="cat" id="modeling" aria-labelledby="h-modeling">
+    <div class="cat-head">
+      <h2 id="h-modeling">Modeling</h2>
+      <p>Java item models built in Blockbench. Six of them are live 3D models you can spin.</p>
+    </div>
+    <div class="rotate-tip">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 13a11 5 0 0 1 22 0"/><path d="M27 19a11 5 0 0 1-22 0"/><path d="M23 9l4 4-5 1"/><path d="M9 23l-4-4 5-1"/>
+      </svg>
+      <div>
+        <strong>Try it: drag to rotate</strong>
+        <p>Drag a dark 3D panel with your mouse, or swipe it on your phone, to spin the model. Left alone, each model turns slowly by itself.</p>
+      </div>
+    </div>
+    <div class="viewers">
+      <article class="card">
+        <div class="stage">
+          <canvas data-model="nocturne" role="img" aria-label="Nocturne Reforged sword in 3D. Drag to rotate."></canvas>
+          <span class="hint">↔ Drag to rotate</span>
+        </div>
+        <div class="body">
+          <h3>Nocturne Reforged</h3>
+          <p class="meta">56 cubes · Java item model · ItemsAdder-ready</p>
+          <p>A dark steel greatsword with a crescent guard, amethyst inlays and runes etched down the blade.</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="stage">
+          <canvas data-model="azure" data-roll="135" role="img" aria-label="Azure Talon sword in 3D. Drag to rotate."></canvas>
+          <span class="hint">↔ Drag to rotate</span>
+        </div>
+        <div class="body">
+          <h3>Azure Talon</h3>
+          <p class="meta">562 cubes · Java item model</p>
+          <p>A winged sword with a gold guard and a sapphire set into the hilt.</p>
+        </div>
+      </article>
+    </div>
+
+    <section class="set" aria-labelledby="h-tools">
+      <div class="set-head">
+        <h3 id="h-tools">Tool Set</h3>
+        <p class="meta">4 models · Java item models · ItemsAdder pack</p>
+        <p>Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, so the four read as a family. All four are live 3D.</p>
+      </div>
+      <div class="set-row row-4">
+        <div class="tile3d"><canvas data-model="pickaxe" data-roll="0" role="img" aria-label="Pickaxe in 3D. Drag to rotate."></canvas><span class="label">Pickaxe</span><span class="spin">↔ Drag</span></div>
+        <div class="tile3d"><canvas data-model="axe" data-roll="0" role="img" aria-label="Axe in 3D. Drag to rotate."></canvas><span class="label">Axe</span><span class="spin">↔ Drag</span></div>
+        <div class="tile3d"><canvas data-model="hoe" data-roll="0" role="img" aria-label="Hoe in 3D. Drag to rotate."></canvas><span class="label">Hoe</span><span class="spin">↔ Drag</span></div>
+        <div class="tile3d"><canvas data-model="shovel" data-roll="0" role="img" aria-label="Shovel in 3D. Drag to rotate."></canvas><span class="label">Shovel</span><span class="spin">↔ Drag</span></div>
+      </div>
+    </section>
+
+    <section class="set" aria-labelledby="h-medieval">
+      <div class="set-head">
+        <h3 id="h-medieval">Medieval Set</h3>
+        <p class="meta">3 models · Blockbench</p>
+        <p>A fantasy sword, a reinforced wooden shield and a wand. The wand is shown as an untextured blockout.</p>
+      </div>
+      <div class="set-row row-3">
+        <button type="button" class="media tile" data-start="0" data-images="assets/img/medieval-sword.png|Medieval Set: sword;assets/img/medieval-shield.png|Medieval Set: shield;assets/img/medieval-wand.png|Medieval Set: wand blockout">
+          <img src="assets/img/medieval-sword.png" alt="Sword model with a green guard" loading="lazy"><span class="label">Sword</span>
+        </button>
+        <button type="button" class="media tile" data-start="1" data-images="assets/img/medieval-sword.png|Medieval Set: sword;assets/img/medieval-shield.png|Medieval Set: shield;assets/img/medieval-wand.png|Medieval Set: wand blockout">
+          <img src="assets/img/medieval-shield.png" alt="Wooden shield model with steel trim" loading="lazy"><span class="label">Shield</span>
+        </button>
+        <button type="button" class="media tile" data-start="2" data-images="assets/img/medieval-sword.png|Medieval Set: sword;assets/img/medieval-shield.png|Medieval Set: shield;assets/img/medieval-wand.png|Medieval Set: wand blockout">
+          <img src="assets/img/medieval-wand.png" alt="Untextured wand blockout" loading="lazy"><span class="label">Wand</span>
+        </button>
+      </div>
+    </section>
+  </section>
+
+  <!-- Scripts -->
+  <section class="cat" id="scripts" aria-labelledby="h-scripts">
+    <div class="cat-head">
+      <h2 id="h-scripts">Scripts</h2>
+      <p>Server systems written in Skript. Each card opens a short demo video on YouTube.</p>
+    </div>
+
+    <article class="card feature">
+      <button type="button" class="media" data-images="assets/img/server-menu.png|Server main menu (Shift+F) in game" aria-label="Open server menu screenshot">
+        <img src="assets/img/server-menu.png" alt="In-game server menu with store, rewards, mail and fishing buttons" loading="lazy">
+      </button>
+      <div class="body">
+        <p class="eyebrow">Featured project</p>
+        <h3>Solo-Built Server</h3>
+        <p class="meta">Skript · custom GUIs · pixel art</p>
+        <p>A full server I made on my own, designed for streamer events. The Shift+F menu ties together the shop, rewards, mail and other systems, with GUI art I drew myself. Streamer donation integration is ready.</p>
+        <a class="btn" href="https://www.youtube.com/watch?v=8Zpa5Qo9Uf4" target="_blank" rel="noopener">Watch the server tour ↗</a>
+      </div>
+    </article>
+
+    <div class="videos">
+      <a class="card video" href="https://www.youtube.com/watch?v=Z5eFVc0geKs" target="_blank" rel="noopener">
+        <span class="thumb"><img src="assets/img/yt/Z5eFVc0geKs.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></span>
+        <div class="body"><h3>Starter Kit</h3><span class="meta">Skript · Watch demo ↗</span></div>
+      </a>
+      <a class="card video" href="https://www.youtube.com/watch?v=fABopijokQY" target="_blank" rel="noopener">
+        <span class="thumb"><img src="assets/img/yt/fABopijokQY.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></span>
+        <div class="body"><h3>YouTube Subscriber Verification</h3><span class="meta">Skript · Watch demo ↗</span></div>
+      </a>
+      <a class="card video" href="https://www.youtube.com/watch?v=MKkEmsPge5M" target="_blank" rel="noopener">
+        <span class="thumb"><img src="assets/img/yt/MKkEmsPge5M.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></span>
+        <div class="body"><h3>Mailbox</h3><span class="meta">Skript · Watch demo ↗</span></div>
+      </a>
+      <a class="card video" href="https://www.youtube.com/watch?v=JAA1YLDGiyg" target="_blank" rel="noopener">
+        <span class="thumb"><img src="assets/img/yt/JAA1YLDGiyg.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></span>
+        <div class="body"><h3>Titles &amp; Nicknames</h3><span class="meta">Skript · Watch demo ↗</span></div>
+      </a>
+      <a class="card video" href="https://www.youtube.com/watch?v=873H9HmhaBA" target="_blank" rel="noopener">
+        <span class="thumb"><img src="assets/img/yt/873H9HmhaBA.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></span>
+        <div class="body"><h3>Super Jump</h3><span class="meta">Skript · Watch demo ↗</span></div>
+      </a>
+      <a class="card video" href="https://www.youtube.com/watch?v=fopc7WIKQ0Y" target="_blank" rel="noopener">
+        <span class="thumb"><img src="assets/img/yt/fopc7WIKQ0Y.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></span>
+        <div class="body"><h3>Staff Call</h3><span class="meta">Skript · Watch demo ↗</span></div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="contact" id="contact">
+  <div class="wrap">
+    <img class="contact-logo" src="assets/logo.png" alt="">
+    <h2>Commissions</h2>
+    <p>Need custom items, GUIs, models or scripts for your server? Message me on Discord.</p>
+    <div class="handles">
+      <div class="handle">
+        <span class="meta">Discord</span>
+        <span class="handle-row"><code id="discord">mitlim</code><button type="button" id="copy">Copy</button></span>
+      </div>
+      <div class="handle">
+        <span class="meta">YouTube</span>
+        <a href="https://www.youtube.com/@MITLIM98" target="_blank" rel="noopener">@MITLIM98 ↗</a>
+      </div>
+    </div>
+    <p class="meta">Portfolio updated October 2026</p>
+  </div>
+</footer>
+
+<dialog id="lightbox" aria-label="Image viewer">
+  <div class="lb-frame"><img id="lb-img" alt=""></div>
+  <div class="lb-bar">
+    <p id="lb-cap"></p>
+    <div class="lb-ctrl">
+      <button type="button" id="lb-prev">‹ Prev</button>
+      <span id="lb-count" class="meta"></span>
+      <button type="button" id="lb-next">Next ›</button>
+      <button type="button" id="lb-close">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="assets/models.js"></script>
+<script>
+(() => {
+  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+
+  // Category buttons: #pixel-art, #modeling, #scripts
+  const cats = ['pixel-art', 'modeling', 'scripts'];
+  const picks = $$('[data-cat]');
+  function show(cat, remember) {
+    picks.forEach(p => p.setAttribute('aria-pressed', String(p.dataset.cat === cat)));
+    $$('.cat').forEach(s => { s.hidden = cat !== 'all' && s.id !== cat; });
+    if (remember) {
+      try { history.replaceState(null, '', cat === 'all' ? location.pathname + location.search : '#' + cat); } catch (e) {}
+      if (cat !== 'all') document.getElementById(cat).scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    }
+  }
+  picks.forEach(p => p.addEventListener('click', () => show(p.dataset.cat, true)));
+  // each section gets a way back to the category buttons
+  $$('.cat-head').forEach(head => {
+    const back = document.createElement('button');
+    back.type = 'button';
+    back.className = 'back';
+    back.textContent = '↑ Other categories';
+    back.addEventListener('click', () => document.querySelector('.picker').scrollIntoView({ behavior: 'smooth' }));
+    head.appendChild(back);
+  });
+  const fromHash = location.hash.slice(1);
+  show(cats.includes(fromHash) ? fromHash : 'all', false);
+
+  // Korean translations, keyed by the English text on the page.
+  // To change a Korean sentence, edit it here; to add one, copy the English text exactly.
+  const KO = {
+    'Contact': '문의',
+    'Minecraft resource creator': '마인크래프트 리소스 제작자',
+    'Pixel art, models and scripts for Minecraft servers.': '마인크래프트 서버를 위한 도트, 모델링, 스크립트.',
+    "I'm Mitlim. I draw pixel-art items and GUIs, build Java item models in Blockbench, and write Skript systems for servers.": '미트림입니다. 도트 아이템과 GUI를 그리고, Blockbench로 Java 아이템 모델을 만들며, 서버용 Skript 시스템을 제작합니다.',
+    'Choose a category': '카테고리 선택',
+    'Show all': '전체 보기',
+    'Pixel Art': '도트',
+    '6 works · items, badges, GUIs': '작품 6개 · 아이템, 칭호, GUI',
+    'View pixel art →': '도트 보기 →',
+    'Modeling': '모델링',
+    '9 models · 6 in live 3D': '모델 9개 · 그중 6개는 3D',
+    'View models →': '모델링 보기 →',
+    'Scripts': '스크립트',
+    '7 projects · Skript': '프로젝트 7개 · Skript',
+    'View scripts →': '스크립트 보기 →',
+    '↑ Other categories': '↑ 다른 카테고리',
+
+    'Item sprites, chat badges and GUI textures for servers. Click any card to see the full images.': '서버용 아이템 도트, 칭호 배지, GUI 텍스처입니다. 카드를 누르면 전체 이미지를 볼 수 있습니다.',
+    '2 images': '이미지 2장',
+    '7 images': '이미지 7장',
+    '26 items · 32×32 · ItemsAdder config': '아이템 26개 · 32×32 · ItemsAdder 설정 포함',
+    'Cooking ingredients and finished dishes, from flour sacks and fresh fish to pizza, burgers and salad.': '밀가루 포대와 생선 같은 식재료부터 피자, 버거, 샐러드 같은 완성 요리까지 담았습니다.',
+    '22 items · 32×32 · ItemsAdder config': '아이템 22개 · 32×32 · ItemsAdder 설정 포함',
+    'Bakery and desserts: pies, baguettes, cheesecakes, donuts, gingerbread and pudding, most with a plated version.': '파이, 바게트, 치즈케이크, 도넛, 진저브레드, 푸딩 같은 빵과 디저트입니다. 대부분 접시에 담긴 버전도 있습니다.',
+    '26 items · 13 desserts × plated': '아이템 26개 · 디저트 13종 × 접시 버전',
+    'A second dessert set with more detail, where every treat comes alone and served on a plate.': '디테일을 더 살린 두 번째 디저트 세트로, 모든 디저트를 단품과 접시에 담긴 모습으로 그렸습니다.',
+    'Server Rank Tags': '서버 칭호 태그',
+    '20 badges · chat and tab list': '배지 20개 · 채팅과 탭 목록용',
+    'Rank badges for a server: Admin, Owner, Builder, Helper, VIP, MVP, YouTuber and more, each with its own icon.': 'Admin, Owner, Builder, Helper, VIP, MVP, YouTuber 등 서버 칭호 배지로, 칭호마다 전용 아이콘이 있습니다.',
+    'Server GUI Set': '서버 GUI 세트',
+    'Shop · sell · menu · rarity labels': '상점 · 판매 · 메뉴 · 등급 라벨',
+    'Custom inventory screens for a server, including shop and sell windows, rarity labels and the main menu.': '상점과 판매 창, 등급 라벨, 메인 메뉴 등 서버용 커스텀 인벤토리 화면입니다.',
+    'Commission Work': '외주 작업',
+    'Client requests · icons and sprites': '의뢰 작업 · 아이콘과 스프라이트',
+    'Smaller pieces made for other servers: item icons, UI icons, character sprites and decorations.': '다른 서버의 의뢰로 만든 아이템 아이콘, UI 아이콘, 캐릭터 스프라이트, 장식 등입니다.',
+
+    'Java item models built in Blockbench. Six of them are live 3D models you can spin.': 'Blockbench로 만든 Java 아이템 모델입니다. 그중 6개는 직접 돌려 볼 수 있는 3D 모델입니다.',
+    'Try it: drag to rotate': '직접 돌려 보세요',
+    'Drag a dark 3D panel with your mouse, or swipe it on your phone, to spin the model. Left alone, each model turns slowly by itself.': '어두운 3D 칸을 마우스로 끌거나 휴대폰에서 손가락으로 밀면 모델이 돌아갑니다. 가만히 두면 천천히 혼자 돌아갑니다.',
+    '↔ Drag to rotate': '↔ 끌어서 돌리기',
+    '↔ Drag': '↔ 돌리기',
+    '56 cubes · Java item model · ItemsAdder-ready': '큐브 56개 · Java 아이템 모델 · ItemsAdder 적용 가능',
+    'A dark steel greatsword with a crescent guard, amethyst inlays and runes etched down the blade.': '초승달 모양 가드와 자수정 장식, 칼날을 따라 새긴 룬 문양이 있는 어두운 강철 대검입니다.',
+    '562 cubes · Java item model': '큐브 562개 · Java 아이템 모델',
+    'A winged sword with a gold guard and a sapphire set into the hilt.': '금빛 가드와 손잡이에 박힌 사파이어가 특징인 날개 달린 검입니다.',
+    'Tool Set': '도구 세트',
+    '4 models · Java item models · ItemsAdder pack': '모델 4개 · Java 아이템 모델 · ItemsAdder 팩',
+    'Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, so the four read as a family. All four are live 3D.': '곡괭이, 도끼, 괭이, 삽이 같은 손잡이와 보석 장식, 폼멜을 공유해 한 세트로 보입니다. 네 개 모두 3D로 돌려 볼 수 있습니다.',
+    'Pickaxe': '곡괭이', 'Axe': '도끼', 'Hoe': '괭이', 'Shovel': '삽',
+    'Medieval Set': '중세 세트',
+    '3 models · Blockbench': '모델 3개 · Blockbench',
+    'A fantasy sword, a reinforced wooden shield and a wand. The wand is shown as an untextured blockout.': '판타지 검, 강철 테두리를 두른 나무 방패, 완드입니다. 완드는 텍스처를 입히기 전 형태입니다.',
+    'Sword': '검', 'Shield': '방패', 'Wand': '완드',
+
+    'Server systems written in Skript. Each card opens a short demo video on YouTube.': 'Skript로 만든 서버 시스템입니다. 카드를 누르면 유튜브 시연 영상이 열립니다.',
+    'Featured project': '대표 프로젝트',
+    'Solo-Built Server': '1인 제작 서버',
+    'Skript · custom GUIs · pixel art': 'Skript · 커스텀 GUI · 도트',
+    'A full server I made on my own, designed for streamer events. The Shift+F menu ties together the shop, rewards, mail and other systems, with GUI art I drew myself. Streamer donation integration is ready.': '스트리머 이벤트용으로 혼자 만든 서버입니다. Shift+F 메뉴에서 상점, 보상, 우편함 등 여러 시스템을 열 수 있고, GUI 그림도 직접 그렸습니다. 스트리머 후원 연동도 준비되어 있습니다.',
+    'Watch the server tour ↗': '서버 소개 영상 보기 ↗',
+    'Starter Kit': '기본템 지급',
+    'YouTube Subscriber Verification': '유튜브 구독 인증',
+    'Mailbox': '우편함',
+    'Titles & Nicknames': '칭호 · 닉네임',
+    'Super Jump': '슈퍼 점프',
+    'Staff Call': '관리자 호출',
+    'Skript · Watch demo ↗': 'Skript · 시연 영상 ↗',
+
+    'Commissions': '외주 문의',
+    'Need custom items, GUIs, models or scripts for your server? Message me on Discord.': '서버에 쓸 커스텀 아이템, GUI, 모델, 스크립트가 필요하면 디스코드로 연락 주세요.',
+    'Copy': '복사',
+    'Copied': '복사됨',
+    'Press Ctrl+C': 'Ctrl+C를 누르세요',
+    'Portfolio updated October 2026': '포트폴리오 업데이트: 2026년 10월',
+    '‹ Prev': '‹ 이전',
+    'Next ›': '다음 ›',
+    'Close': '닫기',
+
+    'Food Pack v1, all 26 items': 'Food Pack v1 전체 26개',
+    'Food Pack v2, all 22 items': 'Food Pack v2 전체 22개',
+    'Food Pack v2 in game': 'Food Pack v2 게임 적용 모습',
+    'Food Pack v3, all 26 items': 'Food Pack v3 전체 26개',
+    'Food Pack v3 in game': 'Food Pack v3 게임 적용 모습',
+    'All 20 rank tags at 4× scale': '칭호 태그 20개 (4배 확대)',
+    'Rank tag texture files': '칭호 태그 텍스처 파일',
+    'Main menu GUI in game': '게임 속 메인 메뉴 GUI',
+    'GUI texture files': 'GUI 텍스처 파일',
+    'A selection of commission sprites at 3× scale': '외주 스프라이트 모음 (3배 확대)',
+    'Tree, hoodie, house and ankh': '나무, 후드티, 집, 앙크',
+    'Shield icons and winged hammer': '방패 아이콘과 날개 달린 망치',
+    'Box, building, shop and tablet icons': '상자, 건물, 상점, 태블릿 아이콘',
+    'Grain and bean items': '곡물과 콩 아이템',
+    'Character sprites': '캐릭터 스프라이트',
+    'Heart icon and banner': '하트 아이콘과 배너',
+    'Medieval Set: sword': '중세 세트: 검',
+    'Medieval Set: shield': '중세 세트: 방패',
+    'Medieval Set: wand blockout': '중세 세트: 완드 (텍스처 전)',
+    'Server main menu (Shift+F) in game': '게임 속 서버 메인 메뉴 (Shift+F)',
+  };
+  let lang = 'en';
+  const t = s => (lang === 'ko' && KO[s.trim()]) || s;
+
+  // every element that holds only text gets swapped; the original English is kept in data-en
+  function setLang(next) {
+    lang = next;
+    document.documentElement.lang = next;
+    $$('body *').forEach(el => {
+      if (el.children.length || el.closest('script, style, code, .lang, #lb-cap, #lb-count') || !el.textContent.trim()) return;
+      if (el.dataset.en === undefined) el.dataset.en = el.textContent;
+      el.textContent = t(el.dataset.en);
+    });
+    $$('.lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === next)));
+    try { localStorage.setItem('lang', next); } catch (e) {}
+    if (lb.open) render();
+  }
+  $$('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+  // Lightbox. data-images = "path|caption;path|caption"
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbCap = document.getElementById('lb-cap');
+  const lbCount = document.getElementById('lb-count');
+  const prev = document.getElementById('lb-prev');
+  const next = document.getElementById('lb-next');
+  let list = [], idx = 0;
+  function render() {
+    const [src, cap] = list[idx];
+    lbImg.src = src;
+    lbImg.alt = t(cap);
+    lbCap.textContent = t(cap);
+    lbCount.textContent = list.length > 1 ? `${idx + 1} / ${list.length}` : '';
+    prev.hidden = next.hidden = list.length < 2;
+  }
+  lbImg.addEventListener('load', () => {
+    const small = lbImg.naturalWidth < 700;
+    lbImg.classList.toggle('pixel', small);
+    lbImg.style.width = small ? Math.min(lbImg.naturalWidth * 2, 1000) + 'px' : '';
+  });
+  $$('[data-images]').forEach(b => b.addEventListener('click', () => {
+    list = b.dataset.images.split(';').map(s => s.split('|').map(x => x.trim()));
+    idx = Number(b.dataset.start || 0);
+    render();
+    if (lb.showModal) lb.showModal(); else lb.setAttribute('open', '');
+  }));
+  prev.addEventListener('click', () => { idx = (idx - 1 + list.length) % list.length; render(); });
+  next.addEventListener('click', () => { idx = (idx + 1) % list.length; render(); });
+  document.getElementById('lb-close').addEventListener('click', () => lb.close());
+  lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+  // swipe left/right on phones
+  let touchX = null;
+  lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    if (touchX === null || list.length < 2) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    touchX = null;
+    if (dx > 50) prev.click();
+    else if (dx < -50) next.click();
+  });
+  lb.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft' && list.length > 1) prev.click();
+    if (e.key === 'ArrowRight' && list.length > 1) next.click();
+  });
+
+  // Copy Discord handle
+  const copyBtn = document.getElementById('copy');
+  const handle = document.getElementById('discord');
+  copyBtn.addEventListener('click', () => {
+    const done = () => { copyBtn.textContent = t('Copied'); setTimeout(() => { copyBtn.textContent = t('Copy'); }, 1600); };
+    const fallback = () => {
+      const range = document.createRange();
+      range.selectNodeContents(handle);
+      const sel = getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      copyBtn.textContent = t('Press Ctrl+C');
+    };
+    if (navigator.clipboard) navigator.clipboard.writeText(handle.textContent.trim()).then(done, fallback);
+    else fallback();
+  });
+
+  // no right-click "save image" on work previews
+  document.addEventListener('contextmenu', e => {
+    if (e.target.closest('.media, .stage, .tile3d, .thumb, .pick-art, .lb-frame')) e.preventDefault();
+  });
+
+  // start in the saved language (or ?lang=ko), English by default
+  let startLang = new URLSearchParams(location.search).get('lang');
+  if (!startLang) { try { startLang = localStorage.getItem('lang'); } catch (e) {} }
+  setLang(startLang === 'ko' ? 'ko' : 'en');
+
+  // 3D viewers for Blockbench (Java block/item) models
+  const no3d = () => $$('.stage, .tile3d').forEach(s => s.classList.add('no3d'));
+  if (!window.THREE || !window.MODELS_PACK || !window.DecompressionStream) { no3d(); return; }
+
+  // models.js is packed (deflate + xorshift) so the model files can't be read or copied directly
+  async function unpackModels(b64) {
+    const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    let s = 0x9e3779b9 | 0;
+    for (let i = 0; i < bytes.length; i++) {
+      s ^= s << 13; s ^= s >>> 17; s ^= s << 5;
+      bytes[i] ^= s & 255;
+    }
+    const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+    return JSON.parse(await new Response(stream).text());
+  }
+  let MODELS = {};
+
+  // Minecraft face corners as seen from outside: top-left, top-right, bottom-left, bottom-right
+  const FACES = {
+    north: { n: [0, 0, -1], c: (a, b) => [[b[0], b[1], a[2]], [a[0], b[1], a[2]], [b[0], a[1], a[2]], [a[0], a[1], a[2]]] },
+    south: { n: [0, 0, 1],  c: (a, b) => [[a[0], b[1], b[2]], [b[0], b[1], b[2]], [a[0], a[1], b[2]], [b[0], a[1], b[2]]] },
+    east:  { n: [1, 0, 0],  c: (a, b) => [[b[0], b[1], b[2]], [b[0], b[1], a[2]], [b[0], a[1], b[2]], [b[0], a[1], a[2]]] },
+    west:  { n: [-1, 0, 0], c: (a, b) => [[a[0], b[1], a[2]], [a[0], b[1], b[2]], [a[0], a[1], a[2]], [a[0], a[1], b[2]]] },
+    up:    { n: [0, 1, 0],  c: (a, b) => [[a[0], b[1], a[2]], [b[0], b[1], a[2]], [a[0], b[1], b[2]], [b[0], b[1], b[2]]] },
+    down:  { n: [0, -1, 0], c: (a, b) => [[a[0], a[1], b[2]], [b[0], a[1], b[2]], [a[0], a[1], a[2]], [b[0], a[1], a[2]]] },
+  };
+  const AXES = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+
+  function buildGeometry(model) {
+    const pos = [], nor = [], uv = [];
+    for (const el of model.el) {
+      const a = el.a.map((v, i) => Math.min(v, el.b[i]));
+      const b = el.a.map((v, i) => Math.max(v, el.b[i]));
+      const m = new THREE.Matrix4();
+      if (el.r) {
+        const [axis, angle, ox, oy, oz] = el.r;
+        m.makeTranslation(ox, oy, oz)
+          .multiply(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(...AXES[axis]), angle * Math.PI / 180))
+          .multiply(new THREE.Matrix4().makeTranslation(-ox, -oy, -oz));
+      }
+      const nm = new THREE.Matrix3().getNormalMatrix(m);
+      for (const [dir, [u1, v1, u2, v2, rot]] of Object.entries(el.f)) {
+        const def = FACES[dir];
+        const corners = def.c(a, b).map(p => new THREE.Vector3(...p).applyMatrix4(m));
+        const n = new THREE.Vector3(...def.n).applyMatrix3(nm).normalize();
+        // clockwise UV corners, shifted by the face rotation
+        const cw = [[u1, v1], [u2, v1], [u2, v2], [u1, v2]];
+        const k = (rot / 90) | 0;
+        const pick = i => cw[(i - k + 4) % 4];
+        const uvs = [pick(0), pick(1), pick(3), pick(2)].map(([u, v]) => [u / model.uw, 1 - v / model.uh]);
+        for (const i of [0, 2, 1, 1, 2, 3]) {
+          pos.push(corners[i].x, corners[i].y, corners[i].z);
+          nor.push(n.x, n.y, n.z);
+          uv.push(...uvs[i]);
+        }
+      }
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+    g.setAttribute('normal', new THREE.Float32BufferAttribute(nor, 3));
+    g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+    g.computeBoundingBox();
+    return g;
+  }
+
+  function initViewer(canvas) {
+    const model = MODELS[canvas.dataset.model];
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(24, 1, 1, 2000);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.62));
+    const key = new THREE.DirectionalLight(0xffffff, 0.7);
+    key.position.set(-1.5, 2, 3);
+    scene.add(key);
+    const rim = new THREE.DirectionalLight(0xd9c4ff, 0.4);
+    rim.position.set(2, 1, -2.5);
+    scene.add(rim);
+
+    const tex = new THREE.TextureLoader().load(model.tex, () => draw());
+    tex.magFilter = THREE.NearestFilter;
+    tex.minFilter = THREE.NearestFilter;
+    tex.generateMipmaps = false;
+    tex.encoding = THREE.sRGBEncoding;
+
+    const geo = buildGeometry(model);
+    const mesh = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ map: tex, alphaTest: 0.1 }));
+    const center = geo.boundingBox.getCenter(new THREE.Vector3());
+    const radius = geo.boundingBox.getSize(new THREE.Vector3()).length() / 2;
+    mesh.position.copy(center).negate();
+    const pivot = new THREE.Group();
+    pivot.rotation.order = 'XZY'; // spin on its own axis, then lean diagonally like an inventory icon
+    pivot.add(mesh);
+    scene.add(pivot);
+
+    // data-roll flips models whose blade points down in model space
+    const pose = { spin: 25, roll: Number(canvas.dataset.roll || -45), tilt: 8 };
+    const d2r = Math.PI / 180;
+    function draw() {
+      pivot.rotation.set(pose.tilt * d2r, pose.spin * d2r, pose.roll * d2r);
+      renderer.render(scene, camera);
+    }
+    function resize() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      if (!w || !h) return;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      const dist = radius / Math.tan(camera.fov * Math.PI / 360) / Math.min(1, w / h) * 1.05;
+      camera.position.set(0, 0, dist);
+      camera.lookAt(0, 0, 0);
+      camera.updateProjectionMatrix();
+      draw();
+    }
+    new ResizeObserver(resize).observe(canvas);
+
+    let dragX = null, visible = false;
+    canvas.addEventListener('pointerdown', e => {
+      dragX = e.clientX;
+      canvas.setPointerCapture(e.pointerId);
+      canvas.classList.add('dragging');
+    });
+    canvas.addEventListener('pointermove', e => {
+      if (dragX === null) return;
+      pose.spin += (e.clientX - dragX) * 0.6;
+      dragX = e.clientX;
+      draw();
+    });
+    const end = () => { dragX = null; canvas.classList.remove('dragging'); };
+    canvas.addEventListener('pointerup', end);
+    canvas.addEventListener('pointercancel', end);
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(canvas);
+
+    return () => {
+      if (visible && dragX === null) { pose.spin += 0.3; draw(); }
+    };
+  }
+
+  unpackModels(window.MODELS_PACK).then(unpacked => {
+    MODELS = unpacked;
+    const ticks = $$('canvas[data-model]').map(initViewer);
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const loop = () => { ticks.forEach(t => t()); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  }).catch(no3d);
+})();
+</script>
+</body>
+</html>
