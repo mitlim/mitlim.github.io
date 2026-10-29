@@ -568,8 +568,8 @@
       <h2 id="h-about">About MTL Studio</h2>
       <p>MTL Studio is the shop of mitlim, a Minecraft resource creator from Korea. I build pixel art, Blockbench models and server scripts, and every pack is tested in game before release.</p>
       <dl class="facts">
-        <div><dt>Skills</dt><dd><span class="chip">Blockbench</span><span class="chip">Pixel art</span><span class="chip">Skript</span><span class="chip">C</span></dd></div>
-        <div><dt>Languages</dt><dd><span>Korean (native) · English (conversational)</span></dd></div>
+        <div><dt>Skills</dt><dd><span class="chip">Blockbench</span><span class="chip keep">Pixel Art</span><span class="chip">Skript</span><span class="chip">C</span></dd></div>
+        <div><dt>Languages</dt><dd><span>Korean (native) · English (basic)</span></dd></div>
         <div><dt>Tested on</dt><dd><span>Minecraft 1.21 · Paper</span></dd></div>
         <div><dt>Plugin</dt><dd><span>ItemsAdder</span></dd></div>
       </dl>
@@ -763,9 +763,9 @@
     'About MTL Studio': 'MTL Studio 소개',
     'MTL Studio is the shop of mitlim, a Minecraft resource creator from Korea. I build pixel art, Blockbench models and server scripts, and every pack is tested in game before release.': 'MTL Studio는 한국의 마인크래프트 리소스 제작자 mitlim의 숍입니다. 픽셀아트, 블록벤치 모델, 서버 스크립트를 만들며, 모든 팩은 출시 전에 게임에서 직접 테스트합니다.',
     'Skills': '기술',
-    'Pixel art': '픽셀아트',
+    'C': 'C언어',
     'Languages': '언어',
-    'Korean (native) · English (conversational)': '한국어 (모국어) · 영어 (일상 대화 가능)',
+    'Korean (native) · English (basic)': '한국어 (모국어) · 영어 (약간 가능)',
     'Tested on': '테스트 환경',
     'Plugin': '지원 플러그인',
     'How commissions work': '외주 진행 방식',
@@ -787,7 +787,7 @@
     lang = next;
     document.documentElement.lang = next;
     $$('body *').forEach(el => {
-      if (el.children.length || el.closest('script, style, code, .lang, #lb-cap, #lb-count, #player-title') || !el.textContent.trim()) return;
+      if (el.children.length || el.closest('script, style, code, .lang, .keep, #lb-cap, #lb-count, #player-title') || !el.textContent.trim()) return;
       if (el.dataset.en === undefined) el.dataset.en = el.textContent;
       el.textContent = t(el.dataset.en);
     });
