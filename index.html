@@ -93,7 +93,7 @@
     --wm: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='64'%3E%3Cg font-family='Arial, sans-serif' font-size='15' font-weight='700' fill='white' fill-opacity='0.36' stroke='black' stroke-opacity='0.13' stroke-width='0.6' text-anchor='middle'%3E%3Ctext x='30' y='22' transform='rotate(-24 30 18)'%3Emitlim%3C/text%3E%3Ctext x='90' y='54' transform='rotate(-24 90 50)'%3Emitlim%3C/text%3E%3C/g%3E%3C/svg%3E");
   }
   .pick-art, .lb-frame { position: relative; }
-  .media::after, .stage::after, .tile3d::after, .thumb::after, .pick-art::after, .lb-frame::after {
+  .media::after, .stage::after, .tile3d::after, .pick-art::after, .lb-frame::after {
     content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background-image: var(--wm); background-size: 120px 64px;
   }
@@ -218,6 +218,11 @@
   .lb-frame { display: grid; place-items: center; padding: 16px; max-height: calc(94vh - 72px); overflow: auto; background: var(--sheet); }
   #lb-img { display: block; max-width: 100%; max-height: calc(94vh - 104px); object-fit: contain; }
   #lb-img.pixel { image-rendering: pixelated; }
+  #player { width: min(1000px, 94vw); }
+  .player-frame { aspect-ratio: 16 / 9; background: var(--stage); }
+  .player-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+  #player-yt { color: var(--muted); text-decoration: none; }
+  #player-yt:hover { color: var(--accent); }
   .lb-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 12px 16px; border-top: 1px solid var(--line); }
   .lb-bar p { margin: 0; font-weight: 500; }
   .lb-ctrl { display: flex; align-items: center; gap: 8px; }
@@ -464,7 +469,7 @@
   <section class="cat" id="scripts" aria-labelledby="h-scripts">
     <div class="cat-head">
       <h2 id="h-scripts">Scripts</h2>
-      <p>Server systems written in Skript. Each card opens a short demo video on YouTube.</p>
+      <p>Server systems written in Skript. Click a card to play its demo video right here.</p>
     </div>
 
     <article class="card feature">
@@ -476,34 +481,34 @@
         <h3>Solo-Built Server</h3>
         <p class="meta">Skript · custom GUIs · pixel art</p>
         <p>A full server I made on my own, designed for streamer events. The Shift+F menu ties together the shop, rewards, mail and other systems, with GUI art I drew myself. Streamer donation integration is ready.</p>
-        <a class="btn" href="https://www.youtube.com/watch?v=8Zpa5Qo9Uf4" target="_blank" rel="noopener">Watch the server tour ↗</a>
+        <a class="btn" href="https://www.youtube.com/watch?v=8Zpa5Qo9Uf4" target="_blank" rel="noopener">▶ Watch the server tour</a>
       </div>
     </article>
 
     <div class="videos">
       <a class="card video" href="https://www.youtube.com/watch?v=Z5eFVc0geKs" target="_blank" rel="noopener">
         <span class="thumb"><img src="assets/img/yt/Z5eFVc0geKs.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></span>
-        <div class="body"><h3>Starter Kit</h3><span class="meta">Skript · Watch demo ↗</span></div>
+        <div class="body"><h3>Starter Kit</h3><span class="meta">Skript · ▶ Play video</span></div>
       </a>
       <a class="card video" href="https://www.youtube.com/watch?v=fABopijokQY" target="_blank" rel="noopener">
         <span class="thumb"><img src="assets/img/yt/fABopijokQY.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></span>
-        <div class="body"><h3>YouTube Subscriber Verification</h3><span class="meta">Skript · Watch demo ↗</span></div>
+        <div class="body"><h3>YouTube Subscriber Verification</h3><span class="meta">Skript · ▶ Play video</span></div>
       </a>
       <a class="card video" href="https://www.youtube.com/watch?v=MKkEmsPge5M" target="_blank" rel="noopener">
         <span class="thumb"><img src="assets/img/yt/MKkEmsPge5M.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></span>
-        <div class="body"><h3>Mailbox</h3><span class="meta">Skript · Watch demo ↗</span></div>
+        <div class="body"><h3>Mailbox</h3><span class="meta">Skript · ▶ Play video</span></div>
       </a>
       <a class="card video" href="https://www.youtube.com/watch?v=JAA1YLDGiyg" target="_blank" rel="noopener">
         <span class="thumb"><img src="assets/img/yt/JAA1YLDGiyg.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></span>
-        <div class="body"><h3>Titles &amp; Nicknames</h3><span class="meta">Skript · Watch demo ↗</span></div>
+        <div class="body"><h3>Titles &amp; Nicknames</h3><span class="meta">Skript · ▶ Play video</span></div>
       </a>
       <a class="card video" href="https://www.youtube.com/watch?v=873H9HmhaBA" target="_blank" rel="noopener">
         <span class="thumb"><img src="assets/img/yt/873H9HmhaBA.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></span>
-        <div class="body"><h3>Super Jump</h3><span class="meta">Skript · Watch demo ↗</span></div>
+        <div class="body"><h3>Super Jump</h3><span class="meta">Skript · ▶ Play video</span></div>
       </a>
       <a class="card video" href="https://www.youtube.com/watch?v=fopc7WIKQ0Y" target="_blank" rel="noopener">
         <span class="thumb"><img src="assets/img/yt/fopc7WIKQ0Y.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></span>
-        <div class="body"><h3>Staff Call</h3><span class="meta">Skript · Watch demo ↗</span></div>
+        <div class="body"><h3>Staff Call</h3><span class="meta">Skript · ▶ Play video</span></div>
       </a>
     </div>
   </section>
@@ -528,6 +533,17 @@
     <p class="meta">Portfolio updated October 2026</p>
   </div>
 </footer>
+
+<dialog id="player" aria-label="Video player">
+  <div class="player-frame"><iframe id="player-iframe" title="Demo video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+  <div class="lb-bar">
+    <p id="player-title"></p>
+    <div class="lb-ctrl">
+      <a id="player-yt" href="https://www.youtube.com/@MITLIM98" target="_blank" rel="noopener">Open on YouTube ↗</a>
+      <button type="button" id="player-close">Close</button>
+    </div>
+  </div>
+</dialog>
 
 <dialog id="lightbox" aria-label="Image viewer">
   <div class="lb-frame"><img id="lb-img" alt=""></div>
@@ -629,19 +645,20 @@
     'A fantasy sword, a reinforced wooden shield and a wand. The wand is shown as an untextured blockout.': '판타지 검, 강철 테두리를 두른 나무 방패, 완드입니다. 완드는 텍스처를 입히기 전 형태입니다.',
     'Sword': '검', 'Shield': '방패', 'Wand': '완드',
 
-    'Server systems written in Skript. Each card opens a short demo video on YouTube.': 'Skript로 만든 서버 시스템입니다. 카드를 누르면 유튜브 시연 영상이 열립니다.',
+    'Server systems written in Skript. Click a card to play its demo video right here.': 'Skript로 만든 서버 시스템입니다. 카드를 누르면 이 페이지에서 바로 시연 영상이 재생됩니다.',
     'Featured project': '대표 프로젝트',
     'Solo-Built Server': '1인 제작 서버',
     'Skript · custom GUIs · pixel art': 'Skript · 커스텀 GUI · 도트',
     'A full server I made on my own, designed for streamer events. The Shift+F menu ties together the shop, rewards, mail and other systems, with GUI art I drew myself. Streamer donation integration is ready.': '스트리머 이벤트용으로 혼자 만든 서버입니다. Shift+F 메뉴에서 상점, 보상, 우편함 등 여러 시스템을 열 수 있고, GUI 그림도 직접 그렸습니다. 스트리머 후원 연동도 준비되어 있습니다.',
-    'Watch the server tour ↗': '서버 소개 영상 보기 ↗',
+    '▶ Watch the server tour': '▶ 서버 소개 영상 보기',
     'Starter Kit': '기본템 지급',
     'YouTube Subscriber Verification': '유튜브 구독 인증',
     'Mailbox': '우편함',
     'Titles & Nicknames': '칭호 · 닉네임',
     'Super Jump': '슈퍼 점프',
     'Staff Call': '관리자 호출',
-    'Skript · Watch demo ↗': 'Skript · 시연 영상 ↗',
+    'Skript · ▶ Play video': 'Skript · ▶ 영상 재생',
+    'Open on YouTube ↗': '유튜브에서 보기 ↗',
 
     'Commissions': '외주 문의',
     'Need custom items, GUIs, models or scripts for your server? Message me on Discord.': '서버에 쓸 커스텀 아이템, GUI, 모델, 스크립트가 필요하면 디스코드로 연락 주세요.',
@@ -682,7 +699,7 @@
     lang = next;
     document.documentElement.lang = next;
     $$('body *').forEach(el => {
-      if (el.children.length || el.closest('script, style, code, .lang, #lb-cap, #lb-count') || !el.textContent.trim()) return;
+      if (el.children.length || el.closest('script, style, code, .lang, #lb-cap, #lb-count, #player-title') || !el.textContent.trim()) return;
       if (el.dataset.en === undefined) el.dataset.en = el.textContent;
       el.textContent = t(el.dataset.en);
     });
@@ -755,9 +772,30 @@
     else fallback();
   });
 
+  // YouTube demos play in a dialog on the real site; elsewhere the cards stay plain YouTube links
+  const player = document.getElementById('player');
+  const playerFrame = document.getElementById('player-iframe');
+  const playerTitle = document.getElementById('player-title');
+  const playerYt = document.getElementById('player-yt');
+  const canEmbed = /(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname) && !!player.showModal;
+  if (canEmbed) {
+    $$('a[href*="youtube.com/watch"]').forEach(a => a.addEventListener('click', e => {
+      e.preventDefault();
+      const id = new URL(a.href).searchParams.get('v');
+      const h3 = a.querySelector('h3');
+      playerTitle.textContent = h3 ? h3.textContent : t('Solo-Built Server');
+      playerYt.href = a.href;
+      playerFrame.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1`;
+      player.showModal();
+    }));
+    document.getElementById('player-close').addEventListener('click', () => player.close());
+    player.addEventListener('click', e => { if (e.target === player) player.close(); });
+    player.addEventListener('close', () => { playerFrame.src = 'about:blank'; });
+  }
+
   // no right-click "save image" on work previews
   document.addEventListener('contextmenu', e => {
-    if (e.target.closest('.media, .stage, .tile3d, .thumb, .pick-art, .lb-frame')) e.preventDefault();
+    if (e.target.closest('.media, .stage, .tile3d, .pick-art, .lb-frame')) e.preventDefault();
   });
 
   // start in the saved language (or ?lang=ko), English by default
