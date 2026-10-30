@@ -93,8 +93,9 @@
 
   /* Hero */
   .hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 24px 48px; padding-block: 32px 8px; overflow-x: clip; }
-  .hero-logo { width: clamp(180px, 22vw, 260px); height: auto; border-radius: 10px; }
-  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .hero-logo { display: none; } }
+  .hero-mark { display: grid; place-items: center; width: clamp(180px, 22vw, 260px); aspect-ratio: 1; border-radius: 16px; background: radial-gradient(circle at 50% 45%, var(--stage-glow), var(--stage) 75%); }
+  .hero-mark img { width: 94%; height: auto; }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .hero-mark { display: none; } }
   .hero h1 { margin: 10px 0 14px; max-width: 17ch; font: 600 clamp(2rem, 4.6vw, 3.3rem)/1.08 var(--font-display); text-wrap: balance; }
   .lede { margin: 0; max-width: 60ch; font-size: 1.1rem; color: var(--muted); }
 
@@ -122,9 +123,10 @@
 
   /* Pack details */
   .specs { display: grid; gap: 2px; margin: 6px 0 2px; font-size: 0.82rem; }
-  .specs div { display: flex; gap: 8px; }
-  .specs dt { min-width: 92px; color: var(--muted); }
-  .specs dd { margin: 0; font-weight: 500; }
+  .specs div { display: flex; flex-wrap: wrap; column-gap: 6px; }
+  .specs dt { color: var(--muted); }
+  .specs dt::after { content: ":"; }
+  .specs dd { margin: 0; font-weight: 500; white-space: nowrap; }
 
   /* About */
   .about { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px 48px; margin-top: 48px; padding: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
@@ -253,7 +255,7 @@
   /* Contact */
   .contact { margin-top: 56px; background: var(--accent); color: var(--accent-ink); }
   .contact .wrap { display: grid; gap: 12px; padding-block: 44px; }
-  .contact-logo { width: 72px; height: 72px; border-radius: 8px; }
+  .contact-logo { width: 88px; height: 88px; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35)); }
   .contact h2 { margin: 0; font: 600 2rem/1.1 var(--font-display); }
   .contact p { margin: 0; max-width: 56ch; }
   .contact .meta { color: inherit; opacity: 0.8; }
@@ -331,7 +333,7 @@
   <h1 id="hero-title">Welcome to MTL Studio.</h1>
   <p class="lede">I'm mitlim, and I make scripts, pixel art and Blockbench models!</p>
   </div>
-  <img class="hero-logo" src="assets/logo.png" alt="Mitlim logo: a serif M with dark blue leaves">
+  <div class="hero-mark" role="img" aria-label="MTL Studio logo: a serif M with blue leaves"><img src="assets/logo-cutout.png" alt=""></div>
 </section>
 
 <section class="wrap picker" aria-labelledby="h-browse">
@@ -344,7 +346,7 @@
       <span class="pick-art pixel" aria-hidden="true"><img src="assets/icons/pizza.png" alt=""><img src="assets/icons/burger.png" alt=""><img src="assets/icons/cake.png" alt=""></span>
       <span class="pick-text">
         <span class="pick-title">Pixel Art</span>
-        <span class="meta">4 packs · ranks and food</span>
+        <span class="meta">7 packs · ranks, icons and food</span>
         <span class="pick-go">View pixel art →</span>
       </span>
     </button>
@@ -373,13 +375,14 @@
   <section class="cat" id="pixel-art" aria-labelledby="h-pixel">
     <div class="cat-head">
       <h2 id="h-pixel">Pixel Art</h2>
-      <p>Chat badges and item sprites, packaged for servers. Click any card to see the full image.</p>
+      <p>Chat badges, icons and item sprites, packaged for servers. Click a card to flip through the sale image and previews on white and black.</p>
     </div>
     <div class="grid">
       <article class="card">
-        <button type="button" class="media poster" data-images="assets/img/rankpack-v1.png|Rank Pack v1, all 39 ranks" aria-label="Open Rank Pack v1 image">
-          <img src="assets/img/rankpack-v1.png" alt="Rank Pack v1: 39 chat rank badges with icons" loading="lazy">
+        <button type="button" class="media poster" data-images="assets/img/packs/rank-v1-sale.png|Rank Pack v1, sale image;assets/img/packs/rank-v1-white.png|Rank Pack v1 on a white background;assets/img/packs/rank-v1-black.png|Rank Pack v1 on a black background" aria-label="Open Rank Pack v1 images">
+          <img src="assets/img/packs/rank-v1-sale.png" alt="Rank Pack v1: 39 chat rank badges with icons" loading="lazy">
           <span class="soon">Coming soon</span>
+          <span class="count">3 images</span>
         </button>
         <div class="body">
           <h3>Rank Pack v1</h3>
@@ -389,9 +392,49 @@
         </div>
       </article>
       <article class="card">
-        <button type="button" class="media poster" data-images="assets/img/foodpack-v1-poster.png|Food Pack v1, all 26 items" aria-label="Open Food Pack v1 image">
-          <img src="assets/img/foodpack-v1-poster.png" alt="Food Pack v1: 26 food items in an inventory" loading="lazy">
+        <button type="button" class="media poster" data-images="assets/img/packs/icon-v1-sale.png|Icon Pack v1, sale image;assets/img/packs/icon-v1-white.png|Icon Pack v1 on a white background;assets/img/packs/icon-v1-black.png|Icon Pack v1 on a black background" aria-label="Open Icon Pack v1 images">
+          <img src="assets/img/packs/icon-v1-sale.png" alt="Icon Pack v1: 30 UI icons such as hands, arrows, chests and hearts" loading="lazy">
           <span class="soon">Coming soon</span>
+          <span class="count">3 images</span>
+        </button>
+        <div class="body">
+          <h3>Icon Pack v1</h3>
+          <p class="meta">30 icons · 16×16 · PNG</p>
+          <dl class="specs"><div><dt>Tested on</dt><dd>Minecraft 1.21 · Paper</dd></div><div><dt>Plugin</dt><dd>ItemsAdder</dd></div></dl>
+          <p>UI icons for menus and chat: hand gestures, arrows, chests, medals, hearts and locks.</p>
+        </div>
+      </article>
+      <article class="card">
+        <button type="button" class="media poster" data-images="assets/img/packs/icon-v2-sale.png|Icon Pack v2, sale image;assets/img/packs/icon-v2-white.png|Icon Pack v2 on a white background;assets/img/packs/icon-v2-black.png|Icon Pack v2 on a black background" aria-label="Open Icon Pack v2 images">
+          <img src="assets/img/packs/icon-v2-sale.png" alt="Icon Pack v2: 35 icons such as keys, gems, coins and crowns" loading="lazy">
+          <span class="soon">Coming soon</span>
+          <span class="count">3 images</span>
+        </button>
+        <div class="body">
+          <h3>Icon Pack v2</h3>
+          <p class="meta">35 icons · 16×16 · PNG</p>
+          <dl class="specs"><div><dt>Tested on</dt><dd>Minecraft 1.21 · Paper</dd></div><div><dt>Plugin</dt><dd>ItemsAdder</dd></div></dl>
+          <p>Everyday and reward icons: keys, bells, gems, coins, crowns, trophies, mail and weather.</p>
+        </div>
+      </article>
+      <article class="card">
+        <button type="button" class="media poster" data-images="assets/img/packs/icon-v3-sale.png|Icon Pack v3, sale image;assets/img/packs/icon-v3-white.png|Icon Pack v3 on a white background;assets/img/packs/icon-v3-black.png|Icon Pack v3 on a black background" aria-label="Open Icon Pack v3 images">
+          <img src="assets/img/packs/icon-v3-sale.png" alt="Icon Pack v3: 36 icons such as food, potions, animals and vehicles" loading="lazy">
+          <span class="soon">Coming soon</span>
+          <span class="count">3 images</span>
+        </button>
+        <div class="body">
+          <h3>Icon Pack v3</h3>
+          <p class="meta">36 icons · 16×16 · PNG</p>
+          <dl class="specs"><div><dt>Tested on</dt><dd>Minecraft 1.21 · Paper</dd></div><div><dt>Plugin</dt><dd>ItemsAdder</dd></div></dl>
+          <p>Food, drinks and potions, plus animals, vehicles and nature icons.</p>
+        </div>
+      </article>
+      <article class="card">
+        <button type="button" class="media poster" data-images="assets/img/packs/food-v1-sale.png|Food Pack v1, sale image;assets/img/packs/food-v1-white.png|Food Pack v1 on a white background;assets/img/packs/food-v1-black.png|Food Pack v1 on a black background" aria-label="Open Food Pack v1 images">
+          <img src="assets/img/packs/food-v1-sale.png" alt="Food Pack v1: 26 food items" loading="lazy">
+          <span class="soon">Coming soon</span>
+          <span class="count">3 images</span>
         </button>
         <div class="body">
           <h3>Food Pack v1</h3>
@@ -401,22 +444,23 @@
         </div>
       </article>
       <article class="card">
-        <button type="button" class="media poster" data-images="assets/img/foodpack-v2-poster.png|Food Pack v2, all 22 items" aria-label="Open Food Pack v2 image">
-          <img src="assets/img/foodpack-v2-poster.png" alt="Food Pack v2: 22 dessert items in an inventory" loading="lazy">
+        <button type="button" class="media poster" data-images="assets/img/packs/food-v2-sale.png|Food Pack v2, sale image;assets/img/packs/food-v2-white.png|Food Pack v2 on a white background;assets/img/packs/food-v2-black.png|Food Pack v2 on a black background" aria-label="Open Food Pack v2 images">
+          <img src="assets/img/packs/food-v2-sale.png" alt="Food Pack v2: 22 dessert items" loading="lazy">
           <span class="soon">Coming soon</span>
+          <span class="count">3 images</span>
         </button>
         <div class="body">
           <h3>Food Pack v2</h3>
-          <p class="meta">22 items · 48×48 · ItemsAdder config</p>
+          <p class="meta">22 items · 32×32 · ItemsAdder config</p>
           <dl class="specs"><div><dt>Tested on</dt><dd>Minecraft 1.21 · Paper</dd></div><div><dt>Plugin</dt><dd>ItemsAdder</dd></div></dl>
           <p>Bakery and desserts: pies, baguettes, cheesecakes, donuts, gingerbread and pudding, most with a plated version.</p>
         </div>
       </article>
       <article class="card">
-        <button type="button" class="media poster" data-images="assets/img/foodpack-v3-poster.png|Food Pack v3, all 12 items;assets/img/foodpack-v3-preview.png|Food Pack v3 at 8× scale" aria-label="Open Food Pack v3 images">
-          <img src="assets/img/foodpack-v3-poster.png" alt="Food Pack v3: 12 cooking ingredients in an inventory" loading="lazy">
+        <button type="button" class="media poster" data-images="assets/img/packs/food-v3-sale.png|Food Pack v3, sale image;assets/img/packs/food-v3-white.png|Food Pack v3 on a white background;assets/img/packs/food-v3-black.png|Food Pack v3 on a black background" aria-label="Open Food Pack v3 images">
+          <img src="assets/img/packs/food-v3-sale.png" alt="Food Pack v3: 12 cooking ingredients" loading="lazy">
           <span class="soon">Coming soon</span>
-          <span class="count">2 images</span>
+          <span class="count">3 images</span>
         </button>
         <div class="body">
           <h3>Food Pack v3</h3>
@@ -594,7 +638,7 @@
 
 <footer class="contact" id="contact">
   <div class="wrap">
-    <img class="contact-logo" src="assets/logo.png" alt="">
+    <img class="contact-logo" src="assets/logo-cutout.png" alt="">
     <h2>Commissions</h2>
     <p>Need custom items, GUIs, models or scripts for your server? Message me on Discord.</p>
     <div class="handles">
@@ -675,7 +719,7 @@
     'Choose a category': '카테고리 선택',
     'Show all': '전체 보기',
     'Pixel Art': '도트',
-    '4 packs · ranks and food': '작품 6개 · 아이템, 칭호, GUI',
+    '7 packs · ranks, icons and food': '작품 6개 · 아이템, 칭호, GUI',
     'View pixel art →': '도트 보기 →',
     'Modeling': '모델링',
     '25 models · all in live 3D': '모델 25개 · 그중 22개는 3D',
@@ -685,7 +729,6 @@
     'View scripts →': '스크립트 보기 →',
     '↑ Other categories': '↑ 다른 카테고리',
 
-    '2 images': '이미지 2장',
     '26 items · 32×32 · ItemsAdder config': '아이템 26개 · 32×32 · ItemsAdder 설정 포함',
     'Cooking ingredients and finished dishes, from flour sacks and fresh fish to pizza, burgers and salad.': '밀가루 포대와 생선 같은 식재료부터 피자, 버거, 샐러드 같은 완성 요리까지 담았습니다.',
     'Bakery and desserts: pies, baguettes, cheesecakes, donuts, gingerbread and pudding, most with a plated version.': '파이, 바게트, 치즈케이크, 도넛, 진저브레드, 푸딩 같은 빵과 디저트입니다. 대부분 접시에 담긴 버전도 있습니다.',
@@ -729,21 +772,14 @@
     'Next ›': '다음 ›',
     'Close': '닫기',
 
-    'Food Pack v1, all 26 items': 'Food Pack v1 전체 26개',
-    'Food Pack v2, all 22 items': 'Food Pack v2 전체 22개',
     'Server main menu (Shift+F) in game': '게임 속 서버 메인 메뉴 (Shift+F)',
-    'Chat badges and item sprites, packaged for servers. Click any card to see the full image.': '서버용으로 패키징한 칭호 배지와 아이템 도트입니다. 카드를 누르면 전체 이미지를 볼 수 있습니다.',
     'Coming soon': '출시 예정',
-    '4 packs · ranks and food': '팩 4개 · 칭호와 음식',
+    '7 packs · ranks, icons and food': '팩 4개 · 칭호와 음식',
     '25 models · all in live 3D': '모델 25개 · 모두 3D',
     '39 ranks · 10px · combined / icon / text': '칭호 39종 · 10px · 배지 / 아이콘 / 텍스트',
     'Chat and tab-list rank badges, from Admin and Owner to YouTube, Twitch and TikTok. Every rank comes as a full badge, an icon only and text only.': 'Admin, Owner부터 YouTube, Twitch, TikTok까지 채팅과 탭 목록용 칭호 배지입니다. 모든 칭호를 전체 배지, 아이콘만, 텍스트만의 세 가지 형태로 제공합니다.',
-    '22 items · 48×48 · ItemsAdder config': '아이템 22개 · 48×48 · ItemsAdder 설정 포함',
     '12 items · 32×32': '아이템 12개 · 32×32',
     'Kitchen ingredients for cooking servers: flour, soy sauce, gochujang, strawberries, sliced tomato and more.': '밀가루, 간장, 고추장, 딸기, 슬라이스 토마토 등 요리 서버용 식재료입니다.',
-    'Rank Pack v1, all 39 ranks': 'Rank Pack v1 전체 39종',
-    'Food Pack v3, all 12 items': 'Food Pack v3 전체 12개',
-    'Food Pack v3 at 8× scale': 'Food Pack v3 (8배 확대)',
     'Java item models built in Blockbench. Every model here is live 3D, so you can spin it.': 'Blockbench로 만든 Java 아이템 모델입니다. 모든 모델을 직접 돌려 볼 수 있는 3D로 보여 줍니다.',
     '62 cubes · Java item model': '큐브 62개 · Java 아이템 모델',
     '716 cubes · Java item model': '큐브 716개 · Java 아이템 모델',
@@ -778,6 +814,40 @@
     'Final review': '최종 확인 (컨펌)',
     'Approval and delivery': '승인 및 전달',
     'One revision is included. Further revisions cost extra.': '수정은 1회 무료이며, 그 이후 수정부터는 추가 비용이 발생합니다.',
+    'Chat badges, icons and item sprites, packaged for servers. Click a card to flip through the sale image and previews on white and black.': '서버용으로 패키징한 칭호 배지, 아이콘, 아이템 도트입니다. 카드를 누르면 판매 이미지와 흰 배경·검은 배경 미리보기를 넘겨 볼 수 있습니다.',
+    '7 packs · ranks, icons and food': '팩 7개 · 칭호, 아이콘, 음식',
+    '3 images': '이미지 3장',
+    '22 items · 32×32 · ItemsAdder config': '아이템 22개 · 32×32 · ItemsAdder 설정 포함',
+    '30 icons · 16×16 · PNG': '아이콘 30개 · 16×16 · PNG',
+    '35 icons · 16×16 · PNG': '아이콘 35개 · 16×16 · PNG',
+    '36 icons · 16×16 · PNG': '아이콘 36개 · 16×16 · PNG',
+    'UI icons for menus and chat: hand gestures, arrows, chests, medals, hearts and locks.': '메뉴와 채팅에 쓰는 UI 아이콘입니다. 손동작, 화살표, 상자, 메달, 하트, 자물쇠 등이 들어 있습니다.',
+    'Everyday and reward icons: keys, bells, gems, coins, crowns, trophies, mail and weather.': '열쇠, 종, 보석, 코인, 왕관, 트로피, 편지, 날씨 등 일상·보상용 아이콘입니다.',
+    'Food, drinks and potions, plus animals, vehicles and nature icons.': '음식, 음료, 포션과 함께 동물, 탈것, 자연 아이콘이 들어 있습니다.',
+    'Icon Pack v1': '아이콘 팩 v1',
+    'Icon Pack v2': '아이콘 팩 v2',
+    'Icon Pack v3': '아이콘 팩 v3',
+    'Rank Pack v1, sale image': '칭호 팩 v1 판매 이미지',
+    'Rank Pack v1 on a white background': '칭호 팩 v1 흰 배경 미리보기',
+    'Rank Pack v1 on a black background': '칭호 팩 v1 검은 배경 미리보기',
+    'Icon Pack v1, sale image': '아이콘 팩 v1 판매 이미지',
+    'Icon Pack v1 on a white background': '아이콘 팩 v1 흰 배경 미리보기',
+    'Icon Pack v1 on a black background': '아이콘 팩 v1 검은 배경 미리보기',
+    'Icon Pack v2, sale image': '아이콘 팩 v2 판매 이미지',
+    'Icon Pack v2 on a white background': '아이콘 팩 v2 흰 배경 미리보기',
+    'Icon Pack v2 on a black background': '아이콘 팩 v2 검은 배경 미리보기',
+    'Icon Pack v3, sale image': '아이콘 팩 v3 판매 이미지',
+    'Icon Pack v3 on a white background': '아이콘 팩 v3 흰 배경 미리보기',
+    'Icon Pack v3 on a black background': '아이콘 팩 v3 검은 배경 미리보기',
+    'Food Pack v1, sale image': '푸드 팩 v1 판매 이미지',
+    'Food Pack v1 on a white background': '푸드 팩 v1 흰 배경 미리보기',
+    'Food Pack v1 on a black background': '푸드 팩 v1 검은 배경 미리보기',
+    'Food Pack v2, sale image': '푸드 팩 v2 판매 이미지',
+    'Food Pack v2 on a white background': '푸드 팩 v2 흰 배경 미리보기',
+    'Food Pack v2 on a black background': '푸드 팩 v2 검은 배경 미리보기',
+    'Food Pack v3, sale image': '푸드 팩 v3 판매 이미지',
+    'Food Pack v3 on a white background': '푸드 팩 v3 흰 배경 미리보기',
+    'Food Pack v3 on a black background': '푸드 팩 v3 검은 배경 미리보기',
   };
   let lang = 'en';
   const t = s => (lang === 'ko' && KO[s.trim()]) || s;
