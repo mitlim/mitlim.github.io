@@ -33,7 +33,7 @@ for (const [en, ko] of Object.entries(KO).sort((a, b) => b[0].length - a[0].leng
   });
 }
 
-const descKo = 'MTL Studio(미트림): 마인크래프트 리소스 외주와 판매 팩. 아이템에더용 칭호·아이콘·음식 픽셀아트(도트) 팩, 블록벤치 아이템 모델링, Skript 서버 스크립트를 제작합니다.';
+const descKo = 'MTL Studio(미트림): 마인크래프트 리소스 외주와 판매 팩. 아이템에더용 칭호·아이콘·재료·음식 픽셀아트(도트) 팩, 블록벤치 아이템 모델링, Skript 서버 스크립트를 제작합니다.';
 head = head
   .replace('<html lang="en">', '<html lang="ko">')
   .replace(/<title>[^<]*<\/title>/, '<title>MTL Studio | 마인크래프트 리소스 외주 · 픽셀아트 · 모델링 · 스크립트</title>')
