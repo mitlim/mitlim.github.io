@@ -3,19 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>MTL Studio</title>
+<title>MTL Studio | Minecraft Pixel Art, Models &amp; Skript Commissions</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Minecraft pixel art, Blockbench models and Skript systems by mitlim.">
+<meta name="description" content="MTL Studio by mitlim: Minecraft resource commissions and packs. Pixel art rank, icon and food packs for ItemsAdder, Blockbench item models and Skript server systems.">
+<link rel="canonical" href="https://mitlim.github.io/">
+<link rel="alternate" hreflang="en" href="https://mitlim.github.io/">
+<link rel="alternate" hreflang="ko" href="https://mitlim.github.io/ko/">
+<link rel="alternate" hreflang="x-default" href="https://mitlim.github.io/">
 <meta name="theme-color" content="#46568a">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MTL Studio">
 <meta property="og:title" content="MTL Studio">
-<meta property="og:description" content="Minecraft pixel art, Blockbench models and Skript systems by mitlim. Rank packs, food packs and live 3D models.">
+<meta property="og:description" content="MTL Studio by mitlim: Minecraft resource commissions and packs. Pixel art rank, icon and food packs for ItemsAdder, Blockbench item models and Skript server systems.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ko_KR">
 <meta property="og:url" content="https://mitlim.github.io/">
 <meta property="og:image" content="https://mitlim.github.io/assets/logo.png">
 <meta property="og:image:width" content="512">
 <meta property="og:image:height" content="512">
 <meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"MTL Studio","url":"https://mitlim.github.io/","logo":"https://mitlim.github.io/assets/logo.png","image":"https://mitlim.github.io/assets/logo.png","description":"MTL Studio by mitlim: Minecraft resource commissions and packs. Pixel art rank, icon and food packs for ItemsAdder, Blockbench item models and Skript server systems.","founder":{"@type":"Person","name":"mitlim","alternateName":"미트림"},"knowsLanguage":["ko","en"],"areaServed":"Worldwide","sameAs":["https://www.youtube.com/@MITLIM98"],"keywords":"Minecraft, resource pack, pixel art, Blockbench, Skript, ItemsAdder, commissions, 마인크래프트 리소스 외주, 픽셀아트, 모델링, 스크립트"}</script>
 <link rel="icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -865,7 +872,17 @@
     try { localStorage.setItem('lang', next); } catch (e) {}
     if (lb.open) render();
   }
-  $$('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  // On the real site each language has its own page (/ and /ko/) so search engines can index both;
+  // elsewhere (local file, Claude preview) the text is swapped in place.
+  const SITE = /(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname);
+  const PAGE_LANG = document.documentElement.lang === 'ko' ? 'ko' : 'en';
+  const langUrl = l => { const link = document.querySelector('link[rel=alternate][hreflang=' + l + ']'); return link ? new URL(link.href).pathname : (l === 'ko' ? '/ko/' : '/'); };
+  $$('.lang button').forEach(b => b.addEventListener('click', () => {
+    const next = b.dataset.lang;
+    try { localStorage.setItem('lang', next); } catch (e) {}
+    if (SITE && next !== PAGE_LANG) location.href = langUrl(next) + location.hash;
+    else setLang(next);
+  }));
 
   // Lightbox. data-images = "path|caption;path|caption"
   const lb = document.getElementById('lightbox');
@@ -956,10 +973,19 @@
     if (e.target.closest('.media, .stage, .tile3d, .pick-art, .lb-frame')) e.preventDefault();
   });
 
-  // start in the saved language (or ?lang=ko), English by default
-  let startLang = new URLSearchParams(location.search).get('lang');
-  if (!startLang) { try { startLang = localStorage.getItem('lang'); } catch (e) {} }
-  setLang(startLang === 'ko' ? 'ko' : 'en');
+  // pick the language: saved choice, then ?lang=, then the visitor's browser language
+  let saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  const fromQuery = new URLSearchParams(location.search).get('lang');
+  const browserKo = (navigator.languages || [navigator.language || '']).some(l => /^ko(-|$)/i.test(l));
+  const wanted = fromQuery || saved || (browserKo ? 'ko' : 'en');
+  if (SITE) {
+    // only the English home page redirects, so a shared /ko/ link always stays Korean
+    if (PAGE_LANG === 'en' && wanted === 'ko' && !fromQuery) { location.replace(langUrl('ko') + location.hash); return; }
+    setLang(PAGE_LANG);
+  } else {
+    setLang(wanted === 'ko' ? 'ko' : 'en');
+  }
 
   // 3D viewers for Blockbench (Java block/item) models
   const no3d = () => $$('.stage, .tile3d').forEach(s => s.classList.add('no3d'));
