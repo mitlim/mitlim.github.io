@@ -26,255 +26,277 @@
 <link rel="icon" href="../assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Pixelify+Sans:wght@500;600&family=Do+Hyeon&family=Noto+Sans+KR:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
 <style>
-  /* Layout: a creator's inventory. A hotbar of real items up top, then work grouped by category like creative-mode tabs. */
+  /* Design: quiet site, sharp work. Neutral greys, one charcoal accent, 1px borders instead of shadows. */
   :root {
-    --bg: #eceef3;
-    --surface: #f8f9fb;
-    --ink: #13151b;
-    --muted: #596071;
-    --line: #d5d9e2;
-    --accent: #46568a;
+    --bg: #fafaf9;
+    --surface: #ffffff;
+    --ink: #18181b;
+    --muted: #71717a;
+    --line: #e4e4e7;
+    --accent: #27272a;
     --accent-ink: #ffffff;
-    --stage: #16181f;
-    --stage-glow: #2a2f40;
-    --stage-ink: #e9e4f0;
+    --soft: #f4f4f5;
+    --stage: #202124;
+    --stage-ink: #e4e4e7;
     --sheet: #ffffff;
-    --panel: #c6c6c6;
-    --slot: #8b8b8b;
-    --slot-dark: #373737;
-    --slot-light: #ffffff;
-    --slot-hover: rgba(255, 255, 255, 0.45);
-    --tip-bg: #100010;
-    --tip-edge: #5000ff;
-    --tip-ink: #ffffff;
-    --scrim: rgba(16, 0, 16, 0.78);
-    --backdrop: rgba(12, 8, 6, 0.82);
-    --font-display: "Pixelify Sans", "Do Hyeon", "Malgun Gothic", "Courier New", monospace;
-    --font-body: "Figtree", "Noto Sans KR", system-ui, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
-    --font-mono: "JetBrains Mono", "Noto Sans KR", ui-monospace, Consolas, monospace;
-    --radius: 6px;
+    --scrim: rgba(24, 24, 27, 0.72);
+    --backdrop: rgba(9, 9, 11, 0.8);
+    --font: "Inter", "Noto Sans KR", system-ui, -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+    --r-card: 10px;
+    --r-btn: 6px;
+    --gutter: 32px;
+    --section: 104px;
+    --gap: 24px;
+    --pad: 24px;
     color-scheme: light;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #0a0b0f; --surface: #14161d; --ink: #eceef4; --muted: #9aa2b5;
-      --line: #252a36; --accent: #a9b8e0; --accent-ink: #0a0b0f;
+      --bg: #0c0c0e; --surface: #18181b; --ink: #fafafa; --muted: #a1a1aa;
+      --line: #2e2e33; --accent: #fafafa; --accent-ink: #18181b; --soft: #232327;
       color-scheme: dark;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #0a0b0f; --surface: #14161d; --ink: #eceef4; --muted: #9aa2b5;
-    --line: #252a36; --accent: #a9b8e0; --accent-ink: #0a0b0f;
+    --bg: #0c0c0e; --surface: #18181b; --ink: #fafafa; --muted: #a1a1aa;
+    --line: #2e2e33; --accent: #fafafa; --accent-ink: #18181b; --soft: #232327;
     color-scheme: dark;
   }
+  @media (max-width: 768px) { :root { --gutter: 20px; --section: 72px; --gap: 16px; --pad: 18px; } }
 
   * { box-sizing: border-box; }
-  html { font-variant-ligatures: none; }
   html[lang="ko"] { word-break: keep-all; overflow-wrap: anywhere; }
   [hidden] { display: none !important; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.6 var(--font-body); }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 15px/1.65 var(--font); -webkit-font-smoothing: antialiased; }
   img { max-width: 100%; }
   button { font: inherit; color: inherit; }
   a { color: inherit; }
-  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  h1, h2, h3 { line-height: 1.2; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   .wrap {
-    max-width: 1120px; margin-inline: auto;
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    max-width: calc(1120px + 2 * var(--gutter)); margin-inline: auto;
+    padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
   }
-  .meta { margin: 0; font: 400 0.78rem/1.45 var(--font-mono); color: var(--muted); }
-  .eyebrow { margin: 0; font: 500 0.76rem/1.4 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .meta { margin: 0; font-size: 13px; line-height: 1.5; color: var(--muted); }
+  .eyebrow { margin: 0; font-size: 13px; font-weight: 500; color: var(--muted); }
 
-  /* Header */
-  .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
-  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 600 1.25rem/1 var(--font-display); }
-  .brand-logo { display: block; width: 40px; height: 40px; border-radius: 6px; }
-  .top nav { display: flex; gap: 18px; font-weight: 500; }
-  .top nav a { text-decoration: none; }
-  .top nav a:hover { color: var(--accent); }
+  /* Buttons */
+  .btn, .show-all, .cat-head .back, .mat button, .lb-ctrl button, #copy, .yt-link {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 16px;
+    font-size: 14px; font-weight: 500; text-decoration: none; cursor: pointer; white-space: nowrap;
+    background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: var(--r-btn);
+    transition: background-color .15s, border-color .15s, color .15s;
+  }
+  .btn:hover, .show-all:hover, .cat-head .back:hover, .mat button:hover, .lb-ctrl button:hover, #copy:hover, .yt-link:hover { border-color: var(--muted); }
+  .btn-primary, #copy { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn-primary:hover, #copy:hover { background: #3f3f46; border-color: #3f3f46; }
+  .show-all[aria-pressed="true"], .mat button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+  /* Top bar */
+  .topbar { position: sticky; top: 0; z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line); }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-size: 16px; font-weight: 600; }
+  .brand-logo { display: block; width: 36px; height: 36px; border-radius: 6px; }
+  .top nav { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500; }
+  .top nav a { text-decoration: none; color: var(--muted); transition: color .15s; }
+  .top nav a:hover { color: var(--ink); }
+  .lang { display: flex; padding: 2px; border: 1px solid var(--line); border-radius: var(--r-btn); }
+  .lang button { height: 30px; padding: 0 10px; cursor: pointer; background: none; border: 0; border-radius: 4px; color: var(--muted); font-size: 13px; font-weight: 500; }
+  .lang button:hover { color: var(--ink); }
+  .lang button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+  @media (max-width: 768px) {
+    .top { height: 60px; }
+    .top nav { gap: 16px; }
+    .nav-about, .nav-yt { display: none; }
+  }
 
   /* Hero */
-  .hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 24px 48px; padding-block: 32px 8px; overflow-x: clip; }
-  .hero-mark { display: grid; place-items: center; width: clamp(180px, 22vw, 260px); aspect-ratio: 1; border-radius: 16px; background: radial-gradient(circle at 50% 45%, var(--stage-glow), var(--stage) 75%); }
-  .hero-mark img { width: 94%; height: auto; }
-  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .hero-mark { display: none; } }
-  .hero h1 { margin: 10px 0 14px; max-width: 17ch; font: 600 clamp(2rem, 4.6vw, 3.3rem)/1.08 var(--font-display); text-wrap: balance; }
-  .lede { margin: 0; max-width: 60ch; font-size: 1.1rem; color: var(--muted); }
+  .hero { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; gap: 32px; padding-block: 100px; }
+  .hero h1 { margin: 10px 0 16px; font-size: 48px; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; }
+  .lede { margin: 0; max-width: 52ch; font-size: 17px; color: var(--muted); }
+  .hero-mark { justify-self: end; width: 100%; max-width: 240px; }
+  .hero-mark img { display: block; width: 100%; height: auto; border-radius: var(--r-card); }
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding-block: 64px 48px; }
+    .hero h1 { font-size: 34px; }
+    .lede { font-size: 15px; }
+    .hero-mark { order: -1; justify-self: start; max-width: 72px; }
+  }
+
+  /* Category picker */
+  .picker { padding-bottom: 8px; }
+  .picker-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+  .picker-head h2 { margin: 0; font-size: 18px; font-weight: 600; }
+  .picker-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+  .pick {
+    display: flex; align-items: stretch; min-width: 0; height: 116px; padding: 0; overflow: hidden; cursor: pointer; text-align: left;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card);
+    transition: border-color .15s, background-color .15s;
+  }
+  .pick:hover { border-color: var(--muted); }
+  .pick[aria-pressed="true"] { border: 2px solid var(--accent); background: var(--soft); }
+  .pick-art { position: relative; flex: none; display: flex; align-items: center; justify-content: center; gap: 4%; width: 116px; height: 100%; background: var(--stage); overflow: hidden; }
+  .pick-art img { width: 100%; height: 100%; object-fit: cover; }
+  .pick-art.pixel { background: var(--soft); border-right: 1px solid var(--line); }
+  .pick-art.pixel img { width: 28%; height: auto; image-rendering: pixelated; }
+  .pick-canvas { display: block; width: 100%; height: 100%; pointer-events: none; }
+  .pick-text { display: grid; align-content: center; gap: 4px; padding: 0 20px; }
+  .pick-title { font-size: 18px; font-weight: 600; line-height: 1.2; }
+  .pick-go { display: none; }
+  @media (max-width: 768px) {
+    .picker-grid { grid-template-columns: 1fr; }
+    .pick { height: 96px; }
+    .pick-art { width: 96px; }
+  }
+
+  /* Category sections */
+  .cat { padding-top: var(--section); scroll-margin-top: 72px; }
+  .cat-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 8px 32px; margin-bottom: 32px; }
+  .cat-head h2 { flex-basis: 100%; margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -0.01em; }
+  .cat-head p { flex: 1 1 420px; margin: 0; max-width: 62ch; color: var(--muted); }
+  @media (max-width: 768px) { .cat-head h2 { font-size: 26px; } .cat-head { margin-bottom: 24px; } }
+
+  /* Cards */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--gap); }
+  .card { display: flex; flex-direction: column; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden; }
+  .card .body { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: var(--pad); }
+  .card h3 { margin: 0; font-size: 18px; font-weight: 600; }
+  .card .body > p:not(.meta):not(.eyebrow) { margin: 2px 0 0; color: var(--muted); }
+  @media (max-width: 768px) { .card h3 { font-size: 17px; } }
+
+  .media { position: relative; display: block; width: 100%; aspect-ratio: 1 / 1; padding: 0; border: 0; background: var(--sheet); cursor: zoom-in; overflow: hidden; }
+  .media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .media .count { position: absolute; right: 10px; bottom: 10px; padding: 2px 8px; background: var(--scrim); color: #fff; font-size: 12px; font-weight: 500; line-height: 1.6; border-radius: 4px; }
 
   /* Watermark: repeated semi-transparent white "mitlim" over every piece of work */
   :root {
     --wm: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='64'%3E%3Cg font-family='Arial, sans-serif' font-size='15' font-weight='700' fill='white' fill-opacity='0.5' stroke='black' stroke-opacity='0.3' stroke-width='0.8' text-anchor='middle'%3E%3Ctext x='30' y='22' transform='rotate(-24 30 18)'%3Emitlim%3C/text%3E%3Ctext x='90' y='54' transform='rotate(-24 90 50)'%3Emitlim%3C/text%3E%3C/g%3E%3C/svg%3E");
   }
-  .pick-art, .lb-frame { position: relative; }
+  .lb-frame { position: relative; }
   .media::after, .stage::after, .tile3d::after, .pick-art::after, .lb-frame::after {
     content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background-image: var(--wm); background-size: 120px 64px;
   }
-  .media .count, .stage .hint, .tile3d .label, .tile3d .spin, .tile .label, .play { z-index: 2; }  .media img, .thumb img, .pick-art img, #lb-img { -webkit-user-drag: none; user-select: none; }
+  .media .count, .stage .hint, .tile3d .label, .tile3d .spin, .play { z-index: 2; }
+  .media img, .thumb img, .pick-art img, #lb-img { -webkit-user-drag: none; user-select: none; }
 
-  /* Tool Set material buttons */
-  :root { --mat-stone: #8f8f8f; --mat-iron: #d9d9d9; --mat-gold: #f4c542; --mat-diamond: #4fd8d2; --mat-netherite: #4b3f46; }
-  .mat { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
-  .mat button {
-    display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; cursor: pointer;
-    background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); font-weight: 500; font-size: 0.9rem;
-  }
-  .mat button:hover { border-color: var(--accent); }
-  .mat button[aria-pressed="true"] { border-color: var(--accent); outline: 2px solid var(--accent); outline-offset: -1px; }
-  .mat i { width: 12px; height: 12px; background: var(--c); border: 1px solid var(--slot-dark); }
-
-  /* Pack details */
-  .specs { display: grid; gap: 2px; margin: 6px 0 2px; font-size: 0.82rem; }
+  /* Pixel Art */
+  #pixel-art .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 1000px) { #pixel-art .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { #pixel-art .grid { grid-template-columns: 1fr; } }
+  .media.poster { aspect-ratio: 9 / 10; border-bottom: 1px solid var(--line); }
+  .media.poster img { object-fit: contain; }
+  .soon { display: inline-block; padding: 2px 8px; background: var(--soft); color: #3f3f46; font-size: 12px; font-weight: 500; line-height: 1.6; border-radius: 4px; }
+  :root[data-theme="dark"] .soon { color: var(--muted); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .soon { color: var(--muted); } }
+  .specs { display: grid; gap: 2px; margin: 4px 0 0; font-size: 13px; }
   .specs div { display: flex; flex-wrap: wrap; column-gap: 6px; }
   .specs dt { color: var(--muted); }
   .specs dt::after { content: ":"; }
-  .specs dd { margin: 0; font-weight: 500; white-space: nowrap; }
-
-  /* About */
-  .about { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px 48px; margin-top: 48px; padding: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
-  .about h2 { margin: 8px 0 12px; font: 600 1.9rem/1.15 var(--font-display); }
-  .about-intro > p:not(.eyebrow) { margin: 0; max-width: 56ch; color: var(--muted); }
-  .facts { display: grid; gap: 10px; margin: 20px 0 0; }
-  .facts div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px; align-items: baseline; }
-  .facts dt { font: 500 0.78rem/1.4 var(--font-mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
-  .facts dd { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; font-weight: 500; }
-  .chip { padding: 2px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); font-size: 0.9rem; }
-  .process h3 { margin: 0 0 14px; font: 600 1.25rem/1.2 var(--font-display); }
-  .steps { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; counter-reset: none; }
-  .steps li { display: flex; align-items: center; gap: 12px; }
-  .step-n { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font: 600 0.85rem/1 var(--font-mono); }
-  .process .note { margin: 16px 0 0; padding: 10px 14px; border-left: 3px solid var(--accent); background: var(--bg); border-radius: var(--radius); font-weight: 500; }
-  @media (max-width: 760px) { .about { grid-template-columns: 1fr; padding: 22px; } .facts div { grid-template-columns: 1fr; gap: 4px; } }
-  @media (max-width: 520px) { .nav-about { display: none; } }
-
-  /* Language switch */
-  .top nav { align-items: center; }
-  .lang { display: flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-  .lang button { padding: 5px 10px; cursor: pointer; background: none; border: 0; color: var(--muted); font: 600 0.85rem/1.2 var(--font-body); }
-  .lang button:hover { color: var(--ink); }
-  .lang button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
-
-  /* Rotate tip in the Modeling section */
-  .rotate-tip {
-    display: flex; align-items: center; gap: 14px; margin: 0 0 22px; padding: 14px 18px;
-    background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius);
-  }
-  .rotate-tip svg { flex: none; width: 34px; height: 34px; color: var(--accent); }
-  .rotate-tip strong { display: block; font: 600 1.05rem/1.3 var(--font-display); }
-  .rotate-tip p { margin: 2px 0 0; color: var(--muted); }
-
-  /* Category picker: big buttons that show one category at a time */
-  .picker { padding-block: 44px 4px; }
-  .picker-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-  .picker-head h2 { margin: 0; font: 600 1.25rem/1.2 var(--font-display); color: var(--muted); }
-  .show-all { padding: 6px 12px; cursor: pointer; background: none; color: var(--muted); border: 1px solid var(--line); border-radius: var(--radius); font-weight: 500; }
-  .show-all:hover, .show-all[aria-pressed="true"] { color: var(--ink); border-color: var(--accent); }
-  .picker-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .pick {
-    display: flex; flex-direction: column; min-width: 0; padding: 0; overflow: hidden; cursor: pointer; text-align: left;
-    background: var(--surface); border: 2px solid var(--line); border-radius: 12px;
-    transition: border-color 0.15s, transform 0.15s;
-  }
-  .pick:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .pick[aria-pressed="true"] { border-color: var(--accent); outline: 2px solid var(--accent); outline-offset: -4px; }
-  .pick-art { display: flex; align-items: center; justify-content: center; gap: 6%; aspect-ratio: 16 / 9; background: var(--stage); overflow: hidden; }
-  .pick-art img { width: 100%; height: 100%; object-fit: cover; }
-  .pick-art.pixel { background: var(--panel); }
-  .pick-art.pixel img { width: 22%; height: auto; image-rendering: pixelated; }
-  .pick-art.model img { object-fit: contain; }
-  .pick-text { display: grid; gap: 2px; padding: 14px 16px 16px; }
-  .pick-title { font: 600 1.7rem/1.1 var(--font-display); }
-  .pick-go { margin-top: 6px; font-weight: 600; color: var(--accent); }
-
-  /* Category sections */
-  .cat { padding-block: 40px 12px; }
-  .cat-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 32px; margin-bottom: 22px; }
-  .cat-head h2 { margin: 0; font: 600 1.9rem/1.1 var(--font-display); }
-  .cat-head p { margin: 0; max-width: 58ch; color: var(--muted); }
-  .cat-head .back { padding: 6px 12px; cursor: pointer; background: none; color: var(--accent); border: 1px solid var(--line); border-radius: var(--radius); font-weight: 600; }
-  .cat-head .back:hover { border-color: var(--accent); }
-
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-  .card { display: flex; flex-direction: column; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
-  .card .body { display: grid; gap: 4px; padding: 14px 16px 18px; }
-  .card h3 { margin: 0; font: 600 1.15rem/1.25 var(--font-display); }
-  .card .body > p:not(.meta) { margin: 4px 0 0; font-size: 0.95rem; }
-
-  .media { position: relative; display: block; width: 100%; aspect-ratio: 1 / 1; padding: 0; border: 0; background: var(--sheet); cursor: zoom-in; overflow: hidden; }
-  .media img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .media.fit img { object-fit: contain; padding: 7%; image-rendering: pixelated; }
-  .media.fit.smooth img { image-rendering: auto; }
-  .media .count { position: absolute; right: 8px; bottom: 8px; padding: 2px 7px; background: var(--scrim); color: var(--tip-ink); font: 500 0.72rem/1.5 var(--font-mono); border-radius: 3px; }
+  .specs dd { margin: 0; font-weight: 500; }
+  #pixel-art .body > p:last-child { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
   /* Modeling */
-  .viewers { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-  .stage { position: relative; aspect-ratio: 1 / 1; background: radial-gradient(circle at 50% 45%, var(--stage-glow), var(--stage) 70%); }
+  .rotate-tip { display: flex; align-items: center; gap: 10px; margin: -12px 0 24px; color: var(--muted); font-size: 13px; }
+  .rotate-tip svg { flex: none; width: 18px; height: 18px; }
+  .rotate-tip strong { font-weight: 600; color: var(--ink); }
+  .rotate-tip strong::after { content: " · "; font-weight: 400; color: var(--muted); }
+  .rotate-tip div { display: inline; }
+  .rotate-tip p { display: inline; margin: 0; }
+  .viewers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+  @media (max-width: 860px) { .viewers { grid-template-columns: 1fr; } }
+  .stage { position: relative; aspect-ratio: 4 / 3; background: var(--stage); }
   .stage canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
-  .stage canvas.dragging { cursor: grabbing; }
-  .stage .hint { position: absolute; left: 12px; bottom: 12px; padding: 4px 10px; background: var(--scrim); color: var(--tip-ink); font: 500 0.8rem/1.4 var(--font-mono); border-radius: 999px; pointer-events: none; }
-  .tile3d .spin { position: absolute; right: 8px; top: 8px; padding: 2px 8px; background: var(--scrim); color: var(--tip-ink); font: 500 0.72rem/1.5 var(--font-mono); border-radius: 999px; pointer-events: none; }
-  .tile3d.no3d::before, .stage.no3d::before { content: "3D preview needs an internet connection"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--stage-ink); font: 400 0.85rem var(--font-mono); }
+  .stage canvas.dragging, .tile3d canvas.dragging { cursor: grabbing; }
+  .stage .hint { position: absolute; left: 12px; bottom: 12px; padding: 2px 8px; background: var(--scrim); color: #fff; font-size: 12px; font-weight: 500; line-height: 1.6; border-radius: 4px; pointer-events: none; }
+  .tile3d.no3d::before, .stage.no3d::before { content: "3D preview needs an internet connection"; position: absolute; inset: 0; display: grid; place-items: center; color: var(--stage-ink); font-size: 13px; }
 
-  .set { display: grid; grid-template-columns: minmax(200px, 270px) minmax(0, 1fr); gap: 16px 28px; margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); }
-  .set h3 { margin: 0 0 4px; font: 600 1.35rem/1.2 var(--font-display); }
+  .set { display: grid; grid-template-columns: minmax(200px, 280px) minmax(0, 1fr); gap: 20px 32px; margin-top: var(--gap); padding: var(--pad); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); }
+  .set h3 { margin: 0 0 4px; font-size: 18px; font-weight: 600; }
   .set-head > p:not(.meta) { margin: 10px 0 0; color: var(--muted); }
-  .set-row { display: grid; gap: 12px; }
+  .set-row { display: grid; gap: 12px; align-content: start; }
+  .set-body { display: grid; gap: 16px; align-content: start; }
   .row-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .row-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .tile { aspect-ratio: 3 / 4; background: var(--stage); border-radius: var(--radius); }
-  .tile img { object-fit: contain; }
-  .media.poster { aspect-ratio: 9 / 10; }
-  #pixel-art .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  @media (max-width: 900px) { #pixel-art .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 520px) { #pixel-art .grid { grid-template-columns: 1fr; } }
-  .media.poster img { object-position: top; }
-  .media .soon { position: absolute; left: 8px; top: 8px; z-index: 2; padding: 3px 9px; background: var(--accent); color: var(--accent-ink); font: 600 0.72rem/1.4 var(--font-mono); border-radius: 999px; }
-  .row-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 620px; }
-  .pick-art.model { background: radial-gradient(circle at 50% 45%, var(--stage-glow), var(--stage) 75%); }
-  .pick-canvas { display: block; width: 100%; height: 100%; pointer-events: none; }
-  .tile3d { position: relative; aspect-ratio: 3 / 4; border-radius: var(--radius); overflow: hidden; background: radial-gradient(circle at 50% 45%, var(--stage-glow), var(--stage) 75%); }
+  .row-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 560px; }
+  .tile3d { position: relative; aspect-ratio: 3 / 4; border-radius: 6px; overflow: hidden; background: var(--stage); }
   .tile3d canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
-  .tile3d canvas.dragging { cursor: grabbing; }
-  .tile3d .label { position: absolute; left: 8px; bottom: 8px; padding: 2px 7px; background: var(--scrim); color: var(--tip-ink); font: 500 0.8rem/1.4 var(--font-display); border-radius: 3px; pointer-events: none; }
-  .tile .label { position: absolute; left: 8px; bottom: 8px; padding: 2px 7px; background: var(--scrim); color: var(--tip-ink); font: 500 0.8rem/1.4 var(--font-display); border-radius: 3px; }
+  .tile3d .label { position: absolute; left: 8px; bottom: 8px; padding: 2px 8px; background: var(--scrim); color: #fff; font-size: 12px; font-weight: 500; line-height: 1.6; border-radius: 4px; pointer-events: none; }
+  .tile3d .spin { position: absolute; right: 8px; top: 8px; padding: 1px 7px; background: var(--scrim); color: #fff; font-size: 11px; line-height: 1.6; border-radius: 4px; pointer-events: none; }
+  :root { --mat-stone: #8f8f8f; --mat-iron: #d9d9d9; --mat-gold: #f4c542; --mat-diamond: #4fd8d2; --mat-netherite: #4b3f46; }
+  .mat { display: flex; flex-wrap: wrap; gap: 8px; }
+  .mat button { height: 36px; padding: 0 12px; font-size: 13px; }
+  .mat i { width: 10px; height: 10px; border-radius: 2px; background: var(--c); box-shadow: 0 0 0 1px rgba(0, 0, 0, .25); }
+  @media (max-width: 768px) { .set { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .row-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
   /* Scripts */
-  .feature { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); margin-bottom: 20px; }
+  .feature { display: grid; grid-template-columns: minmax(0, 55fr) minmax(0, 45fr); margin-bottom: var(--gap); }
   .feature .media { aspect-ratio: 16 / 9; height: 100%; background: var(--stage); }
-  .feature .body { align-content: center; gap: 8px; padding: 24px; }
-  .feature h3 { font-size: 1.5rem; }
-  .btn { display: inline-block; width: fit-content; margin-top: 8px; padding: 10px 16px; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 600; border-radius: var(--radius); }
-  .btn:hover { filter: brightness(1.08); }
+  .feature .body { justify-content: center; gap: 8px; padding: 32px; }
+  .feature h3 { font-size: 22px; }
+  .feature .btn { margin-top: 10px; }
+  @media (max-width: 768px) { .feature { grid-template-columns: 1fr; } .feature .media { height: auto; } .feature .body { padding: var(--pad); } }
 
-  .videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 20px; }
-  .video { text-decoration: none; }
-  .video:hover h3 { color: var(--accent); }
+  .videos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+  @media (max-width: 860px) { .videos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .videos { grid-template-columns: 1fr; } }
+  .video { text-decoration: none; transition: border-color .15s; }
+  .video:hover { border-color: var(--muted); }
+  .video .body { padding: 16px 18px 18px; gap: 4px; }
+  .video h3 { font-size: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .thumb { position: relative; display: block; aspect-ratio: 16 / 9; background: var(--stage); overflow: hidden; }
   .thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .play { position: absolute; left: 50%; top: 50%; width: 46px; height: 34px; transform: translate(-50%, -50%); background: var(--scrim); border-radius: 6px; }
-  .play::after { content: ""; position: absolute; left: 18px; top: 9px; width: 13px; height: 16px; background: var(--tip-ink); clip-path: polygon(0 0, 100% 50%, 0 100%); }
+  .play { position: absolute; left: 50%; top: 50%; width: 44px; height: 32px; transform: translate(-50%, -50%); background: var(--scrim); border-radius: 6px; }
+  .play::after { content: ""; position: absolute; left: 17px; top: 9px; width: 12px; height: 14px; background: #fff; clip-path: polygon(0 0, 100% 50%, 0 100%); }
 
-  /* Contact */
-  .contact { margin-top: 56px; background: var(--accent); color: var(--accent-ink); }
-  .contact .wrap { display: grid; gap: 12px; padding-block: 44px; }
-  .contact-logo { width: 88px; height: 88px; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35)); }
-  .contact h2 { margin: 0; font: 600 2rem/1.1 var(--font-display); }
-  .contact p { margin: 0; max-width: 56ch; }
-  .contact .meta { color: inherit; opacity: 0.8; }
-  .handles { display: flex; flex-wrap: wrap; gap: 12px 40px; margin-top: 8px; }
-  .handle { display: grid; gap: 2px; }
-  .handle-row { display: flex; align-items: center; gap: 10px; }
-  .handle code, .handle a { font: 600 1.3rem/1.3 var(--font-display); text-decoration: none; }
-  .handle a:hover { text-decoration: underline; }
-  #copy { padding: 4px 12px; cursor: pointer; background: transparent; border: 1px solid currentColor; border-radius: var(--radius); font-size: 0.85rem; }
+  /* About */
+  .about { padding-top: var(--section); scroll-margin-top: 72px; }
+  .about-top { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 32px 56px; }
+  .about h2 { margin: 6px 0 16px; font-size: 30px; font-weight: 600; letter-spacing: -0.01em; }
+  .about-intro > p:not(.eyebrow) { margin: 0; max-width: 60ch; color: var(--muted); font-size: 16px; }
+  .facts { display: grid; gap: 0; margin: 0; align-self: end; border-top: 1px solid var(--line); }
+  .facts div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .facts dt { font-size: 13px; color: var(--muted); }
+  .facts dd { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; font-weight: 500; }
+  .chip { padding: 1px 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); font-size: 13px; }
+  .process { margin-top: 56px; }
+  .process h3 { margin: 0 0 20px; font-size: 18px; font-weight: 600; }
+  .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+  .steps li { display: grid; align-content: start; gap: 8px; padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-card); }
+  .step-n { font-size: 13px; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .steps li > span:last-child { font-weight: 500; }
+  .process .note { margin: 20px 0 0; font-weight: 600; }
+  @media (max-width: 860px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 768px) {
+    .about-top { grid-template-columns: 1fr; }
+    .about h2 { font-size: 26px; }
+    .process { margin-top: 40px; }
+    .steps { grid-template-columns: 1fr; gap: 8px; }
+    .steps li { grid-template-columns: 28px minmax(0, 1fr); align-items: baseline; padding: 14px 16px; }
+  }
 
-  /* Lightbox */
-  dialog { width: min(1100px, 94vw); max-height: 94vh; padding: 0; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); }
+  /* Contact footer */
+  .contact { margin-top: var(--section); background: var(--bg); border-top: 1px solid var(--line); }
+  .contact .wrap { padding-block: 56px 40px; }
+  .contact-main { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 48px; }
+  .contact h2 { margin: 0 0 6px; font-size: 24px; font-weight: 600; }
+  .contact p { margin: 0; max-width: 52ch; color: var(--muted); }
+  .handles { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .handle-row { display: inline-flex; align-items: center; height: 40px; padding-left: 14px; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-btn); overflow: hidden; }
+  .handle-row .meta { font-size: 13px; }
+  .handle-row code { font: 600 14px/1 var(--font); }
+  #copy { height: 38px; border-radius: 0; border-width: 0 0 0 1px; }
+  .contact .fine { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  @media (max-width: 768px) { .contact-main { flex-direction: column; align-items: flex-start; } .contact .wrap { padding-block: 40px 32px; } }
+
+  /* Lightbox and player */
+  dialog { width: min(1100px, 94vw); max-height: 94vh; padding: 0; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: var(--r-card); }
   dialog::backdrop { background: var(--backdrop); }
   .lb-frame { display: grid; place-items: center; padding: 16px; max-height: calc(94vh - 72px); overflow: auto; background: var(--sheet); }
   #lb-img { display: block; max-width: 100%; max-height: calc(94vh - 104px); object-fit: contain; }
@@ -282,46 +304,25 @@
   #player { width: min(1000px, 94vw); }
   .player-frame { aspect-ratio: 16 / 9; background: var(--stage); }
   .player-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
-  #player-yt { color: var(--muted); text-decoration: none; }
-  #player-yt:hover { color: var(--accent); }
+  #player-yt { font-size: 14px; color: var(--muted); text-decoration: none; }
+  #player-yt:hover { color: var(--ink); }
   .lb-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 12px 16px; border-top: 1px solid var(--line); }
   .lb-bar p { margin: 0; font-weight: 500; }
   .lb-ctrl { display: flex; align-items: center; gap: 8px; }
-  .lb-ctrl button { padding: 6px 12px; cursor: pointer; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); }
-  .lb-ctrl button:hover { border-color: var(--accent); }
-
-  @media (max-width: 760px) {
-    .picker-grid { grid-template-columns: 1fr; gap: 12px; }
-    .pick { flex-direction: row; align-items: stretch; }
-    .pick-art { flex: none; width: 38%; height: 112px; aspect-ratio: auto; }
-    .pick-art img { height: 100%; }
-    .pick-art.pixel img { height: auto; }
-    .pick-text { align-content: center; padding: 12px 14px; }
-    .pick-title { font-size: 1.35rem; }
-    .pick-go { display: none; }
-    .set { grid-template-columns: 1fr; }
-    .feature { grid-template-columns: 1fr; }
-    .feature .media { height: auto; }
-  }
+  .lb-ctrl button { height: 36px; padding: 0 12px; }
   @media (max-width: 520px) {
-    .row-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .top nav { gap: 12px; font-size: 0.95rem; }
-    .nav-yt { display: none; }
-    .rotate-tip { align-items: flex-start; }
     dialog { width: calc(100vw - 16px); max-width: none; }
     .lb-frame { padding: 8px; }
     .lb-bar { padding: 10px 12px; }
     .lb-ctrl { width: 100%; justify-content: space-between; }
-    .lb-ctrl button { padding: 10px 14px; }
   }
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
-  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
 
-<header class="wrap top">
+<header class="topbar">
+<div class="wrap top">
   <a class="brand" href="#" aria-label="MTL Studio, back to top"><img class="brand-logo" src="../assets/logo.png" alt=""><span>MTL Studio</span></a>
   <nav aria-label="Site">
     <a class="nav-about" href="#about" data-en="About">소개</a>
@@ -332,6 +333,7 @@
       <button type="button" data-lang="ko" aria-pressed="true" lang="ko">한국어</button>
     </div>
   </nav>
+</div>
 </header>
 
 <section class="wrap hero" aria-labelledby="hero-title">
@@ -340,7 +342,7 @@
   <h1 id="hero-title" data-en="Welcome to MTL Studio.">MTL Studio에 오신 걸 환영합니다.</h1>
   <p class="lede" data-en="I'm mitlim, and I make scripts, pixel art and Blockbench models!">스크립트, 픽셀아트, 블록벤치를 이용한 모델링을 제작하는 mitlim입니다!</p>
   </div>
-  <div class="hero-mark" role="img" aria-label="MTL Studio logo: a serif M with blue leaves"><img src="../assets/logo-cutout.png" alt=""></div>
+  <div class="hero-mark" role="img" aria-label="MTL Studio logo: a serif M with blue leaves"><img src="../assets/logo.png" alt=""></div>
 </section>
 
 <section class="wrap picker" aria-labelledby="h-browse">
@@ -388,10 +390,10 @@
       <article class="card">
         <button type="button" class="media poster" data-images="../assets/img/packs/rank-v1-sale.png|Rank Pack v1, sale image;../assets/img/packs/rank-v1-white.png|Rank Pack v1 on a white background;../assets/img/packs/rank-v1-black.png|Rank Pack v1 on a black background" aria-label="Open Rank Pack v1 images">
           <img src="../assets/img/packs/rank-v1-sale.png" alt="Rank Pack v1: 39 chat rank badges with icons" loading="lazy">
-          <span class="soon" data-en="Coming soon">출시 예정</span>
           <span class="count" data-en="3 images">이미지 3장</span>
         </button>
         <div class="body">
+          <span class="soon" data-en="Coming soon">출시 예정</span>
           <h3 data-en="Rank Pack v1">칭호 팩 v1</h3>
           <p class="meta" data-en="39 ranks · 10px · combined / icon / text">칭호 39종 · 10px · 배지 / 아이콘 / 텍스트</p>
           <dl class="specs"><div><dt data-en="Tested on">테스트 환경</dt><dd>Minecraft 1.21 · Paper</dd></div><div><dt data-en="Plugin">지원 플러그인</dt><dd>ItemsAdder</dd></div></dl>
@@ -401,10 +403,10 @@
       <article class="card">
         <button type="button" class="media poster" data-images="../assets/img/packs/icon-v1-sale.png|Icon Pack v1, sale image;../assets/img/packs/icon-v1-white.png|Icon Pack v1 on a white background;../assets/img/packs/icon-v1-black.png|Icon Pack v1 on a black background" aria-label="Open Icon Pack v1 images">
           <img src="../assets/img/packs/icon-v1-sale.png" alt="Icon Pack v1: 30 UI icons such as hands, arrows, chests and hearts" loading="lazy">
-          <span class="soon" data-en="Coming soon">출시 예정</span>
           <span class="count" data-en="3 images">이미지 3장</span>
         </button>
         <div class="body">
+          <span class="soon" data-en="Coming soon">출시 예정</span>
           <h3 data-en="Icon Pack v1">아이콘 팩 v1</h3>
           <p class="meta" data-en="30 icons · 16×16 · PNG">아이콘 30개 · 16×16 · PNG</p>
           <dl class="specs"><div><dt data-en="Tested on">테스트 환경</dt><dd>Minecraft 1.21 · Paper</dd></div><div><dt data-en="Plugin">지원 플러그인</dt><dd>ItemsAdder</dd></div></dl>
@@ -414,10 +416,10 @@
       <article class="card">
         <button type="button" class="media poster" data-images="../assets/img/packs/icon-v2-sale.png|Icon Pack v2, sale image;../assets/img/packs/icon-v2-white.png|Icon Pack v2 on a white background;../assets/img/packs/icon-v2-black.png|Icon Pack v2 on a black background" aria-label="Open Icon Pack v2 images">
           <img src="../assets/img/packs/icon-v2-sale.png" alt="Icon Pack v2: 35 icons such as keys, gems, coins and crowns" loading="lazy">
-          <span class="soon" data-en="Coming soon">출시 예정</span>
           <span class="count" data-en="3 images">이미지 3장</span>
         </button>
         <div class="body">
+          <span class="soon" data-en="Coming soon">출시 예정</span>
           <h3 data-en="Icon Pack v2">아이콘 팩 v2</h3>
           <p class="meta" data-en="35 icons · 16×16 · PNG">아이콘 35개 · 16×16 · PNG</p>
           <dl class="specs"><div><dt data-en="Tested on">테스트 환경</dt><dd>Minecraft 1.21 · Paper</dd></div><div><dt data-en="Plugin">지원 플러그인</dt><dd>ItemsAdder</dd></div></dl>
@@ -427,10 +429,10 @@
       <article class="card">
         <button type="button" class="media poster" data-images="../assets/img/packs/icon-v3-sale.png|Icon Pack v3, sale image;../assets/img/packs/icon-v3-white.png|Icon Pack v3 on a white background;../assets/img/packs/icon-v3-black.png|Icon Pack v3 on a black background" aria-label="Open Icon Pack v3 images">
           <img src="../assets/img/packs/icon-v3-sale.png" alt="Icon Pack v3: 36 icons such as food, potions, animals and vehicles" loading="lazy">
-          <span class="soon" data-en="Coming soon">출시 예정</span>
           <span class="count" data-en="3 images">이미지 3장</span>
         </button>
         <div class="body">
+          <span class="soon" data-en="Coming soon">출시 예정</span>
           <h3 data-en="Icon Pack v3">아이콘 팩 v3</h3>
           <p class="meta" data-en="36 icons · 16×16 · PNG">아이콘 36개 · 16×16 · PNG</p>
           <dl class="specs"><div><dt data-en="Tested on">테스트 환경</dt><dd>Minecraft 1.21 · Paper</dd></div><div><dt data-en="Plugin">지원 플러그인</dt><dd>ItemsAdder</dd></div></dl>
@@ -440,10 +442,10 @@
       <article class="card">
         <button type="button" class="media poster" data-images="../assets/img/packs/ingredient-v1-sale.png|Ingredient Pack v1, sale image;../assets/img/packs/ingredient-v1-white.png|Ingredient Pack v1 on a white background;../assets/img/packs/ingredient-v1-black.png|Ingredient Pack v1 on a black background" aria-label="Open Ingredient Pack v1 images">
           <img src="../assets/img/packs/ingredient-v1-sale.png" alt="Ingredient Pack v1: 26 ingredient and dish items" loading="lazy">
-          <span class="soon" data-en="Coming soon">출시 예정</span>
           <span class="count" data-en="3 images">이미지 3장</span>
         </button>
         <div class="body">
+          <span class="soon" data-en="Coming soon">출시 예정</span>
           <h3 data-en="Ingredient Pack v1">재료 팩 v1</h3>
           <p class="meta" data-en="26 items · 32×32 · ItemsAdder config">아이템 26개 · 32×32 · ItemsAdder 설정 포함</p>
           <dl class="specs"><div><dt data-en="Tested on">테스트 환경</dt><dd>Minecraft 1.21 · Paper</dd></div><div><dt data-en="Plugin">지원 플러그인</dt><dd>ItemsAdder</dd></div></dl>
@@ -453,10 +455,10 @@
       <article class="card">
         <button type="button" class="media poster" data-images="../assets/img/packs/ingredient-v2-sale.png|Ingredient Pack v2, sale image;../assets/img/packs/ingredient-v2-white.png|Ingredient Pack v2 on a white background;../assets/img/packs/ingredient-v2-black.png|Ingredient Pack v2 on a black background" aria-label="Open Ingredient Pack v2 images">
           <img src="../assets/img/packs/ingredient-v2-sale.png" alt="Ingredient Pack v2: 12 cooking ingredients" loading="lazy">
-          <span class="soon" data-en="Coming soon">출시 예정</span>
           <span class="count" data-en="3 images">이미지 3장</span>
         </button>
         <div class="body">
+          <span class="soon" data-en="Coming soon">출시 예정</span>
           <h3 data-en="Ingredient Pack v2">재료 팩 v2</h3>
           <p class="meta" data-en="12 items · 32×32">아이템 12개 · 32×32</p>
           <dl class="specs"><div><dt data-en="Tested on">테스트 환경</dt><dd>Minecraft 1.21 · Paper</dd></div><div><dt data-en="Plugin">지원 플러그인</dt><dd>ItemsAdder</dd></div></dl>
@@ -466,10 +468,10 @@
       <article class="card">
         <button type="button" class="media poster" data-images="../assets/img/packs/foodpack-v1-sale.png|Food Pack v1, sale image;../assets/img/packs/foodpack-v1-white.png|Food Pack v1 on a white background;../assets/img/packs/foodpack-v1-black.png|Food Pack v1 on a black background" aria-label="Open Food Pack v1 images">
           <img src="../assets/img/packs/foodpack-v1-sale.png" alt="Food Pack v1: 22 dessert items" loading="lazy">
-          <span class="soon" data-en="Coming soon">출시 예정</span>
           <span class="count" data-en="3 images">이미지 3장</span>
         </button>
         <div class="body">
+          <span class="soon" data-en="Coming soon">출시 예정</span>
           <h3 data-en="Food Pack v1">음식 팩 v1</h3>
           <p class="meta" data-en="22 items · 32×32 · ItemsAdder config">아이템 22개 · 32×32 · ItemsAdder 설정 포함</p>
           <dl class="specs"><div><dt data-en="Tested on">테스트 환경</dt><dd>Minecraft 1.21 · Paper</dd></div><div><dt data-en="Plugin">지원 플러그인</dt><dd>ItemsAdder</dd></div></dl>
@@ -549,19 +551,21 @@
         <h3 id="h-tools" data-en="Tool Set">도구 세트</h3>
         <p class="meta" data-en="4 tools × 5 materials · Java item models · ItemsAdder pack">도구 4종 × 재질 5종 · Java 아이템 모델 · ItemsAdder 팩</p>
         <p data-en="Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, so the four read as a family. Each comes in stone, iron, gold, diamond and netherite.">곡괭이, 도끼, 괭이, 삽이 같은 손잡이와 보석 장식, 폼멜을 공유해 한 세트로 보입니다. 각각 돌, 철, 금, 다이아, 네더라이트 버전이 있습니다.</p>
-        <div class="mat" role="group" aria-label="Material">
-          <button type="button" data-mat="stone" aria-pressed="false"><i style="--c: var(--mat-stone)"></i><span data-en="Stone">돌</span></button>
-          <button type="button" data-mat="iron" aria-pressed="false"><i style="--c: var(--mat-iron)"></i><span data-en="Iron">철</span></button>
-          <button type="button" data-mat="gold" aria-pressed="false"><i style="--c: var(--mat-gold)"></i><span data-en="Gold">금</span></button>
-          <button type="button" data-mat="diamond" aria-pressed="true"><i style="--c: var(--mat-diamond)"></i><span data-en="Diamond">다이아</span></button>
-          <button type="button" data-mat="netherite" aria-pressed="false"><i style="--c: var(--mat-netherite)"></i><span data-en="Netherite">네더라이트</span></button>
-        </div>
       </div>
+      <div class="set-body">
       <div class="set-row row-4">
         <div class="tile3d"><canvas data-model="pickaxe_diamond" data-tool="pickaxe" data-roll="0" role="img" aria-label="Pickaxe in 3D. Drag to rotate."></canvas><span class="label" data-en="Pickaxe">곡괭이</span><span class="spin" data-en="↔ Drag">↔ 돌리기</span></div>
         <div class="tile3d"><canvas data-model="axe_diamond" data-tool="axe" data-roll="0" role="img" aria-label="Axe in 3D. Drag to rotate."></canvas><span class="label" data-en="Axe">도끼</span><span class="spin" data-en="↔ Drag">↔ 돌리기</span></div>
         <div class="tile3d"><canvas data-model="hoe_diamond" data-tool="hoe" data-roll="0" role="img" aria-label="Hoe in 3D. Drag to rotate."></canvas><span class="label" data-en="Hoe">괭이</span><span class="spin" data-en="↔ Drag">↔ 돌리기</span></div>
         <div class="tile3d"><canvas data-model="shovel_diamond" data-tool="shovel" data-roll="0" role="img" aria-label="Shovel in 3D. Drag to rotate."></canvas><span class="label" data-en="Shovel">삽</span><span class="spin" data-en="↔ Drag">↔ 돌리기</span></div>
+      </div>
+      <div class="mat" role="group" aria-label="Material">
+        <button type="button" data-mat="stone" aria-pressed="false"><i style="--c: var(--mat-stone)"></i><span data-en="Stone">돌</span></button>
+        <button type="button" data-mat="iron" aria-pressed="false"><i style="--c: var(--mat-iron)"></i><span data-en="Iron">철</span></button>
+        <button type="button" data-mat="gold" aria-pressed="false"><i style="--c: var(--mat-gold)"></i><span data-en="Gold">금</span></button>
+        <button type="button" data-mat="diamond" aria-pressed="true"><i style="--c: var(--mat-diamond)"></i><span data-en="Diamond">다이아</span></button>
+        <button type="button" data-mat="netherite" aria-pressed="false"><i style="--c: var(--mat-netherite)"></i><span data-en="Netherite">네더라이트</span></button>
+      </div>
       </div>
     </section>
 
@@ -628,10 +632,12 @@
 
   <!-- About -->
   <section class="about" id="about" aria-labelledby="h-about">
+    <div class="about-top">
     <div class="about-intro">
       <p class="eyebrow" data-en="About">소개</p>
       <h2 id="h-about" data-en="About MTL Studio">MTL Studio 소개</h2>
       <p data-en="MTL Studio is the shop of mitlim, a Minecraft resource creator from Korea. I build pixel art, Blockbench models and server scripts, and every pack is tested in game before release.">MTL Studio는 한국의 마인크래프트 리소스 제작자 mitlim의 숍입니다. 픽셀아트, 블록벤치 모델, 서버 스크립트를 만들며, 모든 팩은 출시 전에 게임에서 직접 테스트합니다.</p>
+    </div>
       <dl class="facts">
         <div><dt data-en="Skills">기술</dt><dd><span class="chip">Blockbench</span><span class="chip keep">Pixel Art</span><span class="chip">Skript</span><span class="chip" data-en="C">C언어</span></dd></div>
         <div><dt data-en="Languages">언어</dt><dd><span data-en="Korean (native) · English (basic)">한국어 (모국어) · 영어 (약간 가능)</span></dd></div>
@@ -642,14 +648,14 @@
     <div class="process">
       <h3 data-en="How commissions work">외주 진행 방식</h3>
       <ol class="steps">
-        <li><span class="step-n">1</span><span data-en="Brief: you share the plan and what you need">기획안: 원하는 내용과 계획을 전달해 주세요</span></li>
-        <li><span class="step-n">2</span><span data-en="Reference images to agree on the look">참고 이미지로 방향 맞추기</span></li>
-        <li><span class="step-n">3</span><span data-en="Production">제작</span></li>
-        <li><span class="step-n">4</span><span data-en="First review of the result">결과물 1차 확인 (컨펌)</span></li>
-        <li><span class="step-n">5</span><span data-en="You approve it or ask for changes">승인 또는 수정 요청</span></li>
-        <li><span class="step-n">6</span><span data-en="Revision">수정</span></li>
-        <li><span class="step-n">7</span><span data-en="Final review">최종 확인 (컨펌)</span></li>
-        <li><span class="step-n">8</span><span data-en="Approval and delivery">승인 및 전달</span></li>
+        <li><span class="step-n">01</span><span data-en="Brief: you share the plan and what you need">기획안: 원하는 내용과 계획을 전달해 주세요</span></li>
+        <li><span class="step-n">02</span><span data-en="Reference images to agree on the look">참고 이미지로 방향 맞추기</span></li>
+        <li><span class="step-n">03</span><span data-en="Production">제작</span></li>
+        <li><span class="step-n">04</span><span data-en="First review of the result">결과물 1차 확인 (컨펌)</span></li>
+        <li><span class="step-n">05</span><span data-en="You approve it or ask for changes">승인 또는 수정 요청</span></li>
+        <li><span class="step-n">06</span><span data-en="Revision">수정</span></li>
+        <li><span class="step-n">07</span><span data-en="Final review">최종 확인 (컨펌)</span></li>
+        <li><span class="step-n">08</span><span data-en="Approval and delivery">승인 및 전달</span></li>
       </ol>
       <p class="note" data-en="One revision is included. Further revisions cost extra.">수정은 1회 무료이며, 그 이후 수정부터는 추가 비용이 발생합니다.</p>
     </div>
@@ -659,20 +665,17 @@
 
 <footer class="contact" id="contact">
   <div class="wrap">
-    <img class="contact-logo" src="../assets/logo-cutout.png" alt="">
-    <h2 data-en="Commissions">외주 문의</h2>
-    <p data-en="Need custom items, GUIs, models or scripts for your server? Message me on Discord.">서버에 쓸 커스텀 아이템, GUI, 모델, 스크립트가 필요하면 디스코드로 연락 주세요.</p>
-    <div class="handles">
-      <div class="handle">
-        <span class="meta">Discord</span>
-        <span class="handle-row"><code id="discord">mitlim</code><button type="button" id="copy" data-en="Copy">복사</button></span>
+    <div class="contact-main">
+      <div>
+        <h2 data-en="Commissions">외주 문의</h2>
+        <p data-en="Need custom items, GUIs, models or scripts for your server? Message me on Discord.">서버에 쓸 커스텀 아이템, GUI, 모델, 스크립트가 필요하면 디스코드로 연락 주세요.</p>
       </div>
-      <div class="handle">
-        <span class="meta">YouTube</span>
-        <a href="https://www.youtube.com/@MITLIM98" target="_blank" rel="noopener">@MITLIM98 ↗</a>
+      <div class="handles">
+        <span class="handle-row"><span class="meta">Discord</span><code id="discord">mitlim</code><button type="button" id="copy" data-en="Copy">복사</button></span>
+        <a class="yt-link" href="https://www.youtube.com/@MITLIM98" target="_blank" rel="noopener">YouTube ↗</a>
       </div>
     </div>
-    <p class="meta" data-en="MTL Studio · by mitlim · Portfolio updated October 2026">MTL Studio · 제작 mitlim · 포트폴리오 업데이트: 2026년 10월</p>
+    <p class="fine" data-en="MTL Studio · by mitlim · Portfolio updated November 2026">MTL Studio · 제작 mitlim · 포트폴리오 업데이트: 2026년 11월</p>
   </div>
 </footer>
 
@@ -787,7 +790,7 @@
     'Copy': '복사',
     'Copied': '복사됨',
     'Press Ctrl+C': 'Ctrl+C를 누르세요',
-    'MTL Studio · by mitlim · Portfolio updated October 2026': 'MTL Studio · 제작 mitlim · 포트폴리오 업데이트: 2026년 10월',
+    'MTL Studio · by mitlim · Portfolio updated November 2026': 'MTL Studio · 제작 mitlim · 포트폴리오 업데이트: 2026년 11월',
     '‹ Prev': '‹ 이전',
     'Next ›': '다음 ›',
     'Close': '닫기',
