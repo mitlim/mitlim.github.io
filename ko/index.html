@@ -303,6 +303,12 @@
   ::selection { background: var(--accent-soft); color: var(--ink); }
   .hero-kicker, .hero-description, .about-main > p, .contact-intro p, .featured-content .description, .featured-content .spec, .model-details .spec, .pack-spec, .collection-spec { color: var(--muted); }
 
+  .model-sale { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+  .collection .model-sale { max-width: 420px; }
+  .model-viewer[hidden], .model-row[hidden], .mat[hidden], .model-sale[hidden], .view-toggle[hidden] { display: none; }
+  .view-toggles { margin-top: 14px; }
+  .view-toggle { font-size: 13px; cursor: pointer; }
+
   /* Responsive */
   @media (max-width: 1000px) {
     .hero-inner { grid-template-columns: 1.5fr .6fr; gap: 25px; }
@@ -465,8 +471,8 @@
       </div>
       <div class="packs-grid">
           <article class="pack-card">
-            <button type="button" class="pack-trigger" data-images="../assets/img/packs/rank-v1-sale.png|Rank Pack v1, sale image" aria-label="Open Rank Pack v1 images">
-              <span class="pack-image"><img src="../assets/img/packs/rank-v1-sale.png" alt="Rank Pack v1: 39 chat rank badges with icons" loading="lazy"></span>
+            <button type="button" class="pack-trigger" data-images="../assets/img/packs/rank-v1-sale.webp|Rank Pack v1, sale image" aria-label="Open Rank Pack v1 images">
+              <span class="pack-image"><img src="../assets/img/packs/rank-v1-sale.webp" alt="Rank Pack v1: 39 chat rank badges with icons" loading="lazy"></span>
             </button>
             <div class="pack-meta"><span class="type" data-en="Pixel Art">도트</span><span class="availability-tag" data-en="Coming soon">출시 예정</span></div>
             <h3 data-en="Rank Pack v1">칭호 팩 v1</h3>
@@ -553,27 +559,33 @@
       </div>
       <div class="models-featured">
           <article class="model-card">
-            <div class="model-viewer"><canvas data-model="nocturne" role="img" aria-label="Black Rune Sword in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag to rotate">↔ 드래그해서 돌리기</span></div>
+            <button type="button" class="pack-trigger model-sale" data-images="../assets/img/packs/weapon-v1-sale.webp|Weapon Pack v1, sale image" aria-label="Open Weapon Pack v1 sale image"><span class="pack-image"><img src="../assets/img/packs/weapon-v1-sale.webp" alt="Weapon Pack v1 sale image" loading="lazy"></span></button>
+            <div class="model-viewer" hidden><canvas data-model="nocturne" role="img" aria-label="Black Rune Sword in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag to rotate">↔ 드래그해서 돌리기</span></div>
             <div class="model-details">
               <h3 data-en="Black Rune Sword">검은 룬의 검</h3>
               <p class="spec" data-en="62 cubes · Java item model">큐브 62개 · Java 아이템 모델</p>
               <p class="description" data-en="A dark steel greatsword with a crescent guard, amethyst inlays and runes etched down the blade.">초승달 모양 가드와 자수정 장식, 칼날에 새긴 룬 문양이 특징인 검은 강철 대검입니다.</p>
+              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d" data-en="View in 3D">3D로 보기</button><button type="button" class="text-link view-toggle" data-view="sale" hidden data-en="Back to sale image">판매 이미지로 돌아가기</button></div>
             </div>
           </article>
           <article class="model-card">
-            <div class="model-viewer"><canvas data-model="azure" data-roll="135" role="img" aria-label="Sword of Blue Light in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag to rotate">↔ 드래그해서 돌리기</span></div>
+            <button type="button" class="pack-trigger model-sale" data-images="../assets/img/packs/weapon-v2-sale.webp|Weapon Pack v2, sale image" aria-label="Open Weapon Pack v2 sale image"><span class="pack-image"><img src="../assets/img/packs/weapon-v2-sale.webp" alt="Weapon Pack v2 sale image" loading="lazy"></span></button>
+            <div class="model-viewer" hidden><canvas data-model="azure" data-roll="135" role="img" aria-label="Sword of Blue Light in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag to rotate">↔ 드래그해서 돌리기</span></div>
             <div class="model-details">
               <h3 data-en="Sword of Blue Light">푸른 빛의 검</h3>
               <p class="spec" data-en="562 cubes · Java item model">큐브 562개 · Java 아이템 모델</p>
               <p class="description" data-en="A winged sword with a gold guard and a sapphire set into the hilt.">금빛 가드와 손잡이에 박힌 사파이어가 특징인 날개 달린 검입니다.</p>
+              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d" data-en="View in 3D">3D로 보기</button><button type="button" class="text-link view-toggle" data-view="sale" hidden data-en="Back to sale image">판매 이미지로 돌아가기</button></div>
             </div>
           </article>
           <article class="model-card">
-            <div class="model-viewer"><canvas data-model="obsidian_dagger" role="img" aria-label="Silver Sentinel Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag to rotate">↔ 드래그해서 돌리기</span></div>
+            <button type="button" class="pack-trigger model-sale" data-images="../assets/img/packs/weapon-v3-sale.webp|Weapon Pack v3, sale image" aria-label="Open Weapon Pack v3 sale image"><span class="pack-image"><img src="../assets/img/packs/weapon-v3-sale.webp" alt="Weapon Pack v3 sale image" loading="lazy"></span></button>
+            <div class="model-viewer" hidden><canvas data-model="obsidian_dagger" role="img" aria-label="Silver Sentinel Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag to rotate">↔ 드래그해서 돌리기</span></div>
             <div class="model-details">
               <h3 data-en="Silver Sentinel Dagger">은빛 파수꾼 단검</h3>
               <p class="spec" data-en="716 cubes · Java item model">큐브 716개 · Java 아이템 모델</p>
               <p class="description" data-en="A curved dagger with a dark, thorn-serrated blade and a wrapped grip.">가시 모양 톱니가 난 어두운 곡선 칼날과 천을 감은 손잡이가 특징인 단검입니다.</p>
+              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d" data-en="View in 3D">3D로 보기</button><button type="button" class="text-link view-toggle" data-view="sale" hidden data-en="Back to sale image">판매 이미지로 돌아가기</button></div>
             </div>
           </article>
       </div>
@@ -584,9 +596,11 @@
             <div>
               <span class="collection-spec" data-en="4 tiers · class advancement weapon · Java item models">4단계 · 전직 무기 · Java 아이템 모델</span>
               <p data-en="A rogue's dagger whose look changes with each class advancement or upgrade.">도적의 단검으로, 전직 혹은 강화를 하면 외형이 바뀌는 구조입니다.</p>
+              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d" data-en="View in 3D">3D로 보기</button><button type="button" class="text-link view-toggle" data-view="sale" hidden data-en="Back to sale image">판매 이미지로 돌아가기</button></div>
             </div>
           </div>
-          <div class="model-row">
+          <button type="button" class="pack-trigger model-sale" data-images="../assets/img/packs/dagger-v1-sale.webp|Dagger Pack v1, sale image" aria-label="Open Dagger Pack v1 sale image"><span class="pack-image"><img src="../assets/img/packs/dagger-v1-sale.webp" alt="Dagger Pack v1 sale image" loading="lazy"></span></button>
+          <div class="model-row" hidden>
               <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_1" data-roll="0" role="img" aria-label="Tier 1 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Tier 1 Dagger">1단계 단검</div></div>
               <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_2" data-roll="0" role="img" aria-label="Tier 2 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Tier 2 Dagger">2단계 단검</div></div>
               <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_3" data-roll="0" role="img" aria-label="Tier 3 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Tier 3 Dagger">3단계 단검</div></div>
@@ -599,16 +613,18 @@
             <div>
               <span class="collection-spec" data-en="4 tools × 5 materials · Java item models · ItemsAdder pack">도구 4종 × 재질 5종 · Java 아이템 모델 · ItemsAdder 팩</span>
               <p data-en="Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, giving all four a consistent look. Each comes in stone, iron, gold, diamond and netherite.">곡괭이, 도끼, 괭이, 삽 모두 같은 손잡이와 보석 장식, 폼멜을 써서 한 세트처럼 통일감이 있습니다. 재질은 돌, 철, 금, 다이아, 네더라이트 5가지입니다.</p>
+              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d" data-en="View in 3D">3D로 보기</button><button type="button" class="text-link view-toggle" data-view="sale" hidden data-en="Back to sale image">판매 이미지로 돌아가기</button></div>
             </div>
           </div>
-          <div class="mat" role="group" aria-label="Material">
+          <button type="button" class="pack-trigger model-sale" data-images="../assets/img/packs/tool-v1-sale.webp|Tool Pack v1, sale image" aria-label="Open Tool Pack v1 sale image"><span class="pack-image"><img src="../assets/img/packs/tool-v1-sale.webp" alt="Tool Pack v1 sale image" loading="lazy"></span></button>
+          <div class="mat" role="group" aria-label="Material" hidden>
             <button type="button" data-mat="stone" aria-pressed="false" data-en="Stone">돌</button>
             <button type="button" data-mat="iron" aria-pressed="false" data-en="Iron">철</button>
             <button type="button" data-mat="gold" aria-pressed="false" data-en="Gold">금</button>
             <button type="button" data-mat="diamond" aria-pressed="true" data-en="Diamond">다이아</button>
             <button type="button" data-mat="netherite" aria-pressed="false" data-en="Netherite">네더라이트</button>
           </div>
-          <div class="model-row">
+          <div class="model-row" hidden>
               <div class="model-item"><div class="model-viewer"><canvas data-model="pickaxe_diamond" data-tool="pickaxe" data-roll="0" role="img" aria-label="Pickaxe in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Pickaxe">곡괭이</div></div>
               <div class="model-item"><div class="model-viewer"><canvas data-model="axe_diamond" data-tool="axe" data-roll="0" role="img" aria-label="Axe in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Axe">도끼</div></div>
               <div class="model-item"><div class="model-viewer"><canvas data-model="hoe_diamond" data-tool="hoe" data-roll="0" role="img" aria-label="Hoe in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Hoe">괭이</div></div>
@@ -906,6 +922,13 @@
     'Icon Pack v1': '아이콘 팩 v1',
     'Icon Pack v2': '아이콘 팩 v2',
     'Icon Pack v3': '아이콘 팩 v3',
+    'View in 3D': '3D로 보기',
+    'Back to sale image': '판매 이미지로 돌아가기',
+    'Weapon Pack v1, sale image': '무기 팩 v1 판매 이미지',
+    'Weapon Pack v2, sale image': '무기 팩 v2 판매 이미지',
+    'Weapon Pack v3, sale image': '무기 팩 v3 판매 이미지',
+    'Dagger Pack v1, sale image': '단검 팩 v1 판매 이미지',
+    'Tool Pack v1, sale image': '도구 팩 v1 판매 이미지',
     'Rank Pack v1, sale image': '칭호 팩 v1 판매 이미지',
     'Rank Pack v1 on a white background': '칭호 팩 v1 흰 배경 미리보기',
     'Rank Pack v1 on a black background': '칭호 팩 v1 검은 배경 미리보기',
@@ -996,6 +1019,13 @@
     idx = Number(b.dataset.start || 0);
     render();
     if (lb.showModal) lb.showModal(); else lb.setAttribute('open', '');
+  }));
+  // Modeling: "View in 3D" / "Back to sale image"
+  $$('.view-toggle').forEach(b => b.addEventListener('click', () => {
+    const box = b.closest('.model-card, .collection'), to3d = b.dataset.view === '3d';
+    box.querySelectorAll('.model-sale').forEach(e => { e.hidden = to3d; });
+    box.querySelectorAll('.model-viewer, .model-row, .mat').forEach(e => { e.hidden = !to3d; });
+    box.querySelectorAll('.view-toggle').forEach(e => { e.hidden = (e.dataset.view === '3d') === to3d; });
   }));
   prev.addEventListener('click', () => { idx = (idx - 1 + list.length) % list.length; render(); });
   next.addEventListener('click', () => { idx = (idx + 1) % list.length; render(); });

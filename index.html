@@ -303,6 +303,12 @@
   ::selection { background: var(--accent-soft); color: var(--ink); }
   .hero-kicker, .hero-description, .about-main > p, .contact-intro p, .featured-content .description, .featured-content .spec, .model-details .spec, .pack-spec, .collection-spec { color: var(--muted); }
 
+  .model-sale { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+  .collection .model-sale { max-width: 420px; }
+  .model-viewer[hidden], .model-row[hidden], .mat[hidden], .model-sale[hidden], .view-toggle[hidden] { display: none; }
+  .view-toggles { margin-top: 14px; }
+  .view-toggle { font-size: 13px; cursor: pointer; }
+
   /* Responsive */
   @media (max-width: 1000px) {
     .hero-inner { grid-template-columns: 1.5fr .6fr; gap: 25px; }
@@ -465,8 +471,8 @@
       </div>
       <div class="packs-grid">
           <article class="pack-card">
-            <button type="button" class="pack-trigger" data-images="assets/img/packs/rank-v1-sale.png|Rank Pack v1, sale image" aria-label="Open Rank Pack v1 images">
-              <span class="pack-image"><img src="assets/img/packs/rank-v1-sale.png" alt="Rank Pack v1: 39 chat rank badges with icons" loading="lazy"></span>
+            <button type="button" class="pack-trigger" data-images="assets/img/packs/rank-v1-sale.webp|Rank Pack v1, sale image" aria-label="Open Rank Pack v1 images">
+              <span class="pack-image"><img src="assets/img/packs/rank-v1-sale.webp" alt="Rank Pack v1: 39 chat rank badges with icons" loading="lazy"></span>
             </button>
             <div class="pack-meta"><span class="type">Pixel Art</span><span class="availability-tag">Coming soon</span></div>
             <h3>Rank Pack v1</h3>
@@ -553,27 +559,33 @@
       </div>
       <div class="models-featured">
           <article class="model-card">
-            <div class="model-viewer"><canvas data-model="nocturne" role="img" aria-label="Black Rune Sword in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag to rotate</span></div>
+            <button type="button" class="pack-trigger model-sale" data-images="assets/img/packs/weapon-v1-sale.webp|Weapon Pack v1, sale image" aria-label="Open Weapon Pack v1 sale image"><span class="pack-image"><img src="assets/img/packs/weapon-v1-sale.webp" alt="Weapon Pack v1 sale image" loading="lazy"></span></button>
+            <div class="model-viewer" hidden><canvas data-model="nocturne" role="img" aria-label="Black Rune Sword in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag to rotate</span></div>
             <div class="model-details">
               <h3>Black Rune Sword</h3>
               <p class="spec">62 cubes · Java item model</p>
               <p class="description">A dark steel greatsword with a crescent guard, amethyst inlays and runes etched down the blade.</p>
+              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d">View in 3D</button><button type="button" class="text-link view-toggle" data-view="sale" hidden>Back to sale image</button></div>
             </div>
           </article>
           <article class="model-card">
-            <div class="model-viewer"><canvas data-model="azure" data-roll="135" role="img" aria-label="Sword of Blue Light in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag to rotate</span></div>
+            <button type="button" class="pack-trigger model-sale" data-images="assets/img/packs/weapon-v2-sale.webp|Weapon Pack v2, sale image" aria-label="Open Weapon Pack v2 sale image"><span class="pack-image"><img src="assets/img/packs/weapon-v2-sale.webp" alt="Weapon Pack v2 sale image" loading="lazy"></span></button>
+            <div class="model-viewer" hidden><canvas data-model="azure" data-roll="135" role="img" aria-label="Sword of Blue Light in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag to rotate</span></div>
             <div class="model-details">
               <h3>Sword of Blue Light</h3>
               <p class="spec">562 cubes · Java item model</p>
               <p class="description">A winged sword with a gold guard and a sapphire set into the hilt.</p>
+              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d">View in 3D</button><button type="button" class="text-link view-toggle" data-view="sale" hidden>Back to sale image</button></div>
             </div>
           </article>
           <article class="model-card">
-            <div class="model-viewer"><canvas data-model="obsidian_dagger" role="img" aria-label="Silver Sentinel Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag to rotate</span></div>
+            <button type="button" class="pack-trigger model-sale" data-images="assets/img/packs/weapon-v3-sale.webp|Weapon Pack v3, sale image" aria-label="Open Weapon Pack v3 sale image"><span class="pack-image"><img src="assets/img/packs/weapon-v3-sale.webp" alt="Weapon Pack v3 sale image" loading="lazy"></span></button>
+            <div class="model-viewer" hidden><canvas data-model="obsidian_dagger" role="img" aria-label="Silver Sentinel Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag to rotate</span></div>
             <div class="model-details">
               <h3>Silver Sentinel Dagger</h3>
               <p class="spec">716 cubes · Java item model</p>
               <p class="description">A curved dagger with a dark, thorn-serrated blade and a wrapped grip.</p>
+              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d">View in 3D</button><button type="button" class="text-link view-toggle" data-view="sale" hidden>Back to sale image</button></div>
             </div>
           </article>
       </div>
@@ -584,9 +596,11 @@
             <div>
               <span class="collection-spec">4 tiers · class advancement weapon · Java item models</span>
               <p>A rogue's dagger whose look changes with each class advancement or upgrade.</p>
+              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d">View in 3D</button><button type="button" class="text-link view-toggle" data-view="sale" hidden>Back to sale image</button></div>
             </div>
           </div>
-          <div class="model-row">
+          <button type="button" class="pack-trigger model-sale" data-images="assets/img/packs/dagger-v1-sale.webp|Dagger Pack v1, sale image" aria-label="Open Dagger Pack v1 sale image"><span class="pack-image"><img src="assets/img/packs/dagger-v1-sale.webp" alt="Dagger Pack v1 sale image" loading="lazy"></span></button>
+          <div class="model-row" hidden>
               <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_1" data-roll="0" role="img" aria-label="Tier 1 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Tier 1 Dagger</div></div>
               <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_2" data-roll="0" role="img" aria-label="Tier 2 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Tier 2 Dagger</div></div>
               <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_3" data-roll="0" role="img" aria-label="Tier 3 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Tier 3 Dagger</div></div>
@@ -599,16 +613,18 @@
             <div>
               <span class="collection-spec">4 tools × 5 materials · Java item models · ItemsAdder pack</span>
               <p>Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, giving all four a consistent look. Each comes in stone, iron, gold, diamond and netherite.</p>
+              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d">View in 3D</button><button type="button" class="text-link view-toggle" data-view="sale" hidden>Back to sale image</button></div>
             </div>
           </div>
-          <div class="mat" role="group" aria-label="Material">
+          <button type="button" class="pack-trigger model-sale" data-images="assets/img/packs/tool-v1-sale.webp|Tool Pack v1, sale image" aria-label="Open Tool Pack v1 sale image"><span class="pack-image"><img src="assets/img/packs/tool-v1-sale.webp" alt="Tool Pack v1 sale image" loading="lazy"></span></button>
+          <div class="mat" role="group" aria-label="Material" hidden>
             <button type="button" data-mat="stone" aria-pressed="false">Stone</button>
             <button type="button" data-mat="iron" aria-pressed="false">Iron</button>
             <button type="button" data-mat="gold" aria-pressed="false">Gold</button>
             <button type="button" data-mat="diamond" aria-pressed="true">Diamond</button>
             <button type="button" data-mat="netherite" aria-pressed="false">Netherite</button>
           </div>
-          <div class="model-row">
+          <div class="model-row" hidden>
               <div class="model-item"><div class="model-viewer"><canvas data-model="pickaxe_diamond" data-tool="pickaxe" data-roll="0" role="img" aria-label="Pickaxe in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Pickaxe</div></div>
               <div class="model-item"><div class="model-viewer"><canvas data-model="axe_diamond" data-tool="axe" data-roll="0" role="img" aria-label="Axe in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Axe</div></div>
               <div class="model-item"><div class="model-viewer"><canvas data-model="hoe_diamond" data-tool="hoe" data-roll="0" role="img" aria-label="Hoe in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Hoe</div></div>
@@ -906,6 +922,13 @@
     'Icon Pack v1': '아이콘 팩 v1',
     'Icon Pack v2': '아이콘 팩 v2',
     'Icon Pack v3': '아이콘 팩 v3',
+    'View in 3D': '3D로 보기',
+    'Back to sale image': '판매 이미지로 돌아가기',
+    'Weapon Pack v1, sale image': '무기 팩 v1 판매 이미지',
+    'Weapon Pack v2, sale image': '무기 팩 v2 판매 이미지',
+    'Weapon Pack v3, sale image': '무기 팩 v3 판매 이미지',
+    'Dagger Pack v1, sale image': '단검 팩 v1 판매 이미지',
+    'Tool Pack v1, sale image': '도구 팩 v1 판매 이미지',
     'Rank Pack v1, sale image': '칭호 팩 v1 판매 이미지',
     'Rank Pack v1 on a white background': '칭호 팩 v1 흰 배경 미리보기',
     'Rank Pack v1 on a black background': '칭호 팩 v1 검은 배경 미리보기',
@@ -996,6 +1019,13 @@
     idx = Number(b.dataset.start || 0);
     render();
     if (lb.showModal) lb.showModal(); else lb.setAttribute('open', '');
+  }));
+  // Modeling: "View in 3D" / "Back to sale image"
+  $$('.view-toggle').forEach(b => b.addEventListener('click', () => {
+    const box = b.closest('.model-card, .collection'), to3d = b.dataset.view === '3d';
+    box.querySelectorAll('.model-sale').forEach(e => { e.hidden = to3d; });
+    box.querySelectorAll('.model-viewer, .model-row, .mat').forEach(e => { e.hidden = !to3d; });
+    box.querySelectorAll('.view-toggle').forEach(e => { e.hidden = (e.dataset.view === '3d') === to3d; });
   }));
   prev.addEventListener('click', () => { idx = (idx - 1 + list.length) % list.length; render(); });
   next.addEventListener('click', () => { idx = (idx + 1) % list.length; render(); });
