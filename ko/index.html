@@ -304,7 +304,6 @@
   .hero-kicker, .hero-description, .about-main > p, .contact-intro p, .featured-content .description, .featured-content .spec, .model-details .spec, .pack-spec, .collection-spec { color: var(--muted); }
 
   .model-sale { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
-  .collection .model-sale { max-width: 420px; }
   .model-viewer[hidden], .model-row[hidden], .mat[hidden], .model-sale[hidden], .view-toggle[hidden] { display: none; }
   .view-toggles { margin-top: 14px; }
   .view-toggle { font-size: 13px; cursor: pointer; }
@@ -394,6 +393,12 @@
 
   /* featured 3D viewers take the same 9:10 box as the sale image they replace */
   .models-featured .model-card .model-viewer { height: auto; aspect-ratio: 9 / 10; }
+  /* Rogue Dagger / Tool Set: the 3D grid fills the same 9:10 box as the sale image (2 x 2) */
+  .collection .model-sale, .collection:has(.model-sale) .model-row, .collection:has(.model-sale) .mat { max-width: 560px; }
+  .collection:has(.model-sale) .model-row { grid-template-columns: repeat(2, minmax(0,1fr)); grid-template-rows: repeat(2, minmax(0,1fr)); aspect-ratio: 9 / 10; }
+  .collection:has(.model-sale) .model-item { display: flex; flex-direction: column; min-height: 0; }
+  .collection:has(.model-sale) .model-row .model-viewer { height: auto; flex: 1; min-height: 0; }
+  .collection:has(.model-sale) .model-row[hidden], .collection:has(.model-sale) .mat[hidden] { display: none; }
 </style>
 
 </head>
