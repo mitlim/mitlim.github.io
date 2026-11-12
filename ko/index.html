@@ -304,6 +304,7 @@
   .hero-kicker, .hero-description, .about-main > p, .contact-intro p, .featured-content .description, .featured-content .spec, .model-details .spec, .pack-spec, .collection-spec { color: var(--muted); }
 
   .model-sale { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+  .model-sale .pack-image { display: block; } .model-sale .pack-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .model-viewer[hidden], .model-row[hidden], .mat[hidden], .model-sale[hidden], .view-toggle[hidden] { display: none; }
   .view-toggles { margin-top: 14px; }
   .view-toggle { font-size: 13px; cursor: pointer; }
@@ -393,8 +394,13 @@
 
   /* featured 3D viewers take the same 9:10 box as the sale image they replace */
   .models-featured .model-card .model-viewer { height: auto; aspect-ratio: 9 / 10; }
-  /* Rogue Dagger / Tool Set: the 3D grid fills the same 9:10 box as the sale image (2 x 2) */
-  .collection .model-sale, .collection:has(.model-sale) .model-row, .collection:has(.model-sale) .mat { max-width: 560px; }
+  /* Dagger Set / Tool Set side by side; in each, the 3D grid (2 x 2) fills the same 9:10 box as the sale image */
+  .collection-pair { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); column-gap: 40px; row-gap: 0; border-top: 1px solid var(--line); }
+  .collection-pair .collection { border-top: 0; min-width: 0; display: grid; grid-row: span 3; grid-template-rows: subgrid; grid-template-columns: minmax(0,1fr); align-content: start; }
+  .collection-pair .collection > * { min-width: 0; }
+  .collection-pair .collection-intro { grid-row: 1; } .collection-pair .mat { grid-row: 2; } .collection-pair .model-sale, .collection-pair .model-row { grid-row: 3; }
+  .collection-pair .collection-intro { grid-template-columns: 1fr; gap: 12px; }
+  @media (max-width: 760px) { .collection-pair { grid-template-columns: 1fr; gap: 0; } .collection-pair .collection + .collection { border-top: 1px solid var(--line); } }
   .collection:has(.model-sale) .model-row { grid-template-columns: repeat(2, minmax(0,1fr)); grid-template-rows: repeat(2, minmax(0,1fr)); aspect-ratio: 9 / 10; }
   .collection:has(.model-sale) .model-item { display: flex; flex-direction: column; min-height: 0; }
   .collection:has(.model-sale) .model-row .model-viewer { height: auto; flex: 1; min-height: 0; }
@@ -597,47 +603,49 @@
           </article>
       </div>
       <div class="model-collections">
-        <section class="collection">
-          <div class="collection-intro">
-            <h3 data-en="Rogue Dagger">도적 단검</h3>
-            <div>
-              <span class="collection-spec" data-en="4 tiers · class advancement weapon · Java item models">4단계 · 전직 무기 · Java 아이템 모델</span>
-              <p data-en="A rogue's dagger whose look changes with each class advancement or upgrade.">도적의 단검으로, 전직 혹은 강화를 하면 외형이 바뀌는 구조입니다.</p>
-              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d" data-en="View in 3D">3D로 보기</button><button type="button" class="text-link view-toggle" data-view="sale" hidden data-en="Back to sale image">판매 이미지로 돌아가기</button></div>
+        <div class="collection-pair">
+          <section class="collection">
+            <div class="collection-intro">
+              <h3 data-en="Dagger Set">단검 세트</h3>
+              <div>
+                <span class="collection-spec" data-en="4 tiers · class advancement weapon · Java item models">4단계 · 전직 무기 · Java 아이템 모델</span>
+                <p data-en="A rogue's dagger whose look changes with each class advancement or upgrade.">도적의 단검으로, 전직 혹은 강화를 하면 외형이 바뀌는 구조입니다.</p>
+                <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d" data-en="View in 3D">3D로 보기</button><button type="button" class="text-link view-toggle" data-view="sale" hidden data-en="Back to sale image">판매 이미지로 돌아가기</button></div>
+              </div>
             </div>
-          </div>
-          <button type="button" class="pack-trigger model-sale" data-images="../assets/img/packs/dagger-v1-sale.webp|Dagger Pack v1, sale image" aria-label="Open Dagger Pack v1 sale image"><span class="pack-image"><img src="../assets/img/packs/dagger-v1-sale.webp" alt="Dagger Pack v1 sale image" loading="lazy"></span></button>
-          <div class="model-row" hidden>
-              <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_1" data-roll="0" role="img" aria-label="Tier 1 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Tier 1 Dagger">1단계 단검</div></div>
-              <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_2" data-roll="0" role="img" aria-label="Tier 2 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Tier 2 Dagger">2단계 단검</div></div>
-              <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_3" data-roll="0" role="img" aria-label="Tier 3 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Tier 3 Dagger">3단계 단검</div></div>
-              <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_4" data-roll="0" role="img" aria-label="Tier 4 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Tier 4 Dagger">4단계 단검</div></div>
-          </div>
-        </section>
-        <section class="collection">
-          <div class="collection-intro">
-            <h3 data-en="Tool Set">도구 세트</h3>
-            <div>
-              <span class="collection-spec" data-en="4 tools × 5 materials · Java item models · ItemsAdder pack">도구 4종 × 재질 5종 · Java 아이템 모델 · ItemsAdder 팩</span>
-              <p data-en="Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, giving all four a consistent look. Each comes in stone, iron, gold, diamond and netherite.">곡괭이, 도끼, 괭이, 삽 모두 같은 손잡이와 보석 장식, 폼멜을 써서 한 세트처럼 통일감이 있습니다. 재질은 돌, 철, 금, 다이아, 네더라이트 5가지입니다.</p>
-              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d" data-en="View in 3D">3D로 보기</button><button type="button" class="text-link view-toggle" data-view="sale" hidden data-en="Back to sale image">판매 이미지로 돌아가기</button></div>
+            <button type="button" class="pack-trigger model-sale" data-images="../assets/img/packs/dagger-v1-sale.webp|Dagger Pack v1, sale image" aria-label="Open Dagger Pack v1 sale image"><span class="pack-image"><img src="../assets/img/packs/dagger-v1-sale.webp" alt="Dagger Pack v1 sale image" loading="lazy"></span></button>
+            <div class="model-row" hidden>
+                <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_1" data-roll="0" role="img" aria-label="Tier 1 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Tier 1 Dagger">1단계 단검</div></div>
+                <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_2" data-roll="0" role="img" aria-label="Tier 2 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Tier 2 Dagger">2단계 단검</div></div>
+                <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_3" data-roll="0" role="img" aria-label="Tier 3 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Tier 3 Dagger">3단계 단검</div></div>
+                <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_4" data-roll="0" role="img" aria-label="Tier 4 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Tier 4 Dagger">4단계 단검</div></div>
             </div>
-          </div>
-          <button type="button" class="pack-trigger model-sale" data-images="../assets/img/packs/tool-v1-sale.webp|Tool Pack v1, sale image" aria-label="Open Tool Pack v1 sale image"><span class="pack-image"><img src="../assets/img/packs/tool-v1-sale.webp" alt="Tool Pack v1 sale image" loading="lazy"></span></button>
-          <div class="mat" role="group" aria-label="Material" hidden>
-            <button type="button" data-mat="stone" aria-pressed="false" data-en="Stone">돌</button>
-            <button type="button" data-mat="iron" aria-pressed="false" data-en="Iron">철</button>
-            <button type="button" data-mat="gold" aria-pressed="false" data-en="Gold">금</button>
-            <button type="button" data-mat="diamond" aria-pressed="true" data-en="Diamond">다이아</button>
-            <button type="button" data-mat="netherite" aria-pressed="false" data-en="Netherite">네더라이트</button>
-          </div>
-          <div class="model-row" hidden>
-              <div class="model-item"><div class="model-viewer"><canvas data-model="pickaxe_diamond" data-tool="pickaxe" data-roll="0" role="img" aria-label="Pickaxe in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Pickaxe">곡괭이</div></div>
-              <div class="model-item"><div class="model-viewer"><canvas data-model="axe_diamond" data-tool="axe" data-roll="0" role="img" aria-label="Axe in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Axe">도끼</div></div>
-              <div class="model-item"><div class="model-viewer"><canvas data-model="hoe_diamond" data-tool="hoe" data-roll="0" role="img" aria-label="Hoe in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Hoe">괭이</div></div>
-              <div class="model-item"><div class="model-viewer"><canvas data-model="shovel_diamond" data-tool="shovel" data-roll="0" role="img" aria-label="Shovel in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Shovel">삽</div></div>
-          </div>
-        </section>
+          </section>
+          <section class="collection">
+            <div class="collection-intro">
+              <h3 data-en="Tool Set">도구 세트</h3>
+              <div>
+                <span class="collection-spec" data-en="4 tools × 5 materials · Java item models · ItemsAdder pack">도구 4종 × 재질 5종 · Java 아이템 모델 · ItemsAdder 팩</span>
+                <p data-en="Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, giving all four a consistent look. Each comes in stone, iron, gold, diamond and netherite.">곡괭이, 도끼, 괭이, 삽 모두 같은 손잡이와 보석 장식, 폼멜을 써서 한 세트처럼 통일감이 있습니다. 재질은 돌, 철, 금, 다이아, 네더라이트 5가지입니다.</p>
+                <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d" data-en="View in 3D">3D로 보기</button><button type="button" class="text-link view-toggle" data-view="sale" hidden data-en="Back to sale image">판매 이미지로 돌아가기</button></div>
+              </div>
+            </div>
+            <button type="button" class="pack-trigger model-sale" data-images="../assets/img/packs/tool-v1-sale.webp|Tool Pack v1, sale image" aria-label="Open Tool Pack v1 sale image"><span class="pack-image"><img src="../assets/img/packs/tool-v1-sale.webp" alt="Tool Pack v1 sale image" loading="lazy"></span></button>
+            <div class="mat" role="group" aria-label="Material" hidden>
+              <button type="button" data-mat="stone" aria-pressed="false" data-en="Stone">돌</button>
+              <button type="button" data-mat="iron" aria-pressed="false" data-en="Iron">철</button>
+              <button type="button" data-mat="gold" aria-pressed="false" data-en="Gold">금</button>
+              <button type="button" data-mat="diamond" aria-pressed="true" data-en="Diamond">다이아</button>
+              <button type="button" data-mat="netherite" aria-pressed="false" data-en="Netherite">네더라이트</button>
+            </div>
+            <div class="model-row" hidden>
+                <div class="model-item"><div class="model-viewer"><canvas data-model="pickaxe_diamond" data-tool="pickaxe" data-roll="0" role="img" aria-label="Pickaxe in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Pickaxe">곡괭이</div></div>
+                <div class="model-item"><div class="model-viewer"><canvas data-model="axe_diamond" data-tool="axe" data-roll="0" role="img" aria-label="Axe in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Axe">도끼</div></div>
+                <div class="model-item"><div class="model-viewer"><canvas data-model="hoe_diamond" data-tool="hoe" data-roll="0" role="img" aria-label="Hoe in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Hoe">괭이</div></div>
+                <div class="model-item"><div class="model-viewer"><canvas data-model="shovel_diamond" data-tool="shovel" data-roll="0" role="img" aria-label="Shovel in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Shovel">삽</div></div>
+            </div>
+          </section>
+        </div>
         <section class="collection">
           <div class="collection-intro">
             <h3 data-en="Medieval Set">중세 세트</h3>
@@ -964,7 +972,7 @@
     'Food Pack v1 on a white background': '음식 팩 v1 흰 배경 미리보기',
     'Food Pack v1 on a black background': '음식 팩 v1 검은 배경 미리보기',
     '29 models · all in live 3D': '모델 29개 · 모두 3D',
-    'Rogue Dagger': '도적 단검',
+    'Dagger Set': '단검 세트',
     '4 tiers · class advancement weapon · Java item models': '4단계 · 전직 무기 · Java 아이템 모델',
     "A rogue's dagger whose look changes with each class advancement or upgrade.": '도적의 단검으로, 전직 혹은 강화를 하면 외형이 바뀌는 구조입니다.',
     'Tier 1 Dagger': '1단계 단검',
