@@ -33,14 +33,15 @@ for (const [en, ko] of Object.entries(KO).sort((a, b) => b[0].length - a[0].leng
   });
 }
 
-const descKo = 'MTL Studio(미트림): 마인크래프트 리소스 외주와 판매 팩. 아이템에더용 칭호·아이콘·재료·음식 픽셀아트(도트) 팩, 블록벤치 아이템 모델링, Skript 서버 스크립트를 제작합니다.';
+const descKo = '마크(마인크래프트) 리소스 외주는 MTL Studio(미트림). 서버용 커스텀 아이템 도트·픽셀아트, 칭호·아이콘 팩, 블록벤치 3D 모델링, GUI, Skript 스크립트를 제작합니다. 아이템에더(ItemsAdder) 서버용, 디스코드로 문의 주세요.';
 head = head
   .replace('<html lang="en">', '<html lang="ko">')
-  .replace(/<title>[^<]*<\/title>/, '<title>MTL Studio | 마인크래프트 리소스 외주 · 픽셀아트 · 모델링 · 스크립트</title>')
+  .replace(/<title>[^<]*<\/title>/, '<title>마크 리소스 외주 | 마인크래프트 도트 · 모델링 · 스크립트 제작 | MTL Studio</title>')
   .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${descKo}">`)
   .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${descKo}">`)
   .replace('<link rel="canonical" href="https://mitlim.github.io/">', '<link rel="canonical" href="https://mitlim.github.io/ko/">')
   .replace('<meta property="og:url" content="https://mitlim.github.io/">', '<meta property="og:url" content="https://mitlim.github.io/ko/">')
+  .replace('<meta property="og:title" content="MTL Studio | Minecraft Resource Commissions">', '<meta property="og:title" content="MTL Studio | 마크 리소스 외주">')
   .replace('<meta property="og:locale" content="en_US">', '<meta property="og:locale" content="ko_KR">')
   .replace('<meta property="og:locale:alternate" content="ko_KR">', '<meta property="og:locale:alternate" content="en_US">')
   .replace(/"description":"[^"]*"/, `"description":"${descKo}"`)
