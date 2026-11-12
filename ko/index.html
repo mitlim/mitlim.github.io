@@ -65,6 +65,7 @@
   .section-heading { display: flex; align-items: start; justify-content: space-between; gap: 32px; margin-bottom: 48px; }
   .section-heading h2 { margin: 0; font-size: clamp(35px, 4vw, 54px); font-weight: 500; letter-spacing: -0.052em; line-height: 1.12; }
   .section-heading p { max-width: 425px; margin: 9px 0 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+  .section-heading .dated-note { display: inline-block; margin-top: 14px; padding: 7px 12px; color: var(--ink); background: var(--accent-soft); border: 1px solid var(--accent-border); font-size: 13px; line-height: 1.5; }
   html[lang="ko"] .section-heading h2, html[lang="ko"] .hero h1, html[lang="ko"] .contact-intro h2, html[lang="ko"] .about-main h2 { letter-spacing: -0.03em; }
 
   .button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 45px; padding: 0 20px; border: 1px solid var(--ink); background: var(--ink); color: white; font-size: 13px; font-weight: 600; text-align: center; transition: background .2s, color .2s; }
@@ -635,7 +636,10 @@
     <div class="container">
       <div class="section-heading">
         <h2 id="h-scripts" data-en="Scripts">스크립트</h2>
-        <p data-en="Server systems written in Skript. Click a card to play its demo video right here.">Skript로 만든 서버 시스템입니다. 카드를 누르면 이 페이지에서 바로 시연 영상이 재생됩니다.</p>
+        <div class="heading-text">
+          <p data-en="Server systems written in Skript. Click a card to play its demo video right here.">Skript로 만든 서버 시스템입니다. 카드를 누르면 이 페이지에서 바로 시연 영상이 재생됩니다.</p>
+          <p class="dated-note" data-en="These scripts were made in 2024 and have not been updated since.">아래 스크립트는 2024년에 만든 작업물로, 이후로는 업데이트하지 않았습니다.</p>
+        </div>
       </div>
       <article class="scripts-featured">
         <a class="featured-image" href="https://www.youtube.com/watch?v=8Zpa5Qo9Uf4" target="_blank" rel="noopener" aria-label="Watch the server tour">
@@ -829,6 +833,7 @@
     'Pickaxe': '곡괭이', 'Axe': '도끼', 'Hoe': '괭이', 'Shovel': '삽',
     'Medieval Set': '중세 세트',
 
+    'These scripts were made in 2024 and have not been updated since.': '아래 스크립트는 2024년에 만든 작업물로, 이후로는 업데이트하지 않았습니다.',
     'Server systems written in Skript. Click a card to play its demo video right here.': 'Skript로 만든 서버 시스템입니다. 카드를 누르면 이 페이지에서 바로 시연 영상이 재생됩니다.',
     'Featured project': '대표 프로젝트',
     'Solo-Built Server': '1인 제작 서버',
