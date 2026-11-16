@@ -316,6 +316,24 @@
 
   .furniture-sets .packs-grid { margin-top: 6px; }
 
+  .category-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .commission-image { background: var(--accent-soft); }
+  .commission-image img { width: 112px; height: 112px; object-fit: contain; }
+  .about-section .section-heading { margin-bottom: 40px; }
+  .price-list-wrap { margin-top: 80px; }
+  .price-list-title { margin: 0 0 22px; font-size: 24px; font-weight: 500; letter-spacing: -.035em; }
+  .price-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+  .price-group { padding: 22px 22px 14px; background: #fff; border: 1px solid var(--line); }
+  .price-group h3 { margin: 0 0 12px; font-size: 15px; font-weight: 700; color: var(--accent); }
+  .price-group dl { margin: 0; }
+  .price-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.5; }
+  .price-row dt { color: var(--ink); }
+  .price-row dd { margin: 0; font-weight: 700; white-space: nowrap; color: var(--ink); }
+  .price-note { margin: 18px 0 0; font-size: 12px; color: var(--muted); }
+  @media (max-width: 1100px) { .price-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 1000px) and (min-width: 761px) { .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .price-list { grid-template-columns: 1fr; } }
+
   /* Responsive */
   @media (max-width: 1000px) {
     .hero-inner { grid-template-columns: 1.5fr .6fr; gap: 25px; }
@@ -422,7 +440,7 @@
     <a href="#" class="brand" aria-label="MTL Studio, back to top"><img src="../assets/logo.png" alt=""><span>MTL Studio</span></a>
     <div class="header-right">
       <nav class="main-nav" aria-label="Site">
-        <a href="#about" data-en="About">소개</a>
+        <a href="#commission" data-en="Commission">외주</a>
         <a href="#contact" data-en="Contact">문의</a>
         <a href="https://www.youtube.com/@MITLIM98" target="_blank" rel="noopener">YouTube ↗</a>
       </nav>
@@ -467,6 +485,10 @@
           <span class="category-image script-image" aria-hidden="true"><img src="../assets/img/server-menu.png" alt=""></span>
           <span class="category-body"><h3 data-en="Scripts">스크립트</h3><p data-en="7 projects · Skript">프로젝트 7개 · Skript</p><span class="category-action" data-en="View scripts →">스크립트 보기 →</span></span>
         </a>
+        <a href="#commission" class="category-card" data-cat="commission">
+          <span class="category-image commission-image" aria-hidden="true"><img src="../assets/logo.png" alt=""></span>
+          <span class="category-body"><h3 data-en="Commission">외주</h3><p data-en="About me · process · prices">내 소개 · 진행 방식 · 가격</p><span class="category-action" data-en="View commission info →">외주 안내 보기 →</span></span>
+        </a>
       </div>
     </div>
   </section>
@@ -479,6 +501,7 @@
         <button type="button" class="filter-button" data-cat="pixel-art" aria-pressed="false" data-en="Pixel Art">도트</button>
         <button type="button" class="filter-button" data-cat="modeling" aria-pressed="false" data-en="Modeling">모델링</button>
         <button type="button" class="filter-button" data-cat="scripts" aria-pressed="false" data-en="Scripts">스크립트</button>
+        <button type="button" class="filter-button" data-cat="commission" aria-pressed="false" data-en="Commission">외주</button>
       </nav>
     </div>
   </div>
@@ -771,8 +794,14 @@
     </div>
   </section>
 
-  <section class="section about-section" id="about" aria-labelledby="h-about">
-    <div class="container about-layout">
+  <section class="section cat about-section" id="commission" aria-labelledby="h-commission">
+    <div class="container">
+      <div class="section-heading">
+        <h2 id="h-commission" data-en="Commission">외주</h2>
+        <p data-en="About me, how commissions work and my prices. Message me on Discord to get started.">제 소개와 외주 진행 방식, 가격을 정리했습니다. 디스코드로 연락 주시면 바로 시작할 수 있습니다.</p>
+      </div>
+    </div>
+    <div class="container about-layout" id="about">
       <div class="about-main">
         <span class="eyebrow" data-en="About">소개</span>
         <h2 id="h-about" data-en="About MTL Studio">MTL Studio 소개</h2>
@@ -798,6 +827,49 @@
         </ol>
         <p class="process-note" data-en="One revision is included. Further revisions cost extra.">수정은 1회 무료이고, 그 이후부터는 추가 비용이 있습니다.</p>
       </div>
+    </div>
+    <div class="container price-list-wrap">
+      <h3 class="price-list-title" data-en="Commission prices">외주 가격</h3>
+      <div class="price-list">
+        <section class="price-group">
+          <h3 data-en="Pixel icons">도트 아이콘</h3>
+          <dl>
+            <div class="price-row"><dt>16 × 16</dt><dd>₩2,000</dd></div>
+            <div class="price-row"><dt>32 × 32</dt><dd>₩2,500</dd></div>
+            <div class="price-row"><dt>48 × 48</dt><dd>₩3,500</dd></div>
+            <div class="price-row"><dt>64 × 64</dt><dd>₩5,000</dd></div>
+            <div class="price-row"><dt data-en="Rank badge (badge, icon and text)">칭호 1종 (배지·아이콘·글자)</dt><dd>₩3,000</dd></div>
+          </dl>
+        </section>
+        <section class="price-group">
+          <h3 data-en="Pixel GUI">도트 GUI</h3>
+          <dl>
+            <div class="price-row"><dt data-en="GUI quality 下">GUI 퀄리티 下</dt><dd>₩12,000~</dd></div>
+            <div class="price-row"><dt data-en="GUI quality 中">GUI 퀄리티 中</dt><dd>₩25,000~</dd></div>
+            <div class="price-row"><dt data-en="GUI quality 上">GUI 퀄리티 上</dt><dd>₩35,000~</dd></div>
+          </dl>
+        </section>
+        <section class="price-group">
+          <h3 data-en="3D models (Blockbench)">3D 모델링 (블록벤치)</h3>
+          <dl>
+            <div class="price-row"><dt data-en="Simple prop or food">간단한 소품·음식</dt><dd>₩8,000~</dd></div>
+            <div class="price-row"><dt data-en="Furniture, per piece">가구 1종</dt><dd>₩10,000~</dd></div>
+            <div class="price-row"><dt data-en="Tool or basic weapon">도구·일반 무기</dt><dd>₩15,000~</dd></div>
+            <div class="price-row"><dt data-en="Detailed weapon">고퀄 무기</dt><dd>₩30,000~</dd></div>
+          </dl>
+        </section>
+        <section class="price-group">
+          <h3 data-en="Options">추가 옵션</h3>
+          <dl>
+            <div class="price-row"><dt data-en="Icon license">아이콘 라이선스</dt><dd>+₩2,000</dd></div>
+            <div class="price-row"><dt data-en="GUI license">GUI 라이선스</dt><dd>×2</dd></div>
+            <div class="price-row"><dt data-en="3D model license">3D 모델 라이선스</dt><dd>×2</dd></div>
+            <div class="price-row"><dt data-en="ItemsAdder setup, per pack">ItemsAdder 적용 (팩당)</dt><dd>+₩5,000</dd></div>
+            <div class="price-row"><dt data-en="Revisions">수정</dt><dd data-en="1 free, then extra">1회 무료, 이후 추가 비용</dd></div>
+          </dl>
+        </section>
+      </div>
+      <p class="price-note" data-en="Prices are in Korean won (KRW) and are starting prices. The final quote depends on size and detail.">가격은 원화 기준 시작 가격이며, 크기와 디테일에 따라 최종 견적이 달라집니다.</p>
     </div>
   </section>
 
@@ -960,6 +1032,30 @@
     'Iron Dagger': '철 단검',
     'Rank Pack v1': '칭호 팩 v1',
     'About': '소개',
+    'Commission': '외주',
+    'About me · process · prices': '내 소개 · 진행 방식 · 가격',
+    'View commission info →': '외주 안내 보기 →',
+    'About me, how commissions work and my prices. Message me on Discord to get started.': '제 소개와 외주 진행 방식, 가격을 정리했습니다. 디스코드로 연락 주시면 바로 시작할 수 있습니다.',
+    'Commission prices': '외주 가격',
+    'Pixel icons': '도트 아이콘',
+    'Pixel GUI': '도트 GUI',
+    '3D models (Blockbench)': '3D 모델링 (블록벤치)',
+    'Options': '추가 옵션',
+    'Rank badge (badge, icon and text)': '칭호 1종 (배지·아이콘·글자)',
+    'GUI quality 下': 'GUI 퀄리티 下',
+    'GUI quality 中': 'GUI 퀄리티 中',
+    'GUI quality 上': 'GUI 퀄리티 上',
+    'Simple prop or food': '간단한 소품·음식',
+    'Furniture, per piece': '가구 1종',
+    'Tool or basic weapon': '도구·일반 무기',
+    'Detailed weapon': '고퀄 무기',
+    'Icon license': '아이콘 라이선스',
+    'GUI license': 'GUI 라이선스',
+    '3D model license': '3D 모델 라이선스',
+    'ItemsAdder setup, per pack': 'ItemsAdder 적용 (팩당)',
+    'Revisions': '수정',
+    '1 free, then extra': '1회 무료, 이후 추가 비용',
+    'Prices are in Korean won (KRW) and are starting prices. The final quote depends on size and detail.': '가격은 원화 기준 시작 가격이며, 크기와 디테일에 따라 최종 견적이 달라집니다.',
     'About MTL Studio': 'MTL Studio 소개',
     'MTL Studio is the shop of mitlim, a Minecraft resource creator from Korea taking commissions worldwide. I build pixel art, Blockbench models, GUIs and server scripts, and every pack is tested in game before release.': 'MTL Studio는 한국의 마인크래프트 리소스 제작자 mitlim이 운영하는 마크 리소스 외주·판매 숍입니다. 도트(픽셀아트), 블록벤치 모델링, GUI, 서버 스크립트를 만들고, 모든 팩은 출시 전에 게임에서 직접 테스트합니다.',
     'Skills': '제작 분야',
