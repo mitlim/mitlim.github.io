@@ -334,6 +334,8 @@
   @media (max-width: 1000px) and (min-width: 761px) { .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 600px) { .price-list { grid-template-columns: 1fr; } }
 
+  html[lang="ko"] .cur-usd, html:not([lang="ko"]) .cur-krw { display: none; }
+
   /* Responsive */
   @media (max-width: 1000px) {
     .hero-inner { grid-template-columns: 1.5fr .6fr; gap: 25px; }
@@ -834,40 +836,39 @@
         <section class="price-group">
           <h3>Pixel icons</h3>
           <dl>
-            <div class="price-row"><dt>16 × 16</dt><dd>₩3,000</dd></div>
-            <div class="price-row"><dt>32 × 32</dt><dd>₩3,500</dd></div>
-            <div class="price-row"><dt>48 × 48</dt><dd>₩4,500</dd></div>
-            <div class="price-row"><dt>64 × 64</dt><dd>₩6,000</dd></div>
-            <div class="price-row"><dt>Rank badge (badge, icon and text)</dt><dd>₩4,000</dd></div>
+            <div class="price-row"><dt>16 × 16</dt><dd><span class="cur-krw">₩3,000</span><span class="cur-usd">$2.5</span></dd></div>
+            <div class="price-row"><dt>32 × 32</dt><dd><span class="cur-krw">₩3,500</span><span class="cur-usd">$3</span></dd></div>
+            <div class="price-row"><dt>48 × 48</dt><dd><span class="cur-krw">₩4,500</span><span class="cur-usd">$3.5</span></dd></div>
+            <div class="price-row"><dt>64 × 64</dt><dd><span class="cur-krw">₩6,000</span><span class="cur-usd">$4.5</span></dd></div>
+            <div class="price-row"><dt>Rank badge (badge, icon and text)</dt><dd><span class="cur-krw">₩4,000</span><span class="cur-usd">$3</span></dd></div>
           </dl>
         </section>
         <section class="price-group">
           <h3>Pixel GUI</h3>
           <dl>
-            <div class="price-row"><dt>GUI, per screen</dt><dd>₩20,000~</dd></div>
+            <div class="price-row"><dt>GUI, per screen</dt><dd><span class="cur-krw">₩20,000~</span><span class="cur-usd">$15~</span></dd></div>
           </dl>
         </section>
         <section class="price-group">
           <h3>3D models (Blockbench)</h3>
           <dl>
-            <div class="price-row"><dt>Simple prop or food</dt><dd>₩8,000~</dd></div>
-            <div class="price-row"><dt>Furniture, per piece</dt><dd>₩10,000~</dd></div>
-            <div class="price-row"><dt>Tool or basic weapon</dt><dd>₩15,000~</dd></div>
-            <div class="price-row"><dt>Detailed weapon</dt><dd>₩30,000~</dd></div>
+            <div class="price-row"><dt>Simple prop or food</dt><dd><span class="cur-krw">₩8,000~</span><span class="cur-usd">$6~</span></dd></div>
+            <div class="price-row"><dt>Furniture, per piece</dt><dd><span class="cur-krw">₩10,000~</span><span class="cur-usd">$7.5~</span></dd></div>
+            <div class="price-row"><dt>Tool or basic weapon</dt><dd><span class="cur-krw">₩15,000~</span><span class="cur-usd">$11~</span></dd></div>
           </dl>
         </section>
         <section class="price-group">
           <h3>Options</h3>
           <dl>
-            <div class="price-row"><dt>Icon license</dt><dd>+₩3,000</dd></div>
+            <div class="price-row"><dt>Icon license</dt><dd><span class="cur-krw">+₩3,000</span><span class="cur-usd">+$2.5</span></dd></div>
             <div class="price-row"><dt>GUI license</dt><dd>×2</dd></div>
             <div class="price-row"><dt>3D model license</dt><dd>×2</dd></div>
-            <div class="price-row"><dt>ItemsAdder setup, per pack</dt><dd>+₩5,000</dd></div>
+            <div class="price-row"><dt>ItemsAdder setup, per pack</dt><dd><span class="cur-krw">+₩5,000</span><span class="cur-usd">+$4</span></dd></div>
             <div class="price-row"><dt>Revisions</dt><dd>1 free, then extra</dd></div>
           </dl>
         </section>
       </div>
-      <p class="price-note">Prices are in Korean won (KRW) and are starting prices. The final quote depends on size and detail.</p>
+      <p class="price-note">Prices are starting prices in US dollars, PayPal and exchange fees included. The final quote depends on size and detail.</p>
     </div>
   </section>
 
@@ -1044,14 +1045,13 @@
     'Simple prop or food': '간단한 소품·음식',
     'Furniture, per piece': '가구 1종',
     'Tool or basic weapon': '도구·일반 무기',
-    'Detailed weapon': '고퀄 무기',
     'Icon license': '아이콘 라이선스',
     'GUI license': 'GUI 라이선스',
     '3D model license': '3D 모델 라이선스',
     'ItemsAdder setup, per pack': 'ItemsAdder 적용 (팩당)',
     'Revisions': '수정',
     '1 free, then extra': '1회 무료, 이후 추가 비용',
-    'Prices are in Korean won (KRW) and are starting prices. The final quote depends on size and detail.': '가격은 원화 기준 시작 가격이며, 크기와 디테일에 따라 최종 견적이 달라집니다.',
+    'Prices are starting prices in US dollars, PayPal and exchange fees included. The final quote depends on size and detail.': '가격은 원화 기준 시작 가격이며, 크기와 디테일에 따라 최종 견적이 달라집니다.',
     'About MTL Studio': 'MTL Studio 소개',
     'MTL Studio is the shop of mitlim, a Minecraft resource creator from Korea taking commissions worldwide. I build pixel art, Blockbench models, GUIs and server scripts, and every pack is tested in game before release.': 'MTL Studio는 한국의 마인크래프트 리소스 제작자 mitlim이 운영하는 마크 리소스 외주·판매 숍입니다. 도트(픽셀아트), 블록벤치 모델링, GUI, 서버 스크립트를 만들고, 모든 팩은 출시 전에 게임에서 직접 테스트합니다.',
     'Skills': '제작 분야',
