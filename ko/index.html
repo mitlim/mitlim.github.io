@@ -336,6 +336,10 @@
 
   html[lang="ko"] .cur-usd, html:not([lang="ko"]) .cur-krw { display: none; }
 
+  .food3d-sets .packs-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 6px; }
+  @media (max-width: 1100px) { .food3d-sets .packs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .food3d-sets .packs-grid { grid-template-columns: 1fr; } }
+
   /* Responsive */
   @media (max-width: 1000px) {
     .hero-inner { grid-template-columns: 1.5fr .6fr; gap: 25px; }
@@ -735,6 +739,57 @@
           </article>
           </div>
         </section>
+        <section class="collection food3d-sets">
+          <div class="collection-intro">
+            <h3 data-en="3D Food Sets">3D 음식 세트</h3>
+            <div>
+              <span class="collection-spec" data-en="4 sets · 32 models · edible items">4세트 · 음식 32종 · 먹을 수 있는 아이템</span>
+              <p data-en="3D food you hold in your hand and can eat. Each set is themed. Click a card to see the sale image.">손에 들고 실제로 먹을 수 있는 3D 음식입니다. 세트마다 테마가 있습니다. 카드를 누르면 판매 이미지를 볼 수 있습니다.</p>
+            </div>
+          </div>
+          <div class="packs-grid">
+          <article class="pack-card">
+            <button type="button" class="pack-trigger" data-images="../assets/img/packs/food3d-v1-sale.webp|3D Food Pack v1, sale image" aria-label="Open 3D Food Pack v1 images">
+              <span class="pack-image"><img src="../assets/img/packs/food3d-v1-sale.webp" alt="3D Food Pack v1: Japanese, 8 food models" loading="lazy"></span>
+            </button>
+            <div class="pack-meta"><span class="type" data-en="3D Food">3D 음식</span><span class="pack-tags"><span class="availability-tag" data-en="Coming soon">출시 예정</span></span></div>
+            <h3 data-en="3D Food Pack v1">3D 음식 팩 v1</h3>
+            <p class="pack-spec" data-en="8 models · Japanese">음식 8종 · 일식</p>
+            <p class="pack-description" data-en="Tonkotsu ramen, grilled onigiri, takoyaki, salmon nigiri, dango, dorayaki, yakitori and taiyaki.">돈코츠라멘, 구운 주먹밥, 타코야키, 연어 니기리, 당고, 도라야키, 야키토리, 타이야키가 들어 있습니다.</p>
+            <div class="pack-footer"><div><span data-en="Tested on">테스트 환경</span><span>Minecraft 1.21.4 · Paper</span></div><div><span data-en="Plugin">지원 플러그인</span><span>ItemsAdder 4.0.17</span></div></div>
+          </article>
+          <article class="pack-card">
+            <button type="button" class="pack-trigger" data-images="../assets/img/packs/food3d-v2-sale.webp|3D Food Pack v2, sale image" aria-label="Open 3D Food Pack v2 images">
+              <span class="pack-image"><img src="../assets/img/packs/food3d-v2-sale.webp" alt="3D Food Pack v2: Diner, 8 food models" loading="lazy"></span>
+            </button>
+            <div class="pack-meta"><span class="type" data-en="3D Food">3D 음식</span><span class="pack-tags"><span class="availability-tag" data-en="Coming soon">출시 예정</span></span></div>
+            <h3 data-en="3D Food Pack v2">3D 음식 팩 v2</h3>
+            <p class="pack-spec" data-en="8 models · Diner">음식 8종 · 다이너</p>
+            <p class="pack-description" data-en="Steak, ketchup omelette, BBQ ribs, fish and chips, cheeseburger, hot dog, club sandwich and burrito.">스테이크, 케첩 오믈렛, 바비큐 립, 피시 앤 칩스, 치즈버거, 핫도그, 클럽 샌드위치, 부리토가 들어 있습니다.</p>
+            <div class="pack-footer"><div><span data-en="Tested on">테스트 환경</span><span>Minecraft 1.21.4 · Paper</span></div><div><span data-en="Plugin">지원 플러그인</span><span>ItemsAdder 4.0.17</span></div></div>
+          </article>
+          <article class="pack-card">
+            <button type="button" class="pack-trigger" data-images="../assets/img/packs/food3d-v3-sale.webp|3D Food Pack v3, sale image" aria-label="Open 3D Food Pack v3 images">
+              <span class="pack-image"><img src="../assets/img/packs/food3d-v3-sale.webp" alt="3D Food Pack v3: Korean Street Food, 8 food models" loading="lazy"></span>
+            </button>
+            <div class="pack-meta"><span class="type" data-en="3D Food">3D 음식</span><span class="pack-tags"><span class="availability-tag" data-en="Coming soon">출시 예정</span></span></div>
+            <h3 data-en="3D Food Pack v3">3D 음식 팩 v3</h3>
+            <p class="pack-spec" data-en="8 models · Korean Street Food">음식 8종 · 분식</p>
+            <p class="pack-description" data-en="Tteokbokki, gimbap, sundae, twigim, fish cake skewer, cheese corn dog, hotteok and sotteok.">떡볶이, 김밥, 순대, 모둠 튀김, 어묵 꼬치, 치즈 핫도그, 호떡, 소떡소떡이 들어 있습니다.</p>
+            <div class="pack-footer"><div><span data-en="Tested on">테스트 환경</span><span>Minecraft 1.21.4 · Paper</span></div><div><span data-en="Plugin">지원 플러그인</span><span>ItemsAdder 4.0.17</span></div></div>
+          </article>
+          <article class="pack-card">
+            <button type="button" class="pack-trigger" data-images="../assets/img/packs/food3d-v4-sale.webp|3D Food Pack v4, sale image" aria-label="Open 3D Food Pack v4 images">
+              <span class="pack-image"><img src="../assets/img/packs/food3d-v4-sale.webp" alt="3D Food Pack v4: Dessert, 8 food models" loading="lazy"></span>
+            </button>
+            <div class="pack-meta"><span class="type" data-en="3D Food">3D 음식</span><span class="pack-tags"><span class="availability-tag" data-en="Coming soon">출시 예정</span></span></div>
+            <h3 data-en="3D Food Pack v4">3D 음식 팩 v4</h3>
+            <p class="pack-spec" data-en="8 models · Dessert">음식 8종 · 디저트</p>
+            <p class="pack-description" data-en="Pancakes, waffle, strawberry tart, croissant, cream bun, crepe, macaron and an ice cream cone.">팬케이크, 와플, 딸기 타르트, 크루아상, 크림빵, 크레페, 마카롱, 아이스크림콘이 들어 있습니다.</p>
+            <div class="pack-footer"><div><span data-en="Tested on">테스트 환경</span><span>Minecraft 1.21.4 · Paper</span></div><div><span data-en="Plugin">지원 플러그인</span><span>ItemsAdder 4.0.17</span></div></div>
+          </article>
+          </div>
+        </section>
       </div>
     </div>
   </section>
@@ -1103,6 +1158,26 @@
     'Light carved-oak home furniture: dining table and chairs, a bed, wardrobe, bookcase, kitchen worktable and more.': '식탁과 의자, 침대, 옷장, 책장, 주방 작업대 등 밝은 조각 원목 느낌의 집 가구입니다.',
     'A rustic tavern set in old wood and iron: long tables, bar counters, barrels, kegs, a lantern, a chandelier and a quest board.': '긴 식탁, 바 카운터, 술통, 맥주 케그, 랜턴, 샹들리에, 의뢰 게시판까지 고목과 철물로 만든 선술집 세트입니다.',
     'A cozy cafe and bakery set: bistro tables, a coffee bar, pastry showcase, coffee machine, menu board, awning and pendant lamp.': '비스트로 테이블, 커피바, 빵 쇼케이스, 커피 머신, 메뉴판, 차양, 펜던트 램프까지 아늑한 카페·베이커리 세트입니다.',
+    '3D Food Sets': '3D 음식 세트',
+    '4 sets · 32 models · edible items': '4세트 · 음식 32종 · 먹을 수 있는 아이템',
+    '3D food you hold in your hand and can eat. Each set is themed. Click a card to see the sale image.': '손에 들고 실제로 먹을 수 있는 3D 음식입니다. 세트마다 테마가 있습니다. 카드를 누르면 판매 이미지를 볼 수 있습니다.',
+    '3D Food': '3D 음식',
+    '3D Food Pack v1': '3D 음식 팩 v1',
+    '3D Food Pack v1, sale image': '3D 음식 팩 v1 판매 이미지',
+    '3D Food Pack v2': '3D 음식 팩 v2',
+    '3D Food Pack v2, sale image': '3D 음식 팩 v2 판매 이미지',
+    '3D Food Pack v3': '3D 음식 팩 v3',
+    '3D Food Pack v3, sale image': '3D 음식 팩 v3 판매 이미지',
+    '3D Food Pack v4': '3D 음식 팩 v4',
+    '3D Food Pack v4, sale image': '3D 음식 팩 v4 판매 이미지',
+    '8 models · Japanese': '음식 8종 · 일식',
+    '8 models · Diner': '음식 8종 · 다이너',
+    '8 models · Korean Street Food': '음식 8종 · 분식',
+    '8 models · Dessert': '음식 8종 · 디저트',
+    'Tonkotsu ramen, grilled onigiri, takoyaki, salmon nigiri, dango, dorayaki, yakitori and taiyaki.': '돈코츠라멘, 구운 주먹밥, 타코야키, 연어 니기리, 당고, 도라야키, 야키토리, 타이야키가 들어 있습니다.',
+    'Steak, ketchup omelette, BBQ ribs, fish and chips, cheeseburger, hot dog, club sandwich and burrito.': '스테이크, 케첩 오믈렛, 바비큐 립, 피시 앤 칩스, 치즈버거, 핫도그, 클럽 샌드위치, 부리토가 들어 있습니다.',
+    'Tteokbokki, gimbap, sundae, twigim, fish cake skewer, cheese corn dog, hotteok and sotteok.': '떡볶이, 김밥, 순대, 모둠 튀김, 어묵 꼬치, 치즈 핫도그, 호떡, 소떡소떡이 들어 있습니다.',
+    'Pancakes, waffle, strawberry tart, croissant, cream bun, crepe, macaron and an ice cream cone.': '팬케이크, 와플, 딸기 타르트, 크루아상, 크림빵, 크레페, 마카롱, 아이스크림콘이 들어 있습니다.',
     'Rank Pack v1, sale image': '칭호 팩 v1 판매 이미지',
     'Rank Pack v1 on a white background': '칭호 팩 v1 흰 배경 미리보기',
     'Rank Pack v1 on a black background': '칭호 팩 v1 검은 배경 미리보기',
