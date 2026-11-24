@@ -336,9 +336,9 @@
 
   html[lang="ko"] .cur-usd, html:not([lang="ko"]) .cur-krw { display: none; }
 
-  .food3d-sets .packs-grid, .weapon-sets .packs-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 6px; }
-  @media (max-width: 1100px) { .food3d-sets .packs-grid, .weapon-sets .packs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 600px) { .food3d-sets .packs-grid, .weapon-sets .packs-grid { grid-template-columns: 1fr; } }
+  .food3d-sets .packs-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 6px; }
+  @media (max-width: 1100px) { .food3d-sets .packs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .food3d-sets .packs-grid { grid-template-columns: 1fr; } }
 
   /* Responsive */
   @media (max-width: 1000px) {
@@ -698,37 +698,6 @@
               <div class="model-item"><div class="model-viewer"><canvas data-model="sentinel_dagger" data-roll="0" role="img" aria-label="Iron Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Iron Dagger</div></div>
           </div>
         </section>
-        <section class="collection weapon-sets">
-          <div class="collection-intro">
-            <h3>Weapon Sets</h3>
-            <div>
-              <span class="collection-spec">2 sets · 15 models · Java item models</span>
-              <p>Medieval and fantasy weapons made as ItemsAdder packs. Click a card to see the sale image.</p>
-            </div>
-          </div>
-          <div class="packs-grid">
-          <article class="pack-card">
-            <button type="button" class="pack-trigger" data-images="assets/img/packs/medieval-v1-sale.webp|Medieval Weapon Pack v1, sale image" aria-label="Open Medieval Weapon Pack v1 images">
-              <span class="pack-image"><img src="assets/img/packs/medieval-v1-sale.webp" alt="Medieval Weapon Pack v1: Medieval Knight, 9 weapon models" loading="lazy"></span>
-            </button>
-            <div class="pack-meta"><span class="type">3D Weapons</span><span class="pack-tags"><span class="availability-tag">Coming soon</span></span></div>
-            <h3>Medieval Weapon Pack v1</h3>
-            <p class="pack-spec">9 models · Medieval Knight</p>
-            <p class="pack-description">Longsword, dagger, battle axe, spear, poleaxe, war hammer, scimitar, rapier and mace, all with crest details.</p>
-            <div class="pack-footer"><div><span>Tested on</span><span>Minecraft 1.21.4 · Paper</span></div><div><span>Plugin</span><span>ItemsAdder 4.0.17</span></div></div>
-          </article>
-          <article class="pack-card">
-            <button type="button" class="pack-trigger" data-images="assets/img/packs/fantasy-v1-sale.webp|Fantasy Weapon Pack v1, sale image" aria-label="Open Fantasy Weapon Pack v1 images">
-              <span class="pack-image"><img src="assets/img/packs/fantasy-v1-sale.webp" alt="Fantasy Weapon Pack v1: Fantasy, 6 weapon models" loading="lazy"></span>
-            </button>
-            <div class="pack-meta"><span class="type">3D Weapons</span><span class="pack-tags"><span class="availability-tag">Coming soon</span></span></div>
-            <h3>Fantasy Weapon Pack v1</h3>
-            <p class="pack-spec">6 models · Fantasy</p>
-            <p class="pack-description">Jade dagger, frost war hammer, emerald staff, lava sword, a flame bow with 3 draw stages and a crystal greatsword.</p>
-            <div class="pack-footer"><div><span>Tested on</span><span>Minecraft 1.21.4 · Paper</span></div><div><span>Plugin</span><span>ItemsAdder 4.0.17</span></div></div>
-          </article>
-          </div>
-        </section>
         <section class="collection furniture-sets">
           <div class="collection-intro">
             <h3>Furniture Sets</h3>
@@ -774,7 +743,7 @@
           <div class="collection-intro">
             <h3>3D Food Sets</h3>
             <div>
-              <span class="collection-spec">7 sets · 56 models · edible items</span>
+              <span class="collection-spec">4 sets · 32 models · edible items</span>
               <p>3D food you hold in your hand and can eat. Each set is themed. Click a card to see the sale image.</p>
             </div>
           </div>
@@ -817,36 +786,6 @@
             <h3>3D Food Pack v4</h3>
             <p class="pack-spec">8 models · Dessert</p>
             <p class="pack-description">Pancakes, waffle, strawberry tart, croissant, cream bun, crepe, macaron and an ice cream cone.</p>
-            <div class="pack-footer"><div><span>Tested on</span><span>Minecraft 1.21.4 · Paper</span></div><div><span>Plugin</span><span>ItemsAdder 4.0.17</span></div></div>
-          </article>
-          <article class="pack-card">
-            <button type="button" class="pack-trigger" data-images="assets/img/packs/food3d-v5-sale.webp|3D Food Pack v5, sale image" aria-label="Open 3D Food Pack v5 images">
-              <span class="pack-image"><img src="assets/img/packs/food3d-v5-sale.webp" alt="3D Food Pack v5: Black Cat Cafe, 8 food models" loading="lazy"></span>
-            </button>
-            <div class="pack-meta"><span class="type">3D Food</span><span class="pack-tags"><span class="availability-tag">Coming soon</span></span></div>
-            <h3>3D Food Pack v5</h3>
-            <p class="pack-spec">8 models · Black Cat Cafe</p>
-            <p class="pack-description">Black cat themed cafe food: mousse, curry rice, pancakes, berry tart, donut, cream bun, macaron and a matcha sandwich.</p>
-            <div class="pack-footer"><div><span>Tested on</span><span>Minecraft 1.21.4 · Paper</span></div><div><span>Plugin</span><span>ItemsAdder 4.0.17</span></div></div>
-          </article>
-          <article class="pack-card">
-            <button type="button" class="pack-trigger" data-images="assets/img/packs/food3d-v6-sale.webp|3D Food Pack v6, sale image" aria-label="Open 3D Food Pack v6 images">
-              <span class="pack-image"><img src="assets/img/packs/food3d-v6-sale.webp" alt="3D Food Pack v6: Dessert II, 8 food models" loading="lazy"></span>
-            </button>
-            <div class="pack-meta"><span class="type">3D Food</span><span class="pack-tags"><span class="availability-tag">Coming soon</span></span></div>
-            <h3>3D Food Pack v6</h3>
-            <p class="pack-spec">8 models · Dessert II</p>
-            <p class="pack-description">Tiramisu, basque cheesecake, apple pie, brownie, eclair, cinnamon roll, churros and a chocolate chip cookie.</p>
-            <div class="pack-footer"><div><span>Tested on</span><span>Minecraft 1.21.4 · Paper</span></div><div><span>Plugin</span><span>ItemsAdder 4.0.17</span></div></div>
-          </article>
-          <article class="pack-card">
-            <button type="button" class="pack-trigger" data-images="assets/img/packs/food3d-v7-sale.webp|3D Food Pack v7, sale image" aria-label="Open 3D Food Pack v7 images">
-              <span class="pack-image"><img src="assets/img/packs/food3d-v7-sale.webp" alt="3D Food Pack v7: Chinese, 8 food models" loading="lazy"></span>
-            </button>
-            <div class="pack-meta"><span class="type">3D Food</span><span class="pack-tags"><span class="availability-tag">Coming soon</span></span></div>
-            <h3>3D Food Pack v7</h3>
-            <p class="pack-spec">8 models · Chinese</p>
-            <p class="pack-description">Jajangmyeon, shrimp fried rice, sweet and sour pork, mapo tofu, dumplings, spring rolls, flower buns and sesame balls.</p>
             <div class="pack-footer"><div><span>Tested on</span><span>Minecraft 1.21.4 · Paper</span></div><div><span>Plugin</span><span>ItemsAdder 4.0.17</span></div></div>
           </article>
           </div>
@@ -1219,33 +1158,9 @@
     'A rustic tavern set in old wood and iron: long tables, bar counters, barrels, kegs, a lantern, a chandelier and a quest board.': '긴 식탁, 바 카운터, 술통, 맥주 케그, 랜턴, 샹들리에, 의뢰 게시판까지 고목과 철물로 만든 선술집 세트입니다.',
     'A cozy cafe and bakery set: bistro tables, a coffee bar, pastry showcase, coffee machine, menu board, awning and pendant lamp.': '비스트로 테이블, 커피바, 빵 쇼케이스, 커피 머신, 메뉴판, 차양, 펜던트 램프까지 아늑한 카페·베이커리 세트입니다.',
     '3D Food Sets': '3D 음식 세트',
-    '7 sets · 56 models · edible items': '7세트 · 음식 56종 · 먹을 수 있는 아이템',
+    '4 sets · 32 models · edible items': '4세트 · 음식 32종 · 먹을 수 있는 아이템',
     '3D food you hold in your hand and can eat. Each set is themed. Click a card to see the sale image.': '손에 들고 실제로 먹을 수 있는 3D 음식입니다. 세트마다 테마가 있습니다. 카드를 누르면 판매 이미지를 볼 수 있습니다.',
     '3D Food': '3D 음식',
-    'Weapon Sets': '무기 세트',
-    '2 sets · 15 models · Java item models': '2세트 · 무기 15종 · Java 아이템 모델',
-    'Medieval and fantasy weapons made as ItemsAdder packs. Click a card to see the sale image.': 'ItemsAdder 팩으로 만든 중세·판타지 무기 세트입니다. 카드를 누르면 판매 이미지를 볼 수 있습니다.',
-    '3D Weapons': '3D 무기',
-    'Medieval Weapon Pack v1': '중세 무기 팩 v1',
-    'Medieval Weapon Pack v1, sale image': '중세 무기 팩 v1 판매 이미지',
-    '9 models · Medieval Knight': '무기 9종 · 중세 기사',
-    'Longsword, dagger, battle axe, spear, poleaxe, war hammer, scimitar, rapier and mace, all with crest details.': '롱소드, 단검, 전투도끼, 창, 폴액스, 전투망치, 곡도, 레이피어, 메이스까지 문장 장식이 들어간 기사 무기입니다.',
-    'Fantasy Weapon Pack v1': '판타지 무기 팩 v1',
-    'Fantasy Weapon Pack v1, sale image': '판타지 무기 팩 v1 판매 이미지',
-    '6 models · Fantasy': '무기 6종 · 판타지',
-    'Jade dagger, frost war hammer, emerald staff, lava sword, a flame bow with 3 draw stages and a crystal greatsword.': '비취 단검, 얼음 전투망치, 에메랄드 지팡이, 용암 황금검, 당기기 3단계가 있는 화염활, 결정 대검이 들어 있습니다.',
-    '3D Food Pack v5': '3D 음식 팩 v5',
-    '3D Food Pack v5, sale image': '3D 음식 팩 v5 판매 이미지',
-    '8 models · Black Cat Cafe': '음식 8종 · 검은 고양이 카페',
-    'Black cat themed cafe food: mousse, curry rice, pancakes, berry tart, donut, cream bun, macaron and a matcha sandwich.': '검은 고양이 테마 카페 음식입니다. 무스, 카레라이스, 팬케이크, 베리 타르트, 도넛, 크림빵, 마카롱, 말차 샌드가 들어 있습니다.',
-    '3D Food Pack v6': '3D 음식 팩 v6',
-    '3D Food Pack v6, sale image': '3D 음식 팩 v6 판매 이미지',
-    '8 models · Dessert II': '음식 8종 · 디저트 2',
-    'Tiramisu, basque cheesecake, apple pie, brownie, eclair, cinnamon roll, churros and a chocolate chip cookie.': '티라미수, 바스크 치즈케이크, 애플파이, 브라우니, 에클레어, 시나몬 롤, 츄러스, 초코칩 쿠키가 들어 있습니다.',
-    '3D Food Pack v7': '3D 음식 팩 v7',
-    '3D Food Pack v7, sale image': '3D 음식 팩 v7 판매 이미지',
-    '8 models · Chinese': '음식 8종 · 중식',
-    'Jajangmyeon, shrimp fried rice, sweet and sour pork, mapo tofu, dumplings, spring rolls, flower buns and sesame balls.': '짜장면, 새우 볶음밥, 탕수육, 마파두부, 왕만두, 춘권, 꽃빵, 참깨볼이 들어 있습니다.',
     'Dagger Pack v1, sale image': '단검 팩 v1 판매 이미지',
     'Dagger Set': '단검 세트',
     '4 tiers · class advancement weapon · Java item models': '4단계 · 전직 무기 · Java 아이템 모델',
