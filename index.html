@@ -425,7 +425,12 @@
 
   /* featured 3D viewers take the same 9:10 box as the sale image they replace */
   .models-featured .model-card .model-viewer { height: auto; aspect-ratio: 9 / 10; }
-  /* Dagger Set / Tool Set side by side; in each, the 3D grid (2 x 2) fills the same 9:10 box as the sale image */
+  /* Tool Set on its own: text on the left, sale image / 3D grid on the right at the same size as before */
+  .tool-solo { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); column-gap: 40px; align-items: start; }
+  .tool-solo > * { min-width: 0; grid-column: 2; }
+  .tool-solo > .collection-intro { grid-column: 1; grid-row: 1 / span 3; grid-template-columns: 1fr; gap: 12px; }
+  @media (max-width: 760px) { .tool-solo { grid-template-columns: minmax(0,1fr); } .tool-solo > *, .tool-solo > .collection-intro { grid-column: 1; grid-row: auto; } }
+  /* (old) Dagger Set / Tool Set pair layout */
   .collection-pair { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); column-gap: 40px; row-gap: 0; border-top: 1px solid var(--line); }
   .collection-pair .collection { border-top: 0; min-width: 0; display: grid; grid-row: span 3; grid-template-rows: subgrid; grid-template-columns: minmax(0,1fr); align-content: start; }
   .collection-pair .collection > * { min-width: 0; }
@@ -642,49 +647,30 @@
           </article>
       </div>
       <div class="model-collections">
-        <div class="collection-pair">
-          <section class="collection">
-            <div class="collection-intro">
-              <h3>Dagger Set</h3>
-              <div>
-                <span class="collection-spec">4 tiers · class advancement weapon · Java item models</span><span class="price-tag">$7.99</span>
-                <p>A rogue's dagger whose look changes with each class advancement or upgrade.</p>
-                <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d">View in 3D</button><button type="button" class="text-link view-toggle" data-view="sale" hidden>Back to sale image</button></div>
-              </div>
+        <section class="collection tool-solo">
+          <div class="collection-intro">
+            <h3>Tool Set</h3>
+            <div>
+              <span class="collection-spec">4 tools × 5 materials · Java item models · ItemsAdder pack</span><span class="price-tag">$8.99</span>
+              <p>Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, giving all four a consistent look. Each comes in stone, iron, gold, diamond and netherite.</p>
+              <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d">View in 3D</button><button type="button" class="text-link view-toggle" data-view="sale" hidden>Back to sale image</button></div>
             </div>
-            <button type="button" class="pack-trigger model-sale" data-images="assets/img/packs/dagger-v1-sale.webp|Dagger Pack v1, sale image" aria-label="Open Dagger Pack v1 sale image"><span class="pack-image"><img src="assets/img/packs/dagger-v1-sale.webp" alt="Dagger Pack v1 sale image" loading="lazy"></span></button>
-            <div class="model-row" hidden>
-                <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_1" data-roll="0" role="img" aria-label="Tier 1 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Tier 1 Dagger</div></div>
-                <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_2" data-roll="0" role="img" aria-label="Tier 2 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Tier 2 Dagger</div></div>
-                <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_3" data-roll="0" role="img" aria-label="Tier 3 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Tier 3 Dagger</div></div>
-                <div class="model-item"><div class="model-viewer"><canvas data-model="rogue_4" data-roll="0" role="img" aria-label="Tier 4 Dagger in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Tier 4 Dagger</div></div>
-            </div>
-          </section>
-          <section class="collection">
-            <div class="collection-intro">
-              <h3>Tool Set</h3>
-              <div>
-                <span class="collection-spec">4 tools × 5 materials · Java item models · ItemsAdder pack</span><span class="price-tag">$8.99</span>
-                <p>Pickaxe, axe, hoe and shovel share one handle, gem collar and pommel, giving all four a consistent look. Each comes in stone, iron, gold, diamond and netherite.</p>
-                <div class="view-toggles"><button type="button" class="text-link view-toggle" data-view="3d">View in 3D</button><button type="button" class="text-link view-toggle" data-view="sale" hidden>Back to sale image</button></div>
-              </div>
-            </div>
-            <button type="button" class="pack-trigger model-sale" data-images="assets/img/packs/tool-v1-sale.webp|Tool Pack v1, sale image" aria-label="Open Tool Pack v1 sale image"><span class="pack-image"><img src="assets/img/packs/tool-v1-sale.webp" alt="Tool Pack v1 sale image" loading="lazy"></span></button>
-            <div class="mat" role="group" aria-label="Material" hidden>
-              <button type="button" data-mat="stone" aria-pressed="false">Stone</button>
-              <button type="button" data-mat="iron" aria-pressed="false">Iron</button>
-              <button type="button" data-mat="gold" aria-pressed="false">Gold</button>
-              <button type="button" data-mat="diamond" aria-pressed="true">Diamond</button>
-              <button type="button" data-mat="netherite" aria-pressed="false">Netherite</button>
-            </div>
-            <div class="model-row" hidden>
-                <div class="model-item"><div class="model-viewer"><canvas data-model="pickaxe_diamond" data-tool="pickaxe" data-roll="0" role="img" aria-label="Pickaxe in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Pickaxe</div></div>
-                <div class="model-item"><div class="model-viewer"><canvas data-model="axe_diamond" data-tool="axe" data-roll="0" role="img" aria-label="Axe in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Axe</div></div>
-                <div class="model-item"><div class="model-viewer"><canvas data-model="hoe_diamond" data-tool="hoe" data-roll="0" role="img" aria-label="Hoe in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Hoe</div></div>
-                <div class="model-item"><div class="model-viewer"><canvas data-model="shovel_diamond" data-tool="shovel" data-roll="0" role="img" aria-label="Shovel in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Shovel</div></div>
-            </div>
-          </section>
-        </div>
+          </div>
+          <button type="button" class="pack-trigger model-sale" data-images="assets/img/packs/tool-v1-sale.webp|Tool Pack v1, sale image" aria-label="Open Tool Pack v1 sale image"><span class="pack-image"><img src="assets/img/packs/tool-v1-sale.webp" alt="Tool Pack v1 sale image" loading="lazy"></span></button>
+          <div class="mat" role="group" aria-label="Material" hidden>
+            <button type="button" data-mat="stone" aria-pressed="false">Stone</button>
+            <button type="button" data-mat="iron" aria-pressed="false">Iron</button>
+            <button type="button" data-mat="gold" aria-pressed="false">Gold</button>
+            <button type="button" data-mat="diamond" aria-pressed="true">Diamond</button>
+            <button type="button" data-mat="netherite" aria-pressed="false">Netherite</button>
+          </div>
+          <div class="model-row" hidden>
+              <div class="model-item"><div class="model-viewer"><canvas data-model="pickaxe_diamond" data-tool="pickaxe" data-roll="0" role="img" aria-label="Pickaxe in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Pickaxe</div></div>
+              <div class="model-item"><div class="model-viewer"><canvas data-model="axe_diamond" data-tool="axe" data-roll="0" role="img" aria-label="Axe in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Axe</div></div>
+              <div class="model-item"><div class="model-viewer"><canvas data-model="hoe_diamond" data-tool="hoe" data-roll="0" role="img" aria-label="Hoe in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Hoe</div></div>
+              <div class="model-item"><div class="model-viewer"><canvas data-model="shovel_diamond" data-tool="shovel" data-roll="0" role="img" aria-label="Shovel in 3D. Drag to rotate."></canvas><span class="viewer-hint">↔ Drag</span></div><div class="model-caption">Shovel</div></div>
+          </div>
+        </section>
         <section class="collection">
           <div class="collection-intro">
             <h3>Medieval Set</h3>
@@ -702,7 +688,7 @@
           <div class="collection-intro">
             <h3>Furniture Sets</h3>
             <div>
-              <span class="collection-spec">3 sets · 54 models · ItemsAdder furniture</span>
+              <span class="collection-spec">3 sets · 53 models · ItemsAdder furniture</span>
               <p>Placeable 3D furniture. Chairs and benches can be sat on, and lamps give off real light. Click a card to see the sale image.</p>
             </div>
           </div>
@@ -729,12 +715,12 @@
           </article>
           <article class="pack-card">
             <button type="button" class="pack-trigger" data-images="assets/img/packs/furniture-v3-sale.webp|Furniture Pack v3, sale image" aria-label="Open Furniture Pack v3 images">
-              <span class="pack-image"><img src="assets/img/packs/furniture-v3-sale.webp" alt="Furniture Pack v3: Cozy Cafe Bakery, 18 furniture models" loading="lazy"></span>
+              <span class="pack-image"><img src="assets/img/packs/furniture-v3-sale.webp" alt="Furniture Pack v3: Cozy Cafe Bakery, 17 furniture models" loading="lazy"></span>
             </button>
             <div class="pack-meta"><span class="type">3D Furniture</span><span class="pack-tags"><span class="price-tag">$9.99</span><span class="availability-tag">Coming soon</span></span></div>
             <h3>Furniture Pack v3</h3>
-            <p class="pack-spec">18 models · Cozy Cafe Bakery · 2 sittable · 1 light</p>
-            <p class="pack-description">A cozy cafe and bakery set: bistro tables, a coffee bar, pastry showcase, coffee machine, menu board, awning and pendant lamp.</p>
+            <p class="pack-spec">17 models · Cozy Cafe Bakery · 2 sittable · 1 light</p>
+            <p class="pack-description">A cozy cafe and bakery set: bistro tables, a coffee bar, pastry showcase, coffee machine, cash register, awning and pendant lamp.</p>
             <div class="pack-footer"><div><span>Tested on</span><span>Minecraft 1.21.4 · Paper</span></div><div><span>Plugin</span><span>ItemsAdder 4.0.17</span></div></div>
           </article>
           </div>
@@ -1140,10 +1126,9 @@
     'Weapon Pack v1, sale image': '무기 팩 v1 판매 이미지',
     'Weapon Pack v2, sale image': '무기 팩 v2 판매 이미지',
     'Weapon Pack v3, sale image': '무기 팩 v3 판매 이미지',
-    'Dagger Pack v1, sale image': '단검 팩 v1 판매 이미지',
     'Tool Pack v1, sale image': '도구 팩 v1 판매 이미지',
     'Furniture Sets': '가구 세트',
-    '3 sets · 54 models · ItemsAdder furniture': '3세트 · 가구 54종 · ItemsAdder 가구',
+    '3 sets · 53 models · ItemsAdder furniture': '3세트 · 가구 53종 · ItemsAdder 가구',
     'Placeable 3D furniture. Chairs and benches can be sat on, and lamps give off real light. Click a card to see the sale image.': '설치해서 쓰는 3D 가구입니다. 의자와 벤치에는 앉을 수 있고, 조명은 실제로 빛이 납니다. 카드를 누르면 판매 이미지를 볼 수 있습니다.',
     '3D Furniture': '3D 가구',
     'Furniture Pack v1': '가구 팩 v1',
@@ -1154,10 +1139,10 @@
     'Furniture Pack v3, sale image': '가구 팩 v3 판매 이미지',
     '18 models · Bright Carved Oak · 4 sittable': '가구 18종 · 밝은 조각 원목 · 앉기 4종',
     '18 models · Old Wood Tavern · 3 sittable · 2 lights': '가구 18종 · 고목 철물 선술집 · 앉기 3종 · 조명 2종',
-    '18 models · Cozy Cafe Bakery · 2 sittable · 1 light': '가구 18종 · 코지 카페 베이커리 · 앉기 2종 · 조명 1종',
+    '17 models · Cozy Cafe Bakery · 2 sittable · 1 light': '가구 17종 · 코지 카페 베이커리 · 앉기 2종 · 조명 1종',
     'Light carved-oak home furniture: dining table and chairs, a bed, wardrobe, bookcase, kitchen worktable and more.': '식탁과 의자, 침대, 옷장, 책장, 주방 작업대 등 밝은 조각 원목 느낌의 집 가구입니다.',
     'A rustic tavern set in old wood and iron: long tables, bar counters, barrels, kegs, a lantern, a chandelier and a quest board.': '긴 식탁, 바 카운터, 술통, 맥주 케그, 랜턴, 샹들리에, 의뢰 게시판까지 고목과 철물로 만든 선술집 세트입니다.',
-    'A cozy cafe and bakery set: bistro tables, a coffee bar, pastry showcase, coffee machine, menu board, awning and pendant lamp.': '비스트로 테이블, 커피바, 빵 쇼케이스, 커피 머신, 메뉴판, 차양, 펜던트 램프까지 아늑한 카페·베이커리 세트입니다.',
+    'A cozy cafe and bakery set: bistro tables, a coffee bar, pastry showcase, coffee machine, cash register, awning and pendant lamp.': '비스트로 테이블, 커피바, 빵 쇼케이스, 커피 머신, 계산대, 차양, 펜던트 램프까지 아늑한 카페·베이커리 세트입니다.',
     '3D Food Sets': '3D 음식 세트',
     '4 sets · 32 models · edible items': '4세트 · 음식 32종 · 먹을 수 있는 아이템',
     '3D food you hold in your hand and can eat. Each set is themed. Click a card to see the sale image.': '손에 들고 실제로 먹을 수 있는 3D 음식입니다. 세트마다 테마가 있습니다. 카드를 누르면 판매 이미지를 볼 수 있습니다.',
@@ -1206,13 +1191,6 @@
     'Food Pack v1 on a white background': '음식 팩 v1 흰 배경 미리보기',
     'Food Pack v1 on a black background': '음식 팩 v1 검은 배경 미리보기',
     '29 models · all in live 3D': '모델 29개 · 모두 3D',
-    'Dagger Set': '단검 세트',
-    '4 tiers · class advancement weapon · Java item models': '4단계 · 전직 무기 · Java 아이템 모델',
-    "A rogue's dagger whose look changes with each class advancement or upgrade.": '도적의 단검으로, 전직 혹은 강화를 하면 외형이 바뀌는 구조입니다.',
-    'Tier 1 Dagger': '1단계 단검',
-    'Tier 2 Dagger': '2단계 단검',
-    'Tier 3 Dagger': '3단계 단검',
-    'Tier 4 Dagger': '4단계 단검',
   };
   let lang = 'en';
   const t = s => (lang === 'ko' && KO[s.trim()]) || s;
