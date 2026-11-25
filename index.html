@@ -316,7 +316,11 @@
 
   .furniture-sets .packs-grid { margin-top: 6px; }
 
-  .category-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .category-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .cobble-image { background: #f3f0fa; }
+  .cobble-soon { padding: 8px 14px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+  .cobble-empty { display: grid; justify-items: start; gap: 10px; padding: 36px 32px; border: 1px dashed var(--line); background: var(--surface); }
+  .cobble-empty p { margin: 0; color: var(--muted); }
   .commission-image { background: var(--accent-soft); }
   .commission-image img { width: 112px; height: 112px; object-fit: contain; }
   .about-section .section-heading { margin-bottom: 40px; }
@@ -491,6 +495,10 @@
           <span class="category-image script-image" aria-hidden="true"><img src="assets/img/server-menu.png" alt=""></span>
           <span class="category-body"><h3>Scripts</h3><p>7 projects · Skript</p><span class="category-action">View scripts →</span></span>
         </a>
+        <a href="#cobblemon" class="category-card" data-cat="cobblemon">
+          <span class="category-image cobble-image" aria-hidden="true"><span class="cobble-soon">Coming soon</span></span>
+          <span class="category-body"><h3>Cobblemon</h3><p>Pokémon skins · coming soon</p><span class="category-action">View Cobblemon →</span></span>
+        </a>
         <a href="#commission" class="category-card" data-cat="commission">
           <span class="category-image commission-image" aria-hidden="true"><img src="assets/logo.png" alt=""></span>
           <span class="category-body"><h3>Commission</h3><p>About me · process · prices</p><span class="category-action">View commission info →</span></span>
@@ -507,6 +515,7 @@
         <button type="button" class="filter-button" data-cat="pixel-art" aria-pressed="false">Pixel Art</button>
         <button type="button" class="filter-button" data-cat="modeling" aria-pressed="false">Modeling</button>
         <button type="button" class="filter-button" data-cat="scripts" aria-pressed="false">Scripts</button>
+        <button type="button" class="filter-button" data-cat="cobblemon" aria-pressed="false">Cobblemon</button>
         <button type="button" class="filter-button" data-cat="commission" aria-pressed="false">Commission</button>
       </nav>
     </div>
@@ -858,6 +867,16 @@
     </div>
   </section>
 
+  <section class="section cat" id="cobblemon" aria-labelledby="h-cobblemon">
+    <div class="container">
+      <div class="section-heading">
+        <h2 id="h-cobblemon">Cobblemon</h2>
+        <p>Custom Pokémon skins for Cobblemon servers. New work is on the way.</p>
+      </div>
+      <div class="cobble-empty"><span class="availability-tag">Coming soon</span><p>The first skins will be posted here soon.</p></div>
+    </div>
+  </section>
+
   <section class="section cat about-section" id="commission" aria-labelledby="h-commission">
     <div class="container">
       <div class="section-heading">
@@ -1092,6 +1111,11 @@
     'Rank Pack v1': '칭호 팩 v1',
     'About': '소개',
     'Commission': '외주',
+    'Cobblemon': '코블몬',
+    'Pokémon skins · coming soon': '포켓몬 스킨 · 준비 중',
+    'View Cobblemon →': '코블몬 보기 →',
+    'Custom Pokémon skins for Cobblemon servers. New work is on the way.': '코블몬 서버용 포켓몬 커스텀 스킨입니다. 새 작업물을 준비하고 있습니다.',
+    'The first skins will be posted here soon.': '첫 스킨 작업물이 곧 이곳에 올라옵니다.',
     'About me · process · prices': '내 소개 · 진행 방식 · 가격',
     'View commission info →': '외주 안내 보기 →',
     'About me, how commissions work and my prices. Message me on Discord to get started.': '제 소개와 외주 진행 방식, 가격을 정리했습니다. 디스코드로 연락 주시면 바로 시작할 수 있습니다.',
