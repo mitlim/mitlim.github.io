@@ -1481,10 +1481,20 @@
     return tex;
   }
 
+  // One shared WebGL renderer draws every viewer and copies the frame into each 2D canvas.
+  // Browsers keep only ~16 WebGL contexts per page, so one context per canvas made the oldest ones go blank.
+  let shared = null;
+  function sharedRenderer() {
+    if (!shared) {
+      shared = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+      shared.outputEncoding = THREE.sRGBEncoding;
+    }
+    return shared;
+  }
+
   function initViewer(canvas) {
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-    renderer.outputEncoding = THREE.sRGBEncoding;
+    const renderer = sharedRenderer();
+    const ctx = canvas.getContext('2d');
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(24, 1, 1, 2000);
     scene.add(new THREE.AmbientLight(0xffffff, 0.62));
@@ -1523,12 +1533,18 @@
     const d2r = Math.PI / 180;
     function draw() {
       pivot.rotation.set(pose.tilt * d2r, pose.spin * d2r, pose.roll * d2r);
+      if (!canvas.width || !canvas.height) return;
+      if (renderer.domElement.width !== canvas.width || renderer.domElement.height !== canvas.height) renderer.setSize(canvas.width, canvas.height, false);
       renderer.render(scene, camera);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(renderer.domElement, 0, 0);
     }
     function resize() {
       const w = canvas.clientWidth, h = canvas.clientHeight;
       if (!w || !h) return;
-      renderer.setSize(w, h, false);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
       camera.aspect = w / h;
       const dist = radius / Math.tan(camera.fov * Math.PI / 360) / Math.min(1, w / h) * 1.05;
       camera.position.set(0, 0, dist);
