@@ -33,7 +33,7 @@ for (const [en, ko] of Object.entries(KO).sort((a, b) => b[0].length - a[0].leng
   });
 }
 
-const descKo = '마크(마인크래프트) 리소스 외주는 MTL Studio(미트림). 서버용 커스텀 아이템 도트·픽셀아트, 칭호·아이콘 팩, 블록벤치 3D 모델링, GUI, Skript 스크립트를 제작합니다. 아이템에더(ItemsAdder) 서버용, 디스코드로 문의 주세요.';
+const descKo = '마크(마인크래프트) 리소스 외주는 MTL Studio(미트림). 서버용 커스텀 아이템 도트·픽셀아트, 칭호·아이콘 팩, 블록벤치 3D 모델링, Skript 스크립트를 제작합니다. 아이템에더(ItemsAdder) 서버용, 디스코드로 문의 주세요.';
 head = head
   .replace('<html lang="en">', '<html lang="ko">')
   .replace(/<title>[^<]*<\/title>/, '<title>마크 리소스 외주 | 마인크래프트 도트 · 모델링 · 스크립트 제작 | MTL Studio</title>')
