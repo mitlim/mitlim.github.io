@@ -488,13 +488,13 @@
           <span class="category-image model-image" aria-hidden="true"><canvas class="pick-canvas" data-model="azure" data-roll="135"></canvas></span>
           <span class="category-body"><h3 data-en="Modeling">모델링</h3><p data-en="29 models · all viewable in 3D">모델 29개 · 전부 3D로 돌려 보기</p><span class="category-action" data-en="View models →">모델링 보기 →</span></span>
         </a>
+        <a href="#cobblemon" class="category-card" data-cat="cobblemon">
+          <span class="category-image model-image" aria-hidden="true"><canvas class="pick-canvas" data-model="starlight_gengar" data-roll="0"></canvas></span>
+          <span class="category-body"><h3 data-en="Cobblemon">코블몬</h3><p data-en="4 Pokémon skins · portfolio">포켓몬 스킨 4종 · 포트폴리오</p><span class="category-action" data-en="View Cobblemon →">코블몬 보기 →</span></span>
+        </a>
         <a href="#scripts" class="category-card" data-cat="scripts">
           <span class="category-image script-image" aria-hidden="true"><img src="../assets/img/server-menu.png" alt=""></span>
           <span class="category-body"><h3 data-en="Scripts">스크립트</h3><p data-en="7 projects · Skript">프로젝트 7개 · Skript</p><span class="category-action" data-en="View scripts →">스크립트 보기 →</span></span>
-        </a>
-        <a href="#cobblemon" class="category-card" data-cat="cobblemon">
-          <span class="category-image model-image" aria-hidden="true"><canvas class="pick-canvas" data-model="starlight_gengar" data-roll="0"></canvas></span>
-          <span class="category-body"><h3 data-en="Cobblemon">코블몬</h3><p data-en="1 pack · 4 Pokémon skins">1팩 · 포켓몬 스킨 4종</p><span class="category-action" data-en="View Cobblemon →">코블몬 보기 →</span></span>
         </a>
         <a href="#commission" class="category-card" data-cat="commission">
           <span class="category-image commission-image" aria-hidden="true"><img src="../assets/logo.png" alt=""></span>
@@ -511,8 +511,8 @@
         <button type="button" class="filter-button" data-cat="all" aria-pressed="true" data-en="Show all">전체 보기</button>
         <button type="button" class="filter-button" data-cat="pixel-art" aria-pressed="false" data-en="Pixel Art">도트</button>
         <button type="button" class="filter-button" data-cat="modeling" aria-pressed="false" data-en="Modeling">모델링</button>
-        <button type="button" class="filter-button" data-cat="scripts" aria-pressed="false" data-en="Scripts">스크립트</button>
         <button type="button" class="filter-button" data-cat="cobblemon" aria-pressed="false" data-en="Cobblemon">코블몬</button>
+        <button type="button" class="filter-button" data-cat="scripts" aria-pressed="false" data-en="Scripts">스크립트</button>
         <button type="button" class="filter-button" data-cat="commission" aria-pressed="false" data-en="Commission">외주</button>
       </nav>
     </div>
@@ -807,6 +807,26 @@
     </div>
   </section>
 
+  <section class="section cat" id="cobblemon" aria-labelledby="h-cobblemon">
+    <div class="container">
+      <div class="section-heading">
+        <h2 id="h-cobblemon" data-en="Cobblemon">코블몬</h2>
+        <p data-en="Custom Pokémon skins for Cobblemon. Portfolio pieces, not for sale.">코블몬용 포켓몬 커스텀 스킨입니다. 포트폴리오 작품이며 판매하지 않습니다.</p>
+      </div>
+      <div class="model-collections">
+        <section class="collection">
+          <div class="model-row">
+              <div class="model-item"><div class="model-viewer"><canvas data-model="starlight_piplup" data-roll="0" role="img" aria-label="Piplup Last Train Conductor in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Piplup Last Train Conductor">팽도리 막차 차장</div></div>
+              <div class="model-item"><div class="model-viewer"><canvas data-model="starlight_psyduck" data-roll="0" role="img" aria-label="Psyduck Rookie Ticket Inspector in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Psyduck Rookie Ticket Inspector">고라파덕 초보 검표원</div></div>
+              <div class="model-item"><div class="model-viewer"><canvas data-model="starlight_eevee" data-roll="0" role="img" aria-label="Eevee Lost Property Courier in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Eevee Lost Property Courier">이브이 분실물 배달원</div></div>
+              <div class="model-item"><div class="model-viewer"><canvas data-model="starlight_gengar" data-roll="0" role="img" aria-label="Gengar Night Patrol in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Gengar Night Patrol">팬텀 야간 순찰원</div></div>
+          </div>
+          <p class="cobble-credit" data-en="Base Pokémon models and textures by the Cobblemon Team (CC BY-NC 3.0). Pokémon belongs to its rights holders. Non-commercial fan work.">기본 포켓몬 모델·텍스처: Cobblemon 팀 (CC BY-NC 3.0). 포켓몬의 권리는 각 권리자에게 있습니다. 비상업 팬 작품입니다.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+
   <section class="section cat" id="scripts" aria-labelledby="h-scripts">
     <div class="container">
       <div class="section-heading">
@@ -860,33 +880,6 @@
           <h3 data-en="Staff Call">관리자 호출</h3>
           <p data-en="Skript · ▶ Play video">Skript · ▶ 영상 재생</p>
         </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section cat" id="cobblemon" aria-labelledby="h-cobblemon">
-    <div class="container">
-      <div class="section-heading">
-        <h2 id="h-cobblemon" data-en="Cobblemon">코블몬</h2>
-        <p data-en="Custom Pokémon skins for Cobblemon servers.">코블몬 서버용 포켓몬 커스텀 스킨입니다.</p>
-      </div>
-      <div class="model-collections">
-        <section class="collection">
-          <div class="collection-intro">
-            <h3 data-en="Starlight Last Train">별빛 막차</h3>
-            <div>
-              <span class="collection-spec" data-en="4 skins · 128×128 textures · Cobblemon 1.8.4">스킨 4종 · 128×128 텍스처 · 코블몬 1.8.4</span>
-              <p data-en="Four Pokémon in night-shift railway uniforms: a conductor, a ticket inspector, a lost-property courier and a night patrol with a glowing lantern. Each has normal and shiny textures.">야간 근무복을 입은 포켓몬 4종입니다. 막차 차장, 초보 검표원, 분실물 배달원, 빛나는 순찰등을 든 야간 순찰원으로 구성되며 각각 일반·이로치 텍스처가 있습니다.</p>
-            </div>
-          </div>
-          <div class="model-row">
-              <div class="model-item"><div class="model-viewer"><canvas data-model="starlight_piplup" data-roll="0" role="img" aria-label="Piplup Last Train Conductor in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Piplup Last Train Conductor">팽도리 막차 차장</div></div>
-              <div class="model-item"><div class="model-viewer"><canvas data-model="starlight_psyduck" data-roll="0" role="img" aria-label="Psyduck Rookie Ticket Inspector in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Psyduck Rookie Ticket Inspector">고라파덕 초보 검표원</div></div>
-              <div class="model-item"><div class="model-viewer"><canvas data-model="starlight_eevee" data-roll="0" role="img" aria-label="Eevee Lost Property Courier in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Eevee Lost Property Courier">이브이 분실물 배달원</div></div>
-              <div class="model-item"><div class="model-viewer"><canvas data-model="starlight_gengar" data-roll="0" role="img" aria-label="Gengar Night Patrol in 3D. Drag to rotate."></canvas><span class="viewer-hint" data-en="↔ Drag">↔ 드래그</span></div><div class="model-caption" data-en="Gengar Night Patrol">팬텀 야간 순찰원</div></div>
-          </div>
-          <p class="cobble-credit" data-en="Base Pokémon models and textures by the Cobblemon Team (CC BY-NC 3.0). Pokémon belongs to its rights holders. Non-commercial fan work.">기본 포켓몬 모델·텍스처: Cobblemon 팀 (CC BY-NC 3.0). 포켓몬의 권리는 각 권리자에게 있습니다. 비상업 팬 작품입니다.</p>
-        </section>
       </div>
     </div>
   </section>
@@ -1126,12 +1119,9 @@
     'About': '소개',
     'Commission': '외주',
     'Cobblemon': '코블몬',
-    '1 pack · 4 Pokémon skins': '1팩 · 포켓몬 스킨 4종',
     'View Cobblemon →': '코블몬 보기 →',
-    'Custom Pokémon skins for Cobblemon servers.': '코블몬 서버용 포켓몬 커스텀 스킨입니다.',
-    'Starlight Last Train': '별빛 막차',
-    '4 skins · 128×128 textures · Cobblemon 1.8.4': '스킨 4종 · 128×128 텍스처 · 코블몬 1.8.4',
-    'Four Pokémon in night-shift railway uniforms: a conductor, a ticket inspector, a lost-property courier and a night patrol with a glowing lantern. Each has normal and shiny textures.': '야간 근무복을 입은 포켓몬 4종입니다. 막차 차장, 초보 검표원, 분실물 배달원, 빛나는 순찰등을 든 야간 순찰원으로 구성되며 각각 일반·이로치 텍스처가 있습니다.',
+    'Custom Pokémon skins for Cobblemon. Portfolio pieces, not for sale.': '코블몬용 포켓몬 커스텀 스킨입니다. 포트폴리오 작품이며 판매하지 않습니다.',
+    '4 Pokémon skins · portfolio': '포켓몬 스킨 4종 · 포트폴리오',
     'Piplup Last Train Conductor': '팽도리 막차 차장',
     'Psyduck Rookie Ticket Inspector': '고라파덕 초보 검표원',
     'Eevee Lost Property Courier': '이브이 분실물 배달원',
